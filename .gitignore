@@ -69,3 +69,5 @@ Thumbs.db
 .cielo_*.py
 
 runtime/
+
+tmp/
