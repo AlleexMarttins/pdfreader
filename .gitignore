@@ -68,6 +68,10 @@ Thumbs.db
 .pytest_*/
 .cielo_*.py
 
+# QA com dados reais - nunca versionar
+.qa_*/
+.qa_*.png
+
 runtime/
 
 tmp/

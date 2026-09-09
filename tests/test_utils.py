@@ -1765,6 +1765,43 @@ def test_eh_conciliation_report_exists_when_everything_matches():
     ]
 
 
+def test_eh_does_not_classify_generic_zweb_financial_movements_as_pix():
+    fechamento = utils.comparar_caixa_resumo_nfce(
+        {
+            "caixa_modelo": "EH",
+            "periodo": "08/09/2026 - 08/09/2026",
+            "total_caixa": 50.0,
+            "itens_caixa": [{"pedido": "000110220", "cliente": "CLIENTE BALCAO", "valor": 50.0}],
+            "itens_excluidos": [],
+        },
+        {
+            "resumo_modelo": "EH",
+            "periodo": "08/09/2026 - 08/09/2026",
+            "total_nfce": 50.0,
+            "nfces": [{"numero": "000110220", "numero_exibicao": "110220", "valor": 50.0}],
+            "relatorios_pagamento": {
+                "pix_fechamento": {
+                    "total_autorizado": 50.0,
+                    "itens_autorizados": [
+                        {"numero": "000110220", "numero_exibicao": "110220", "valor_bruto": 50.0},
+                    ],
+                },
+                "pagamentos_digitais_nfce": {
+                    "origem": "zweb_movimentacoes",
+                    "total_autorizado": 50.0,
+                    "itens_autorizados": [
+                        {"data_venda": "08/09/2026 as 14:10", "valor_bruto": 50.0},
+                    ],
+                },
+            },
+        },
+    )
+
+    alertas = fechamento["relatorios_pagamento"]["alertas_eh"]
+
+    assert ("PIX", "R$ 50,00", "N/A", "N/A") in alertas["correlacao_rows"]
+
+
 def test_mva_clipp_cancelled_cash_coupons_are_visible(monkeypatch):
     status_map = {
         "000388060": {

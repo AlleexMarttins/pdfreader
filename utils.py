@@ -1655,7 +1655,7 @@ def _integrate_local_payment_reports(
 
     relatorio_fechamento["relatorios_pagamento"] = relatorios_pagamento
     if relatorio_pix:
-        relatorios_pagamento[str(relatorio_pix.get("categoria") or "pagamentos_digitais_nfce")] = relatorio_pix
+        relatorios_pagamento[str(relatorio_pix.get("categoria") or "pix_caixa")] = relatorio_pix
 
     avisos = list(dict.fromkeys(avisos))
     if avisos:
@@ -13309,10 +13309,7 @@ def _mva_caixa_reports_refresh_needs(relatorio_fechamento: dict) -> dict[str, ob
             reasons.append(f"{label}: fechamento={internal_total:.2f}, caixa/cielo={external_total:.2f}")
 
     pix_fechamento_total = _payment_report_total(relatorios_pagamento.get("pix_fechamento"))
-    pix_caixa_total = _payment_report_total(
-        relatorios_pagamento.get("pix_caixa")
-        or relatorios_pagamento.get("pagamentos_digitais_nfce")
-    )
+    pix_caixa_total = _payment_report_total(relatorios_pagamento.get("pix_caixa"))
     need_pix = pix_fechamento_total > 0.009 and pix_caixa_total + 0.01 < pix_fechamento_total
     if need_pix:
         reasons.append(f"pix: fechamento={pix_fechamento_total:.2f}, caixa={pix_caixa_total:.2f}")
@@ -16148,84 +16145,6 @@ def gerar_relatorios_caixa_eh_zweb(
 
                 return _build_zweb_fiscal_status_map(itens_encontrados)
 
-            async def fetch_finance_pix_transactions(session_id: str) -> list[dict]:
-                _check_cancelled()
-                _emit_pix_status(on_status, "Consultando Financeiro > Movimentações...")
-                await open_route(session_id, credenciais["finance_movimentations_url"], "MOVIMENTACOES")
-
-                pagina = 1
-                max_results = 200
-                itens_encontrados = []
-
-                while pagina <= 30:
-                    _check_cancelled()
-                    payload = {
-                        "done": True,
-                        "sort": {"order": "DESC", "key": "paymentDate"},
-                        "page": pagina,
-                        "maxResults": max_results,
-                    }
-                    resposta = await eval_js(
-                        session_id,
-                        f"""
-                        (async () => {{
-                            const token = localStorage.getItem('token') || '';
-                            const response = await fetch('https://api.zweb.com.br/rpc/v2/finance.get-transactions-paginate', {{
-                                method: 'POST',
-                                credentials: 'include',
-                                headers: {{
-                                    'Accept': 'application/json',
-                                    'Content-Type': 'application/json',
-                                    ...(token ? {{ 'Authorization': `Bearer ${{token}}` }} : {{}})
-                                }},
-                                body: JSON.stringify({json.dumps(payload, ensure_ascii=False)})
-                            }});
-                            const text = await response.text();
-                            return {{
-                                ok: response.ok,
-                                status: response.status,
-                                text
-                            }};
-                        }})()
-                        """,
-                    )
-                    status_code = int((resposta or {}).get("status") or 0)
-                    if status_code >= 400:
-                        raise RuntimeError(
-                            f"O Zweb retornou erro ao consultar Financeiro > Movimentações ({status_code})."
-                        )
-
-                    try:
-                        payload_resposta = json.loads((resposta or {}).get("text") or "{}")
-                    except json.JSONDecodeError as exc:
-                        raise RuntimeError(
-                            "O Zweb retornou um JSON inválido ao consultar Financeiro > Movimentações."
-                        ) from exc
-
-                    pagina_itens = payload_resposta.get("data") or []
-                    if not isinstance(pagina_itens, list) or not pagina_itens:
-                        break
-
-                    datas_pagina = []
-                    for item in pagina_itens:
-                        pagamento_iso = str(item.get("paymentDate") or "").strip()[:10]
-                        if not pagamento_iso:
-                            continue
-                        datas_pagina.append(pagamento_iso)
-                        if pagamento_iso == data_iso:
-                            itens_encontrados.append(item)
-
-                    if not datas_pagina:
-                        break
-
-                    data_mais_antiga = min(datas_pagina)
-                    if data_mais_antiga < data_iso:
-                        break
-
-                    pagina += 1
-
-                return itens_encontrados
-
             try:
                 _check_cancelled()
                 target_id = (await cdp("Target.createTarget", {"url": "about:blank"})).get("targetId")
@@ -16247,13 +16166,7 @@ def gerar_relatorios_caixa_eh_zweb(
                     fiscal_status_map = await fetch_fiscal_nfce_status_map(session_id)
                 except Exception:
                     fiscal_status_map = {}
-                try:
-                    pix_transactions = await fetch_finance_pix_transactions(session_id)
-                    pix_error = None
-                except Exception as exc:
-                    pix_transactions = []
-                    pix_error = str(exc)
-                return html_pedidos, html_fechamento, fiscal_status_map, pix_transactions, pix_error
+                return html_pedidos, html_fechamento, fiscal_status_map
             finally:
                 recv_task.cancel()
                 try:
@@ -16267,8 +16180,6 @@ def gerar_relatorios_caixa_eh_zweb(
     caminho_html_pedidos = ""
     caminho_html_fechamento = ""
     fiscal_status_map = {}
-    pix_transactions = []
-    pix_error = None
     for tentativa in range(2):
         _check_cancelled()
         profile_dir = tempfile.mkdtemp(prefix="run_", dir=profile_root)
@@ -16301,7 +16212,7 @@ def gerar_relatorios_caixa_eh_zweb(
         _emit_pix_status(on_status, "Acessando Zweb...")
         proc = _launch_browser_process(chrome_args)
         try:
-            html_pedidos, html_fechamento, fiscal_status_map, pix_transactions, pix_error = asyncio.run(
+            html_pedidos, html_fechamento, fiscal_status_map = asyncio.run(
                 asyncio.wait_for(_run(), timeout=180.0)
             )
             last_error = None
@@ -16405,25 +16316,19 @@ def gerar_relatorios_caixa_eh_zweb(
             relatorio_pix = _filter_payment_report_to_scope(relatorio_pix, scope_windows)
             if relatorio_pix.get("quantidade_autorizados", 0) <= 0:
                 avisos_usuario.append(
-                    f'O arquivo "{os.path.basename(local_pix_pdf)}" não trouxe transações PIX para {data_br}{scope_label} e foi ignorado.'
+                    f'PIX N/A: o arquivo "{os.path.basename(local_pix_pdf)}" não trouxe transações identificáveis para {data_br}{scope_label} e foi ignorado.'
                 )
-                relatorio_pix = _filter_payment_report_to_scope(
-                    _build_pix_report_from_zweb_movimentations(data_iso, pix_transactions, erro=pix_error),
-                    scope_windows,
-                )
+                relatorio_pix = None
         except Exception as exc:
             avisos_usuario.append(
-                f'Não foi possível ler o arquivo "{os.path.basename(local_pix_pdf)}" para {data_br}: {exc}'
+                f'PIX N/A: não foi possível ler o arquivo "{os.path.basename(local_pix_pdf)}" para {data_br}: {exc}'
             )
-            relatorio_pix = _filter_payment_report_to_scope(
-                _build_pix_report_from_zweb_movimentations(data_iso, pix_transactions, erro=str(exc)),
-                scope_windows,
-            )
+            relatorio_pix = None
     else:
-        relatorio_pix = _filter_payment_report_to_scope(
-            _build_pix_report_from_zweb_movimentations(data_iso, pix_transactions, erro=pix_error),
-            scope_windows,
+        avisos_usuario.append(
+            "PIX N/A: nenhum relatório identificável da Caixa/Azulzinha foi disponibilizado para a conciliação."
         )
+        relatorio_pix = None
 
     if avisos_usuario:
         relatorio_fechamento["avisos_usuario"] = list(dict.fromkeys(avisos_usuario))
@@ -16432,7 +16337,7 @@ def gerar_relatorios_caixa_eh_zweb(
 
     if relatorio_pix:
         relatorio_fechamento.setdefault("relatorios_pagamento", {})
-        relatorio_fechamento["relatorios_pagamento"][str(relatorio_pix.get("categoria") or "pagamentos_digitais_nfce")] = relatorio_pix
+        relatorio_fechamento["relatorios_pagamento"][str(relatorio_pix.get("categoria") or "pix_caixa")] = relatorio_pix
 
     _cleanup_eh_auto_payment_reports(local_pix_pdf, local_card_pdf)
     return relatorio, relatorio_fechamento, relatorio_pix
@@ -16460,82 +16365,6 @@ def _parse_caixa_pix_datetime(data_hora: str) -> tuple[str, datetime]:
             pass
 
     return texto, datetime.min
-
-
-def _build_pix_report_from_zweb_movimentations(data_iso: str, lancamentos: list[dict], erro: str | None = None) -> dict:
-    itens_autorizados = []
-
-    for lancamento in lancamentos or []:
-        data_pagamento = str(lancamento.get("paymentDate") or "").strip()
-        if not data_pagamento.startswith(data_iso):
-            continue
-
-        descricao = str(lancamento.get("description") or "").strip()
-        if not re.search(r"REF\.\s*NFCE\b", descricao, re.IGNORECASE):
-            continue
-        if re.search(r"REF\.\s*NFE\b", descricao, re.IGNORECASE):
-            continue
-        if re.search(r"\bDINHEIRO\b", descricao, re.IGNORECASE):
-            continue
-
-        valor_base = lancamento.get("paidValue")
-        if valor_base in (None, ""):
-            valor_base = lancamento.get("value")
-        valor = round(float(valor_base or 0.0), 2)
-        if valor <= 0:
-            continue
-
-        data_venda, ordem = _parse_caixa_pix_datetime(data_pagamento)
-        if not data_venda:
-            data_venda = _iso_to_br_date(data_iso) or data_iso
-
-        itens_autorizados.append(
-            {
-                "data_venda": data_venda,
-                "valor_bruto": valor,
-                "_sort": ordem,
-            }
-        )
-
-    itens_autorizados.sort(key=lambda item: (item.get("_sort") or datetime.min, item.get("data_venda") or ""))
-    for item in itens_autorizados:
-        item.pop("_sort", None)
-
-    total_autorizado = round(sum(float(item.get("valor_bruto", 0.0)) for item in itens_autorizados), 2)
-    data_br = _iso_to_br_date(data_iso) or data_iso
-    periodo = f"{data_br} - {data_br}"
-
-    mensagem = None
-    if erro:
-        mensagem = f"Não foi possível consultar Financeiro > Movimentações no Zweb:\n{erro}"
-    elif not itens_autorizados:
-        mensagem = "Nenhum pagamento digital de NFC-e foi encontrado em Financeiro > Movimentações para este dia."
-    else:
-        mensagem = "Relatório da Caixa/Azulzinha não utilizado. Valores confirmados via Financeiro > Movimentações do Zweb."
-
-    return {
-        "arquivo": "Zweb Financeiro > Movimentações",
-        "caminho": "",
-        "periodo": periodo,
-        "quantidade_autorizados": len(itens_autorizados),
-        "total_autorizado": total_autorizado,
-        "itens_autorizados": itens_autorizados,
-        "quantidade_relatorio": len(itens_autorizados),
-        "total_relatorio": total_autorizado,
-        "consistente": True,
-        "origem": "zweb_movimentacoes",
-        "mensagem": mensagem,
-        "origem_label": "Financeiro > Movimentações do Zweb",
-        "tab_title": "Pagamentos Digitais",
-        "menu_text": "Abrir pagamentos digitais",
-        "summary_label": "Pagamentos digitais",
-        "total_label": "Total pagamentos digitais",
-        "section_label": "Transações digitais de NFC-e",
-        "empty_message": "Nenhum pagamento digital de NFC-e encontrado para este dia.",
-        "table_headers": ("Data da venda", "Valor bruto"),
-        "table_mode": "data_valor",
-        "categoria": "pagamentos_digitais_nfce",
-    }
 
 
 def _load_minhas_notas_credentials() -> tuple[str, str] | None:
@@ -17152,7 +16981,7 @@ def _comparar_caixa_resumo_nfce_eh(relatorio_caixa: dict, relatorio_nfce: dict) 
     comparacoes = [
         (
             "PIX",
-            relatorios_pagamento.get("pix_caixa") or relatorios_pagamento.get("pagamentos_digitais_nfce"),
+            relatorios_pagamento.get("pix_caixa"),
             relatorios_pagamento.get("pix_fechamento"),
             "valor_bruto",
         ),
@@ -17196,31 +17025,21 @@ def _comparar_caixa_resumo_nfce_eh(relatorio_caixa: dict, relatorio_nfce: dict) 
                 _money_text(item_cancelado.get("valor")),
             )
         total_caixa_pagamento = round(float(report_fechamento.get("total_autorizado", 0.0) or 0.0), 2)
-        origem_externa = str((report_externo or {}).get("origem") or "").strip()
-        usa_fallback_zweb = origem_externa == "zweb_movimentacoes"
-
         if not report_externo:
             correlacao_rows.append(
                 (
                     titulo_pagamento,
                     f"R$ {format_number_br(total_caixa_pagamento)}",
-                    "R$ 0,00",
-                    "Divergente",
+                    "N/A",
+                    "N/A",
                 )
             )
             _add_alert(
                 "Relatório ausente",
-                f"{titulo_pagamento}: relatório local não encontrado na pasta atual de execução.",
-                "-",
+                f"{titulo_pagamento}: N/A, relatório identificável da Caixa/Azulzinha não encontrado na pasta atual de execução.",
+                "N/A",
             )
             continue
-
-        if False and usa_fallback_zweb:
-            _add_alert(
-                "Origem alternativa",
-                f"{titulo_pagamento}: valor confirmado via Financeiro > Movimentações do Zweb, sem relatório da Caixa/Azulzinha.",
-                f"R$ {format_number_br(total_pagamentos)}",
-            )
 
         itens_externos = list(report_externo.get("itens_autorizados") or [])
         itens_externos_compativeis = itens_externos
@@ -17245,15 +17064,7 @@ def _comparar_caixa_resumo_nfce_eh(relatorio_caixa: dict, relatorio_nfce: dict) 
             sum(float(item.get(campo_valor, 0.0) or 0.0) for item in itens_externos),
             2,
         )
-        if usa_fallback_zweb:
-            _add_alert(
-                "Origem alternativa",
-                f"{titulo_pagamento}: valor confirmado via Financeiro > Movimentações do Zweb, sem relatório da Caixa/Azulzinha.",
-                f"R$ {format_number_br(total_pagamentos)}",
-            )
         status_correlacao = "Finalizado" if abs(total_caixa_pagamento - total_pagamentos) < 0.01 else "Divergente"
-        if usa_fallback_zweb:
-            status_correlacao = f"{status_correlacao} (Financeiro Zweb)"
         correlacao_rows.append(
             (
                 titulo_pagamento,
