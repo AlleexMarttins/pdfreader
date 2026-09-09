@@ -1,13 +1,20 @@
 import json
+import os
+import sys
 import threading
 import time
 import zipfile
+from datetime import date, datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pytest
+import agente_relatorios
 import utils
 from utils import (
     _active_report_dir,
+    _azulzinha_sales_period_shortcut,
+    _is_azulzinha_captcha_page,
     parse_number,
     format_number_br,
     _build_card_reports_from_cielo,
@@ -38,6 +45,120 @@ def test_parse_number():
     assert parse_number("1,500.20") == 1500.20
     assert parse_number("20,50") == 20.50
     assert parse_number("100.00") == 100.00
+
+
+def test_azulzinha_login_rejected_message_points_to_credentials_file():
+    message = utils._format_azulzinha_login_rejected_message("Usuario ou senha incorretos.", "EH")
+
+    assert "Credenciais mudaram?" in message
+    assert "credenciais.txt" in message
+    assert "CONTA AZULZINHA / CAIXA" in message
+    assert "Usuario ou senha incorretos." in message
+
+
+def test_azulzinha_captcha_page_is_detected_by_radware_url():
+    assert _is_azulzinha_captcha_page(
+        "https://validate.perfdrive.com/challenge?return=https%3A%2F%2Fportal.azulzinhadacaixa.com.br%2FMinhasVendas",
+        "",
+        "",
+        (),
+    ) is True
+
+
+def test_azulzinha_captcha_page_is_detected_by_hcaptcha_frame():
+    assert _is_azulzinha_captcha_page(
+        "https://portal.azulzinhadacaixa.com.br/Home",
+        "Portal AZULZINHA",
+        "Verificação de segurança",
+        ("https://newassets.hcaptcha.com/captcha/v1/123.html",),
+    ) is True
+
+
+def test_azulzinha_home_without_captcha_is_not_flagged():
+    assert _is_azulzinha_captcha_page(
+        "https://portal.azulzinhadacaixa.com.br/Home",
+        "Portal AZULZINHA",
+        "Vendas hoje",
+        (),
+    ) is False
+
+
+def test_azulzinha_sales_period_shortcut_uses_ontem_only_for_previous_day():
+    assert _azulzinha_sales_period_shortcut("20/08/2026", reference_date=date(2026, 8, 21)) == "ontem"
+    assert _azulzinha_sales_period_shortcut("21/08/2026", reference_date=date(2026, 8, 21)) is None
+
+
+def test_azulzinha_sales_period_shortcut_rejects_invalid_or_older_dates():
+    assert _azulzinha_sales_period_shortcut("19/08/2026", reference_date=date(2026, 8, 21)) is None
+    assert _azulzinha_sales_period_shortcut("data invalida", reference_date=date(2026, 8, 21)) is None
+
+
+def test_load_zweb_credentials_selects_the_horizonte_account_by_index(tmp_path, monkeypatch):
+    credentials_file = tmp_path / "credenciais.txt"
+    credentials_file.write_text(
+        "\n".join(
+            [
+                "CONTA ZWEB:",
+                "mva@example.test",
+                "mva-password",
+                "https://mva.example.test",
+                "CONTA ZWEB:",
+                "horizonte@example.test",
+                "horizonte-password",
+                "https://horizonte.example.test",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(utils, "_runtime_file_path", lambda _filename: credentials_file)
+
+    credentials = utils._load_zweb_credentials(account_index=1)
+
+    assert credentials is not None
+    assert credentials["username"] == "horizonte@example.test"
+    assert credentials["base_url"] == "https://horizonte.example.test"
+
+
+def test_zweb_fechamento_caixa_html_parser_handles_current_section_layout():
+    html = """
+    <html><body>
+      <div class="mt-4">
+        <div class="d-flex justify-content-between">
+          <div class="fw-bolder fs-6">Caixa 001 | Cartão de Débito</div>
+          <div>
+            <span class="fw-bolder">Abertura: </span>07/07/2026 07:58:05
+            <span class="fw-bolder">Fechamento: </span>07/07/2026 13:58:22
+          </div>
+        </div>
+      </div>
+      <table class="striped-table mt-2">
+        <tr><th>Nota Fiscal</th><th>Data</th><th>Total R$</th></tr>
+        <tr><td>00106855</td><td>07/07/26</td><td class="text-end"><div>R$ 58,01</div></td></tr>
+        <tr><td>00106857</td><td>07/07/26</td><td class="text-end"><div>R$ 29,20</div></td></tr>
+      </table>
+      <div class="totalizer-footer"><div class="footer-content">Total R$ 87,21</div></div>
+      <table class="striped-table totalizers-table">
+        <tr><th>Descricao</th><th>Total</th></tr>
+        <tr><td>Cartão de Débito</td><td>R$ 87,21</td></tr>
+        <tr><td>Abertura</td><td>R$ 500,00</td></tr>
+        <tr><td>Sangria</td><td>R$ 0,00</td></tr>
+        <tr><td>Total geral</td><td>R$ 587,21</td></tr>
+      </table>
+    </body></html>
+    """
+
+    report = utils._analisar_html_fechamento_caixa_eh(html)
+
+    assert report["quantidade_nfce"] == 2
+    assert report["total_nfce"] == 87.21
+    assert report["total_geral"] == 587.21
+    assert report["fechamento_janelas"] == [
+        {"abertura": "07/07/2026 07:58:05", "fechamento": "07/07/2026 13:58:22"}
+    ]
+    debit = report["relatorios_pagamento"]["cartao_debito"]
+    assert debit["quantidade_autorizados"] == 2
+    assert debit["total_autorizado"] == 87.21
+    assert debit["consistente"] is True
 
 
 def test_cleanup_generated_auto_reports_removes_runtime_artifacts(tmp_path, monkeypatch):
@@ -82,6 +203,19 @@ def test_cleanup_generated_auto_reports_preserves_cielo_debug_when_enabled(tmp_p
 
     assert debug_log.exists()
     assert not snapshot.exists()
+
+
+def test_find_local_payment_reports_suppresses_wrong_date_warning_when_valid_file_exists(tmp_path, monkeypatch):
+    old_report = tmp_path / "Relatorio_de_Vendas_Pix_07-07-2026_eh_auto.csv"
+    current_report = tmp_path / "Relatorio_de_Vendas_Pix_08-07-2026_eh_auto.csv"
+    old_report.write_text("Data da venda;Valor bruto\n07/07/2026;10,00\n", encoding="utf-8")
+    current_report.write_text("Data da venda;Valor bruto\n08/07/2026;20,00\n", encoding="utf-8")
+    monkeypatch.setattr(utils, "_candidate_local_report_dirs", lambda: [tmp_path])
+
+    found = _find_eh_local_payment_reports("08/07/2026", company="EH")
+
+    assert found["pix"] == str(current_report)
+    assert found["avisos"] == []
 
 
 def test_wait_for_downloaded_report_also_checks_active_report_dir(tmp_path, monkeypatch):
@@ -303,6 +437,28 @@ def test_gmail_oauth_server_honors_pre_cancelled_event():
 
     with pytest.raises(RuntimeError, match="__cancelled__"):
         _run_gmail_oauth_local_server(object(), cancel_event=cancel_event)
+
+
+def test_zweb_browser_profile_uses_the_pdfreader_runtime_not_appdata(tmp_path, monkeypatch):
+    runtime_dir = tmp_path / "pdfReader"
+    runtime_dir.mkdir()
+    monkeypatch.setattr(utils, "_canonical_runtime_dir", lambda: runtime_dir)
+    monkeypatch.setenv("LOCALAPPDATA", r"C:\Users\TI\AppData\Local")
+    monkeypatch.setenv("APPDATA", r"C:\Users\TI\AppData\Roaming")
+
+    profile_dir = utils._zweb_browser_profile_dir()
+
+    assert Path(profile_dir) == runtime_dir / "runtime" / "zweb_browser_profile"
+    assert Path(profile_dir).is_dir()
+
+
+def test_zweb_debug_keeps_browser_open_only_when_the_visible_mode_is_enabled(monkeypatch):
+    monkeypatch.setenv("PDFREADER_SHOW_BROWSER", "1")
+    monkeypatch.setenv("PDFREADER_KEEP_BROWSER_OPEN", "true")
+    assert utils._browser_debug_keep_open_enabled() is True
+
+    monkeypatch.setenv("PDFREADER_SHOW_BROWSER", "0")
+    assert utils._browser_debug_keep_open_enabled() is False
 
 
 def test_gmail_oauth_status_reports_missing_token(tmp_path, monkeypatch):
@@ -576,6 +732,76 @@ def test_wait_for_cielo_downloaded_report_accepts_requested_date_filename(tmp_pa
     assert found == str(caminho)
 
 
+def test_cielo_reports_tab_defers_to_its_single_native_click():
+    source = Path(utils.__file__).read_text(encoding="utf-8")
+    reports_tab_start = source.index("async def click_cielo_sales_reports_tab")
+    reports_tab_end = source.index("async def click_cielo_sales_detail_tab", reports_tab_start)
+    reports_tab_source = source[reports_tab_start:reports_tab_end]
+
+    assert "chosen.e.click();" not in reports_tab_source
+
+
+def test_cielo_report_download_uses_the_table_cell_when_the_icon_has_no_click_area():
+    source = Path(utils.__file__).read_text(encoding="utf-8")
+    download_start = source.index("async def click_cielo_ready_report_download")
+    download_end = source.index("async def click_cielo_sales_reports_tab", download_start)
+    download_source = source[download_start:download_end]
+
+    assert "icon.closest('td')" in download_source
+
+
+def test_cielo_report_download_targets_the_last_cell_of_the_matching_table_row():
+    source = Path(utils.__file__).read_text(encoding="utf-8")
+    download_start = source.index("async def click_cielo_ready_report_download")
+    download_end = source.index("async def click_cielo_sales_reports_tab", download_start)
+    download_source = source[download_start:download_end]
+
+    assert "row.querySelector('td:last-child')" in download_source
+    assert "matching_report_row_last_cell" in download_source
+
+
+def test_cielo_historical_date_validation_accepts_start_and_end_in_separate_inputs():
+    source = Path(utils.__file__).read_text(encoding="utf-8")
+    date_selector_start = source.index("async def select_cielo_historical_sale_date")
+    date_selector_end = source.index("async def dismiss_cielo_overlays", date_selector_start)
+    date_selector_source = source[date_selector_start:date_selector_end]
+
+    assert "allVisibleDateValues" in date_selector_source
+    assert "sameDateOccurrences >= 2" in date_selector_source
+
+
+def test_mva_cielo_reuses_a_complete_local_report_even_during_payment_refresh(monkeypatch):
+    closing = {
+        "relatorios_pagamento": {
+            "cartao_credito": {"total_autorizado": 100.0, "itens_autorizados": [{"valor_bruto": 100.0}]},
+            "cartao_credito_caixa": {"total_autorizado": 0.0, "itens_autorizados": []},
+        }
+    }
+    cielo_report = {
+        "cartao_credito_caixa": {
+            "total_autorizado": 100.0,
+            "itens_autorizados": [{"valor_bruto": 100.0}],
+        }
+    }
+
+    monkeypatch.setattr(utils, "_find_local_cielo_card_report", lambda *_args, **_kwargs: {"cartoes": "local.csv", "avisos": []})
+    monkeypatch.setattr(utils, "_build_card_reports_from_cielo", lambda *_args, **_kwargs: cielo_report)
+    monkeypatch.setattr(utils, "_report_scope_windows", lambda _closing: [])
+    monkeypatch.setattr(utils, "_filter_payment_report_to_scope", lambda report, _scope: report)
+    monkeypatch.setattr(utils, "baixar_relatorio_cielo_mva", lambda *_args, **_kwargs: pytest.fail("A Cielo não deve reabrir quando o CSV local já cobre o fechamento."))
+
+    result, warnings = utils._integrate_cielo_card_reports_if_needed(
+        closing,
+        "29/08/2026",
+        auto_download_missing=True,
+        force_refresh_payments=True,
+        company="MVA",
+    )
+
+    assert warnings == []
+    assert result["relatorios_pagamento"]["cartao_credito_caixa"]["total_autorizado"] == 100.0
+
+
 def test_wait_for_cielo_downloaded_report_requires_detailed_when_requested(tmp_path):
     resumo = tmp_path / "Vendas_Cielo_historico_resumo-20260430-20260430-1-1-csv.csv"
     resumo.write_text(
@@ -612,7 +838,7 @@ def test_wait_for_cielo_downloaded_report_accepts_detailed_when_required(tmp_pat
     assert found == str(detalhado)
 
 
-def test_wait_for_cielo_downloaded_report_rejects_non_exact_cielo_range(tmp_path):
+def test_wait_for_cielo_downloaded_report_accepts_requested_rows_in_multi_day_range(tmp_path):
     detalhado = tmp_path / "Vendas_cielo_hoje_detalhe-20260618-20260619-1-1-csv.csv"
     detalhado.write_text(
         "\n".join(
@@ -628,10 +854,10 @@ def test_wait_for_cielo_downloaded_report_rejects_non_exact_cielo_range(tmp_path
 
     found = _wait_for_cielo_downloaded_report(str(tmp_path), "19/06/2026", time.time() - 5, timeout=0.1, require_detailed=True)
 
-    assert found is None
+    assert found == str(detalhado)
 
 
-def test_find_local_cielo_card_report_rejects_non_exact_range(tmp_path, monkeypatch):
+def test_find_local_cielo_card_report_accepts_requested_rows_in_multi_day_range(tmp_path, monkeypatch):
     detalhado = tmp_path / "cielo_cartoes_19062026_mva_auto.csv"
     detalhado.write_text(
         "\n".join(
@@ -648,8 +874,8 @@ def test_find_local_cielo_card_report_rejects_non_exact_range(tmp_path, monkeypa
 
     found = utils._find_local_cielo_card_report("19/06/2026", company="MVA")
 
-    assert found["cartoes"] is None
-    assert any("intervalo" in aviso for aviso in found["avisos"])
+    assert found["cartoes"]
+    assert any("foi usado" in aviso for aviso in found["avisos"])
 
 
 def _write_caixa_pix_xlsx_with_invalid_styles(path: Path) -> None:
@@ -1570,7 +1796,7 @@ def test_mva_clipp_cancelled_cash_coupons_are_visible(monkeypatch):
         {
             "periodo": "07/05/2026 - 07/05/2026",
             "caixa_modelo": "MVA",
-            "itens_caixa": [],
+            "itens_caixa": [{"pedido": "000110220", "valor": 76.80}],
             "total_caixa": 0.0,
         },
         {
@@ -1609,3 +1835,738 @@ def test_mva_clipp_cancelled_cash_coupons_are_visible(monkeypatch):
         ("CF 388072", "R$ 63,90"),
         ("CF 388166", "R$ 1,30"),
     ]
+
+
+def test_mva_uses_clipp_cancelled_coupons_when_minhas_notas_returns_empty(monkeypatch):
+    def minhas_notas_must_not_be_called(periodo):
+        raise AssertionError("O fechamento da MVA deve usar o status do Clipp quando ele estiver disponível.")
+
+    monkeypatch.setattr(utils, "_load_minhas_notas_mva_context", minhas_notas_must_not_be_called)
+
+    fechamento = utils.comparar_caixa_resumo_nfce(
+        {
+            "periodo": "02/09/2026 - 02/09/2026",
+            "caixa_modelo": "MVA",
+            "itens_caixa": [{"pedido": "000110220", "valor": 76.80}],
+            "total_caixa": 0.0,
+        },
+        {
+            "arquivo_tipo": "fechamento_caixa_clipp_mva",
+            "periodo": "02/09/2026 - 02/09/2026",
+            "total_nfce": 250.0,
+            "nfces": [{"numero": "000399974"}],
+            "fiscal_status_map": {
+                "000399973": {
+                    "numero": "000399973",
+                    "numero_exibicao": "399973",
+                    "valor": 111.0,
+                    "cancelada": True,
+                    "status_codigo": 135,
+                },
+                "000399988": {
+                    "numero": "000399988",
+                    "numero_exibicao": "399988",
+                    "valor": 19.75,
+                    "cancelada": True,
+                    "status_codigo": 135,
+                },
+            },
+            "fiscal_status_source": "clipp_movements",
+            "relatorios_pagamento": {},
+        },
+    )
+
+    assert fechamento["cupons_cancelados_count"] == 2
+    assert fechamento["cupons_cancelados_valor"] == 130.75
+    assert fechamento["total_resumo_nfce"] == 250.0
+    assert fechamento["subtitle"] == "Cupons cancelados identificados no Clipp: 2."
+    assert fechamento["relatorios_pagamento"]["alertas_eh"]["cancelados_rows"] == [
+        ("CF 399973", "R$ 111,00"),
+        ("CF 399988", "R$ 19,75"),
+    ]
+
+
+def test_mva_keeps_azulzinha_payments_visible_without_clipp_payment_rows(monkeypatch):
+    monkeypatch.setattr(utils, "_load_minhas_notas_mva_context", lambda periodo: ([], {}, None))
+
+    fechamento = utils.comparar_caixa_resumo_nfce(
+        {
+            "periodo": "10/08/2026 - 10/08/2026",
+            "caixa_modelo": "MVA",
+            "itens_caixa": [],
+            "total_caixa": 0.0,
+        },
+        {
+            "arquivo_tipo": "fechamento_caixa_clipp_mva",
+            "periodo": "10/08/2026 - 10/08/2026",
+            "total_nfce": 0.0,
+            "nfces": [],
+            "relatorios_pagamento": {
+                "pix_caixa": {
+                    "categoria": "pix_caixa",
+                    "total_autorizado": 867.30,
+                    "itens_autorizados": [{"data_venda": "10/08/2026 às 08:07", "valor_bruto": 867.30}],
+                },
+                "cartao_credito_caixa": {
+                    "categoria": "cartao_credito_caixa",
+                    "total_autorizado": 597.50,
+                    "itens_autorizados": [{"data_venda": "10/08/2026 às 08:08", "valor_bruto": 597.50}],
+                },
+                "cartao_debito_caixa": {
+                    "categoria": "cartao_debito_caixa",
+                    "total_autorizado": 959.15,
+                    "itens_autorizados": [{"data_venda": "10/08/2026 às 08:05", "valor_bruto": 959.15}],
+                },
+            },
+        },
+    )
+
+    alertas = fechamento["relatorios_pagamento"]["alertas_eh"]
+
+    assert alertas["correlacao_rows"] == [
+        ("Dinheiro", "R$ 0,00", "-", "Interno"),
+        ("PIX", "R$ 0,00", "R$ 867,30", "Divergente"),
+        ("Cartão Crédito", "R$ 0,00", "R$ 597,50", "Divergente"),
+        ("Cartão Débito", "R$ 0,00", "R$ 959,15", "Divergente"),
+    ]
+    assert alertas["pix_maquina_rows"] == [("PIX", "10/08/2026 às 08:07", "R$ 867,30")]
+    assert alertas["cartao_maquina_rows"] == [
+        ("Cartão Crédito", "10/08/2026 às 08:08", "R$ 597,50"),
+        ("Cartão Débito", "10/08/2026 às 08:05", "R$ 959,15"),
+    ]
+
+
+def test_mva_agent_limits_azulzinha_payments_to_the_closed_clipp_window():
+    prepared = agente_relatorios._prepare_mva_closing_for_comparison(
+        {
+            "fechamento_janelas": [
+                {"abertura": "10/08/2026 07:52:15", "fechamento": "10/08/2026 14:16:45"}
+            ],
+            "relatorios_pagamento": {},
+        },
+        {
+            "pix_caixa": {
+                "total_autorizado": 83.70,
+                "quantidade_autorizados": 4,
+                "itens_autorizados": [
+                    {"data_venda": "10/08/2026 às 09:57", "valor_bruto": 13.50},
+                    {"data_venda": "10/08/2026 às 13:03", "valor_bruto": 36.80},
+                    {"data_venda": "10/08/2026 às 14:15", "valor_bruto": 9.90},
+                    {"data_venda": "10/08/2026 às 14:30", "valor_bruto": 23.50},
+                ],
+            }
+        },
+    )
+
+    pix = prepared["relatorios_pagamento"]["pix_caixa"]
+
+    assert pix["quantidade_autorizados"] == 3
+    assert pix["total_autorizado"] == 60.20
+    assert [item["valor_bruto"] for item in pix["itens_autorizados"]] == [13.50, 36.80, 9.90]
+
+
+def test_mva_agent_falls_back_to_cielo_for_an_uncovered_card_total(monkeypatch):
+    closing = {
+        "fechamento_janelas": [
+            {"abertura": "29/08/2026 13:00:00", "fechamento": "29/08/2026 18:00:00"}
+        ],
+        "relatorios_pagamento": {
+            "cartao_credito": {
+                "total_autorizado": 100.0,
+                "itens_autorizados": [{"valor_bruto": 100.0, "data_venda": "29/08/2026 às 14:00"}],
+            },
+        },
+    }
+    azulzinha = {
+        "cartao_credito_caixa": {
+            "total_autorizado": 20.0,
+            "itens_autorizados": [{"valor_bruto": 20.0, "data_venda": "29/08/2026 às 14:00"}],
+        },
+    }
+
+    def integrate_cielo(prepared, data_br, **options):
+        assert data_br == "29/08/2026"
+        assert options["auto_download_missing"] is True
+        assert options["force_refresh_payments"] is True
+        assert options["company"] == "MVA"
+        prepared["relatorios_pagamento"]["cartao_credito_caixa"] = {
+            "total_autorizado": 100.0,
+            "itens_autorizados": [{"valor_bruto": 100.0, "data_venda": "29/08/2026 às 14:00"}],
+        }
+        return prepared, ["Relatório da Cielo foi usado para complementar o crédito."]
+
+    monkeypatch.setattr(agente_relatorios, "_integrate_cielo_card_reports_if_needed", integrate_cielo)
+
+    prepared, warnings = agente_relatorios._prepare_mva_payment_reports(date(2026, 8, 29), closing, azulzinha)
+
+    assert prepared["relatorios_pagamento"]["cartao_credito_caixa"]["total_autorizado"] == 100.0
+    assert warnings == ["Relatório da Cielo foi usado para complementar o crédito."]
+
+
+def test_mva_agent_does_not_consult_cielo_outside_friday_or_saturday(monkeypatch):
+    closing = {
+        "relatorios_pagamento": {
+            "cartao_debito": {"total_autorizado": 100.0},
+            "cartao_debito_caixa": {"total_autorizado": 20.0},
+        }
+    }
+
+    monkeypatch.setattr(
+        agente_relatorios,
+        "_integrate_cielo_card_reports_if_needed",
+        lambda *_args, **_kwargs: pytest.fail("A Cielo não deve ser consultada fora de sexta e sábado."),
+    )
+
+    prepared, warnings = agente_relatorios._prepare_mva_payment_reports(
+        date(2026, 8, 31),
+        closing,
+        {},
+    )
+
+    assert prepared["relatorios_pagamento"]["cartao_debito_caixa"]["total_autorizado"] == 20.0
+    assert warnings == []
+    agente_relatorios._validate_mva_card_payment_sources(prepared, date(2026, 8, 31))
+
+
+def test_mva_agent_rejects_a_card_gap_that_cielo_did_not_cover():
+    closing = {
+        "relatorios_pagamento": {
+            "cartao_debito": {"total_autorizado": 100.0},
+            "cartao_debito_caixa": {"total_autorizado": 20.0},
+        }
+    }
+
+    with pytest.raises(RuntimeError, match="Cielo não cobriu.*Cartão Débito"):
+        agente_relatorios._validate_mva_card_payment_sources(closing, date(2026, 8, 29))
+
+
+def test_mva_agent_scopes_clipp_data_to_the_requested_afternoon_window():
+    dav = {
+        "caixa_modelo": "MVA",
+        "itens_caixa": [
+            {"pedido": "000001", "ordem": "2026-08-10 09:57:00", "valor": 13.50},
+            {"pedido": "000002", "ordem": "2026-08-10 15:20:00", "valor": 9.90},
+        ],
+        "itens_excluidos": [],
+    }
+    closing = {
+        "fechamento_janelas": [
+            {"id_movimento": 921, "abertura": "10/08/2026 07:52:15", "fechamento": "10/08/2026 14:16:45"},
+            {"id_movimento": 922, "abertura": "10/08/2026 14:16:55", "fechamento": "10/08/2026 17:35:46"},
+        ],
+        "nfces": [
+            {"numero": "000001", "data_venda": "10/08/2026 09:57:00", "valor": 13.50},
+            {"numero": "000002", "data_venda": "10/08/2026 15:20:00", "valor": 9.90},
+        ],
+        "relatorios_pagamento": {
+            "pix_fechamento": {
+                "total_autorizado": 23.40,
+                "quantidade_autorizados": 2,
+                "itens_autorizados": [
+                    {"numero": "000001", "data_venda": "10/08/2026 09:57:00", "valor_bruto": 13.50},
+                    {"numero": "000002", "data_venda": "10/08/2026 15:20:00", "valor_bruto": 9.90},
+                ],
+            }
+        },
+    }
+
+    scoped_dav, scoped_closing = agente_relatorios._scope_mva_reports(dav, closing, "afternoon")
+
+    assert [item["pedido"] for item in scoped_dav["itens_caixa"]] == ["000002"]
+    assert [item["numero"] for item in scoped_closing["nfces"]] == ["000002"]
+    assert scoped_closing["relatorios_pagamento"]["pix_fechamento"]["total_autorizado"] == 9.90
+    assert scoped_closing["fechamento_janelas"] == [
+        {"id_movimento": 922, "abertura": "10/08/2026 14:16:55", "fechamento": "10/08/2026 17:35:46"}
+    ]
+
+
+def test_mva_agent_uses_explicit_shared_reports_directory():
+    assert agente_relatorios._output_dir_from_environment(
+        r"C:\Users\TI\Desktop\Relatorios"
+    ) == Path(r"C:\Users\TI\Desktop\Relatorios")
+
+
+def test_mva_agent_uses_shared_reports_directory_without_environment_override(monkeypatch):
+    monkeypatch.setattr(
+        agente_relatorios.Path,
+        "home",
+        classmethod(lambda cls: Path(r"C:\Users\relatorios.wol")),
+    )
+
+    assert agente_relatorios._output_dir_from_environment("") == Path(
+        r"C:\Users\TI\Desktop\Relatorios"
+    )
+
+
+def test_print_document_page_style_reserves_a_safe_top_margin():
+    from qt_vendas import _print_document_page_style
+
+    assert "padding:8pt 0 0" in _print_document_page_style()
+
+
+def test_agent_restores_project_root_on_import_path_after_staging_directory(monkeypatch, tmp_path):
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(sys, "path", [entry for entry in sys.path if entry != str(agente_relatorios.ROOT)])
+
+    agente_relatorios._ensure_project_root_on_import_path()
+
+    assert sys.path[0] == str(agente_relatorios.ROOT)
+
+
+def test_agent_sends_both_valid_final_reports_to_the_printer_without_a_window(tmp_path):
+    mva_pdf = tmp_path / "Relatorio_MVA.pdf"
+    horizonte_pdf = tmp_path / "Relatorio_Horizonte.pdf"
+    mva_pdf.write_bytes(b"%PDF-1.7\nMVA")
+    horizonte_pdf.write_bytes(b"%PDF-1.7\nHorizonte")
+    summary = {
+        "mva": {"status": "ok", "arquivos": [str(mva_pdf)]},
+        "eh": {"status": "ok", "arquivos": [str(horizonte_pdf)]},
+    }
+    printed_commands = []
+
+    printer_summary = agente_relatorios._send_final_reports_to_printer(
+        summary,
+        printer_name="IMP-Valdirene",
+        executable=tmp_path / "SumatraPDF.exe",
+        command_runner=lambda command, **options: printed_commands.append((command, options)),
+    )
+
+    assert printer_summary == {
+        "status": "enviado",
+        "impressora": "IMP-Valdirene",
+        "arquivos": [str(mva_pdf), str(horizonte_pdf)],
+    }
+    assert [command for command, _ in printed_commands] == [
+        [str(tmp_path / "SumatraPDF.exe"), "-silent", "-print-to", "IMP-Valdirene", str(mva_pdf)],
+        [str(tmp_path / "SumatraPDF.exe"), "-silent", "-print-to", "IMP-Valdirene", str(horizonte_pdf)],
+    ]
+    assert all(options["check"] is True for _, options in printed_commands)
+
+
+def test_agent_does_not_print_when_only_one_final_report_is_valid(tmp_path):
+    mva_pdf = tmp_path / "Relatorio_MVA.pdf"
+    mva_pdf.write_bytes(b"%PDF-1.7\nMVA")
+    summary = {
+        "mva": {"status": "ok", "arquivos": [str(mva_pdf)]},
+        "eh": {"status": "erro", "mensagem": "Falha na fonte"},
+    }
+
+    printer_summary = agente_relatorios._send_final_reports_to_printer(
+        summary,
+        executable=tmp_path / "SumatraPDF.exe",
+        command_runner=lambda *args, **kwargs: pytest.fail("Não deveria haver envio para a impressora."),
+    )
+
+    assert printer_summary is None
+
+
+def test_agent_cleanup_leaves_a_locked_staging_file_without_failing(tmp_path, monkeypatch):
+    staging_dir = tmp_path / ".agente_tmp"
+    staging_dir.mkdir()
+    locked_file = staging_dir / "Historico_Simplificado_de_vendas_26-08-2026_eh_auto.xlsx"
+    locked_file.write_bytes(b"arquivo temporario")
+    original_unlink = Path.unlink
+
+    def deny_locked_file_removal(path, *args, **kwargs):
+        if path == locked_file:
+            raise PermissionError("arquivo em uso")
+        return original_unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(agente_relatorios, "STAGING_DIR", staging_dir)
+    monkeypatch.setattr(Path, "unlink", deny_locked_file_removal)
+
+    blocked_files = agente_relatorios._cleanup_staging_dir()
+
+    assert locked_file.is_file()
+    assert blocked_files == [str(locked_file)]
+
+
+def test_agent_lock_replaces_a_legacy_pid_lock_that_can_be_reused_by_another_process(tmp_path):
+    lock_path = tmp_path / "agente_relatorios.lock"
+    lock_path.write_text("4452", encoding="ascii")
+
+    lock_token = agente_relatorios._acquire_agent_lock(lock_path)
+
+    assert lock_token
+    lock_payload = json.loads(lock_path.read_text(encoding="utf-8"))
+    assert lock_payload["pid"] == os.getpid()
+    assert lock_payload["token"] == lock_token
+
+
+def test_agent_lock_keeps_a_lock_owned_by_the_same_running_process(tmp_path, monkeypatch):
+    lock_path = tmp_path / "agente_relatorios.lock"
+    lock_path.write_text(
+        json.dumps({"pid": 9876, "process_marker": "creation-9876", "token": "active-token"}),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(agente_relatorios, "_process_creation_marker", lambda pid: "creation-9876")
+
+    assert agente_relatorios._acquire_agent_lock(lock_path) is None
+    assert json.loads(lock_path.read_text(encoding="utf-8"))["token"] == "active-token"
+
+
+def test_agent_lock_release_does_not_remove_a_newer_owners_lock(tmp_path):
+    lock_path = tmp_path / "agente_relatorios.lock"
+    lock_path.write_text(
+        json.dumps({"pid": 9876, "process_marker": "creation-9876", "token": "newer-token"}),
+        encoding="utf-8",
+    )
+
+    agente_relatorios._release_agent_lock(lock_path, "old-token")
+
+    assert json.loads(lock_path.read_text(encoding="utf-8"))["token"] == "newer-token"
+
+
+def test_mva_agent_defers_an_open_closing_without_downloading_external_reports(tmp_path, monkeypatch, capsys):
+    class OpenClosingReader:
+        def build_closing_report(self, target):
+            return {
+                "fechamento_parcial": True,
+                "fechamento_janelas": [
+                    {
+                        "id_movimento": 1235,
+                        "abertura": "10/08/2026 07:52:15",
+                        "fechamento": None,
+                    }
+                ],
+            }
+
+        def build_dav_report(self, target):
+            raise AssertionError("O DAV não deve ser consultado antes de o caixa fechar.")
+
+    monkeypatch.setattr(agente_relatorios, "OUTPUT_DIR", tmp_path / "Relatorios")
+    monkeypatch.setattr(agente_relatorios, "STAGING_DIR", tmp_path / "staging")
+    monkeypatch.setattr(agente_relatorios, "RETRY_STATE_DIR", tmp_path / "retry_state")
+    monkeypatch.setattr(
+        agente_relatorios.ClippMvaReader,
+        "from_environment",
+        lambda: OpenClosingReader(),
+    )
+    monkeypatch.setattr(
+        agente_relatorios,
+        "_download_mva_azulzinha_reports",
+        lambda target: pytest.fail("A Azulzinha não deve ser consultada antes do fechamento."),
+    )
+
+    assert agente_relatorios._run("morning", "10/08/2026") == 0
+
+    status = json.loads(capsys.readouterr().out)
+    assert status == {
+        "status": "adiado",
+        "escopo": "morning",
+        "data_alvo": "10/08/2026",
+        "proxima_verificacao_minutos": 15,
+        "motivo": "O caixa MVA ainda está aberto.",
+    }
+    assert (tmp_path / "retry_state" / "2026-08-10_morning.json").is_file()
+
+
+def test_agent_retry_recovers_a_missed_main_run_only_in_its_retry_window(tmp_path, monkeypatch):
+    sao_paulo = ZoneInfo("America/Sao_Paulo")
+    target = date(2026, 8, 12)
+
+    monkeypatch.setattr(agente_relatorios, "RETRY_STATE_DIR", tmp_path / "retry_state")
+    monkeypatch.setattr(agente_relatorios, "EXECUTION_STATE_DIR", tmp_path / "execution_state")
+
+    assert agente_relatorios._retry_execution_mode(
+        "afternoon",
+        None,
+        target,
+        now=datetime(2026, 8, 13, 8, 15, tzinfo=sao_paulo),
+    ) == "catch_up"
+
+    agente_relatorios._record_execution_start(target, "afternoon", "main")
+
+    assert agente_relatorios._retry_execution_mode(
+        "afternoon",
+        None,
+        target,
+        now=datetime(2026, 8, 13, 8, 15, tzinfo=sao_paulo),
+    ) == "skip"
+    assert agente_relatorios._retry_execution_mode(
+        "afternoon",
+        None,
+        target,
+        now=datetime(2026, 8, 13, 8, 0, tzinfo=sao_paulo),
+    ) == "skip"
+
+
+def test_agent_retry_prefers_a_pending_closing_over_missed_run_recovery(tmp_path, monkeypatch):
+    sao_paulo = ZoneInfo("America/Sao_Paulo")
+    target = date(2026, 8, 12)
+
+    monkeypatch.setattr(agente_relatorios, "RETRY_STATE_DIR", tmp_path / "retry_state")
+    monkeypatch.setattr(agente_relatorios, "EXECUTION_STATE_DIR", tmp_path / "execution_state")
+    agente_relatorios._record_retry_request(target, "afternoon")
+
+    assert agente_relatorios._retry_execution_mode(
+        "afternoon",
+        None,
+        target,
+        now=datetime(2026, 8, 13, 8, 15, tzinfo=sao_paulo),
+    ) == "pending"
+
+
+def test_agent_retry_never_recovers_a_weekend_target(tmp_path, monkeypatch):
+    sao_paulo = ZoneInfo("America/Sao_Paulo")
+    target = date(2026, 8, 16)
+
+    monkeypatch.setattr(agente_relatorios, "RETRY_STATE_DIR", tmp_path / "retry_state")
+    monkeypatch.setattr(agente_relatorios, "EXECUTION_STATE_DIR", tmp_path / "execution_state")
+
+    assert agente_relatorios._retry_execution_mode(
+        "afternoon",
+        None,
+        target,
+        now=datetime(2026, 8, 18, 8, 15, tzinfo=sao_paulo),
+    ) == "skip"
+
+
+def test_agent_cleanup_removes_empty_staging_directory_after_deleting_artifacts(tmp_path, monkeypatch):
+    staging = tmp_path / "staging"
+    nested = staging / "downloads"
+    nested.mkdir(parents=True)
+    (staging / "temporary.csv").write_text("conteudo", encoding="utf-8")
+    (nested / "temporary.html").write_text("conteudo", encoding="utf-8")
+    monkeypatch.setattr(agente_relatorios, "STAGING_DIR", staging)
+    monkeypatch.chdir(staging)
+
+    agente_relatorios._cleanup_staging_dir()
+
+    assert not staging.exists()
+
+
+def test_agent_rejects_horizonte_closing_when_card_source_is_absent():
+    fechamento_horizonte = {
+        "relatorios_pagamento": {
+            "cartao_credito": {"total_autorizado": 1049.25},
+            "cartao_debito": {"total_autorizado": 421.45},
+        }
+    }
+
+    with pytest.raises(RuntimeError, match="Cartão Crédito.*Cartão Débito"):
+        agente_relatorios._validate_eh_card_payment_sources(fechamento_horizonte)
+
+
+def test_mva_agent_identifies_a_closed_movement_as_ready_for_report_generation():
+    assert agente_relatorios._mva_closing_is_ready(
+        {
+            "fechamento_parcial": False,
+            "fechamento_janelas": [
+                {
+                    "id_movimento": 1235,
+                    "abertura": "10/08/2026 07:52:15",
+                    "fechamento": "10/08/2026 14:16:45",
+                }
+            ],
+        }
+    ) is True
+    assert agente_relatorios._mva_closing_is_ready(
+        {
+            "fechamento_parcial": True,
+            "fechamento_janelas": [
+                {
+                    "id_movimento": 1235,
+                    "abertura": "10/08/2026 07:52:15",
+                    "fechamento": None,
+                }
+            ],
+        }
+    ) is False
+
+
+def _successful_report_summary(tmp_path):
+    mva_pdf = tmp_path / "Relatorio_MVA_11-08-2026.pdf"
+    horizonte_pdf = tmp_path / "Relatorio_Horizonte_11-08-2026.pdf"
+    mva_pdf.write_bytes(b"%PDF-1.7\nMVA")
+    horizonte_pdf.write_bytes(b"%PDF-1.7\nHorizonte")
+    return {
+        "mva": {"status": "ok", "arquivos": [str(mva_pdf)]},
+        "eh": {"status": "ok", "arquivos": [str(horizonte_pdf)]},
+    }
+
+
+def test_agent_uses_a_distinct_final_pdf_name_for_each_closing_scope(tmp_path, monkeypatch):
+    monkeypatch.setattr(agente_relatorios, "OUTPUT_DIR", tmp_path)
+    target = date(2026, 8, 18)
+
+    morning = agente_relatorios._final_pdf_path("MVA", target, "morning")
+    afternoon = agente_relatorios._final_pdf_path("MVA", target, "afternoon")
+
+    assert morning.name == "Relatorio_MVA_18-08-2026_Manha.pdf"
+    assert afternoon.name == "Relatorio_MVA_18-08-2026_Tarde.pdf"
+    assert morning != afternoon
+
+
+def test_agent_only_eh_cli_runs_horizonte_without_starting_mva(monkeypatch):
+    captured = {}
+
+    def fake_run(scope, requested, **kwargs):
+        captured.update({"scope": scope, "requested": requested, **kwargs})
+        return 0
+
+    monkeypatch.setattr(agente_relatorios, "_run", fake_run)
+    monkeypatch.setattr(sys, "argv", ["agente_relatorios.py", "--scope", "morning", "--date", "05/09/2026", "--only-eh"])
+
+    assert agente_relatorios.main() == 0
+    assert captured == {
+        "scope": "morning",
+        "requested": "05/09/2026",
+        "retry": False,
+        "shutdown_after_wol": False,
+        "only_mva": False,
+        "only_eh": True,
+    }
+
+
+def test_wol_shutdown_is_armed_only_after_a_valid_report_cycle_started_by_wol(tmp_path):
+    sao_paulo = ZoneInfo("America/Sao_Paulo")
+    shutdown_calls = []
+
+    shutdown = agente_relatorios._schedule_shutdown_for_wol_boot(
+        "morning",
+        None,
+        _successful_report_summary(tmp_path),
+        now=datetime(2026, 8, 11, 13, 46, tzinfo=sao_paulo),
+        booted_at=datetime(2026, 8, 11, 13, 16, tzinfo=sao_paulo),
+        command_runner=shutdown_calls.append,
+    )
+
+    assert shutdown == {
+        "status": "agendado",
+        "desligamento_em_segundos": 90,
+        "wake_programado_para": "11/08/2026 13:15",
+    }
+    assert shutdown_calls == [[
+        "shutdown.exe",
+        "/s",
+        "/t",
+        "90",
+        "/c",
+        "Relatorios de fechamento concluidos pelo agente.",
+    ]]
+
+
+def test_wol_shutdown_does_not_turn_off_a_machine_that_was_already_on(tmp_path):
+    sao_paulo = ZoneInfo("America/Sao_Paulo")
+    shutdown_calls = []
+
+    shutdown = agente_relatorios._schedule_shutdown_for_wol_boot(
+        "afternoon",
+        None,
+        _successful_report_summary(tmp_path),
+        now=datetime(2026, 8, 11, 8, 5, tzinfo=sao_paulo),
+        booted_at=datetime(2026, 8, 11, 7, 30, tzinfo=sao_paulo),
+        command_runner=shutdown_calls.append,
+    )
+
+    assert shutdown is None
+    assert shutdown_calls == []
+
+
+def test_wol_shutdown_requires_both_valid_final_pdfs(tmp_path):
+    sao_paulo = ZoneInfo("America/Sao_Paulo")
+    shutdown_calls = []
+    summary = _successful_report_summary(tmp_path)
+    Path(summary["eh"]["arquivos"][0]).write_bytes(b"arquivo sem cabecalho PDF")
+
+    shutdown = agente_relatorios._schedule_shutdown_for_wol_boot(
+        "morning",
+        None,
+        summary,
+        now=datetime(2026, 8, 11, 13, 46, tzinfo=sao_paulo),
+        booted_at=datetime(2026, 8, 11, 13, 16, tzinfo=sao_paulo),
+        command_runner=shutdown_calls.append,
+    )
+
+    assert shutdown is None
+    assert shutdown_calls == []
+
+
+def test_eh_keeps_unmatched_card_payment_even_when_an_unrelated_nf_has_same_value():
+    fechamento = utils.comparar_caixa_resumo_nfce(
+        {
+            "caixa_modelo": "EH",
+            "periodo": "10/08/2026 - 10/08/2026",
+            "itens_caixa": [],
+            "itens_excluidos": [
+                {
+                    "pedido": "000022591",
+                    "documento": "Nota Fiscal Eletronica",
+                    "motivo": "NF-e",
+                    "valor": 23.70,
+                }
+            ],
+            "total_caixa": 0.0,
+        },
+        {
+            "periodo": "10/08/2026 - 10/08/2026",
+            "nfces": [],
+            "relatorios_pagamento": {
+                "dinheiro": {"total_autorizado": 0.0, "itens_autorizados": []},
+                "cartao_debito": {"total_autorizado": 0.0, "itens_autorizados": []},
+                "cartao_debito_caixa": {
+                    "total_autorizado": 23.70,
+                    "itens_autorizados": [
+                        {
+                            "numero": "003143",
+                            "data_venda": "10/08/2026 às 09:10",
+                            "valor_bruto": 23.70,
+                        }
+                    ],
+                },
+            },
+        },
+    )
+
+    alertas = fechamento["relatorios_pagamento"]["alertas_eh"]
+
+    assert ("Cartão Débito", "R$ 0,00", "R$ 23,70", "Divergente") in alertas["correlacao_rows"]
+    assert alertas["cartao_maquina_rows"] == [("Débito: 10/08/2026 às 09:10", "R$ 23,70")]
+    assert alertas["total_relatorio"] == 23.70
+
+
+def test_eh_keeps_card_transaction_when_the_same_amount_was_paid_in_cash():
+    fechamento = utils.comparar_caixa_resumo_nfce(
+        {
+            "caixa_modelo": "EH",
+            "periodo": "29/08/2026 - 29/08/2026",
+            "itens_caixa": [{"pedido": "000110220", "valor": 76.80}],
+            "itens_excluidos": [],
+            "total_caixa": 0.0,
+        },
+        {
+            "periodo": "29/08/2026 - 29/08/2026",
+            "nfces": [],
+            "relatorios_pagamento": {
+                "dinheiro": {
+                    "total_autorizado": 76.80,
+                    "itens_autorizados": [],
+                },
+                "cartao_credito": {
+                    "total_autorizado": 76.80,
+                    "itens_autorizados": [
+                        {
+                            "numero": "000110221",
+                            "numero_exibicao": "110221",
+                            "valor_bruto": 76.80,
+                        }
+                    ],
+                },
+                "cartao_credito_caixa": {
+                    "total_autorizado": 76.80,
+                    "itens_autorizados": [
+                        {
+                            "data_venda": "29/08/2026 às 10:30",
+                            "valor_bruto": 76.80,
+                        }
+                    ],
+                },
+            },
+        },
+    )
+
+    alertas = fechamento["relatorios_pagamento"]["alertas_eh"]
+
+    assert alertas["cartao_maquina_rows"] == [("Crédito: 29/08/2026 às 10:30", "R$ 76,80")]
+    assert alertas["total_relatorio"] == 153.60

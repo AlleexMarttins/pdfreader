@@ -1,0 +1,5923 @@
+{
+  "relatorio": {
+    "arquivo": "DAV.pdf",
+    "caixa_modelo": "MVA",
+    "arquivo_tipo": "mva_davs_combinado",
+    "periodo": "04/07/2026 - 04/07/2026",
+    "pedidos_total": 106,
+    "pedidos_balcao": 0,
+    "pedidos_caixa": 99,
+    "pedidos_excluidos": 7,
+    "pedidos_excluidos_cliente": 0,
+    "pedidos_excluidos_documento": 0,
+    "pedidos_editando": 6,
+    "pedidos_outros_status": 1,
+    "total_documento": 6444.5,
+    "total_excluido": 244.9,
+    "total_caixa": 6199.6,
+    "itens_caixa": [
+      {
+        "pedido": "0000457276",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 9.45,
+        "data_venda": "04/07/2026 08:07:40",
+        "ordem": "2026-07-04 08:07:40",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457277",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 16.0,
+        "data_venda": "04/07/2026 08:14:39",
+        "ordem": "2026-07-04 08:14:39",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457278",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 4.0,
+        "data_venda": "04/07/2026 08:16:44",
+        "ordem": "2026-07-04 08:16:44",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457279",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 39.6,
+        "data_venda": "04/07/2026 08:16:47",
+        "ordem": "2026-07-04 08:16:47",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457280",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 14.0,
+        "data_venda": "04/07/2026 08:22:23",
+        "ordem": "2026-07-04 08:22:23",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457281",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 53.4,
+        "data_venda": "04/07/2026 08:22:57",
+        "ordem": "2026-07-04 08:22:57",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457282",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 123.0,
+        "data_venda": "04/07/2026 08:26:01",
+        "ordem": "2026-07-04 08:26:01",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457283",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 17.2,
+        "data_venda": "04/07/2026 08:29:11",
+        "ordem": "2026-07-04 08:29:11",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457284",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 3.5,
+        "data_venda": "04/07/2026 08:34:23",
+        "ordem": "2026-07-04 08:34:23",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457285",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 132.3,
+        "data_venda": "04/07/2026 08:40:30",
+        "ordem": "2026-07-04 08:40:30",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457286",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 56.4,
+        "data_venda": "04/07/2026 08:41:19",
+        "ordem": "2026-07-04 08:41:19",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457287",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 65.5,
+        "data_venda": "04/07/2026 08:41:28",
+        "ordem": "2026-07-04 08:41:28",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457288",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 45.5,
+        "data_venda": "04/07/2026 08:44:06",
+        "ordem": "2026-07-04 08:44:06",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457289",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 25.8,
+        "data_venda": "04/07/2026 08:44:50",
+        "ordem": "2026-07-04 08:44:50",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457290",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 6.5,
+        "data_venda": "04/07/2026 08:48:04",
+        "ordem": "2026-07-04 08:48:04",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457291",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 92.75,
+        "data_venda": "04/07/2026 08:49:28",
+        "ordem": "2026-07-04 08:49:28",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457292",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 20.4,
+        "data_venda": "04/07/2026 08:52:27",
+        "ordem": "2026-07-04 08:52:27",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457293",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 41.75,
+        "data_venda": "04/07/2026 08:53:13",
+        "ordem": "2026-07-04 08:53:13",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457294",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 72.1,
+        "data_venda": "04/07/2026 08:56:42",
+        "ordem": "2026-07-04 08:56:42",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457295",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 73.85,
+        "data_venda": "04/07/2026 08:58:07",
+        "ordem": "2026-07-04 08:58:07",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457296",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 12.95,
+        "data_venda": "04/07/2026 08:59:53",
+        "ordem": "2026-07-04 08:59:53",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457297",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 63.5,
+        "data_venda": "04/07/2026 09:01:07",
+        "ordem": "2026-07-04 09:01:07",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457298",
+        "cliente": "PELICANO CONSTRUCOES S.A.",
+        "documento": "Finalizado",
+        "valor": 10.25,
+        "data_venda": "04/07/2026 09:08:02",
+        "ordem": "2026-07-04 09:08:02",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457299",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 11.0,
+        "data_venda": "04/07/2026 09:10:09",
+        "ordem": "2026-07-04 09:10:09",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457300",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 9.9,
+        "data_venda": "04/07/2026 09:15:49",
+        "ordem": "2026-07-04 09:15:49",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457301",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 22.95,
+        "data_venda": "04/07/2026 09:16:08",
+        "ordem": "2026-07-04 09:16:08",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457302",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 25.0,
+        "data_venda": "04/07/2026 09:18:50",
+        "ordem": "2026-07-04 09:18:50",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457303",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 5.5,
+        "data_venda": "04/07/2026 09:19:58",
+        "ordem": "2026-07-04 09:19:58",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457304",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 47.8,
+        "data_venda": "04/07/2026 09:22:04",
+        "ordem": "2026-07-04 09:22:04",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457306",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 26.8,
+        "data_venda": "04/07/2026 09:24:08",
+        "ordem": "2026-07-04 09:24:08",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457307",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 18.4,
+        "data_venda": "04/07/2026 09:31:01",
+        "ordem": "2026-07-04 09:31:01",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457308",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 18.45,
+        "data_venda": "04/07/2026 09:31:56",
+        "ordem": "2026-07-04 09:31:56",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457310",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 6.95,
+        "data_venda": "04/07/2026 09:34:24",
+        "ordem": "2026-07-04 09:34:24",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457311",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 319.8,
+        "data_venda": "04/07/2026 09:34:49",
+        "ordem": "2026-07-04 09:34:49",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457312",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 6.95,
+        "data_venda": "04/07/2026 09:39:20",
+        "ordem": "2026-07-04 09:39:20",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457313",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 73.95,
+        "data_venda": "04/07/2026 09:51:11",
+        "ordem": "2026-07-04 09:51:11",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457314",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 115.5,
+        "data_venda": "04/07/2026 09:54:56",
+        "ordem": "2026-07-04 09:54:56",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457315",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 21.6,
+        "data_venda": "04/07/2026 09:55:54",
+        "ordem": "2026-07-04 09:55:54",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457316",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 35.95,
+        "data_venda": "04/07/2026 09:59:07",
+        "ordem": "2026-07-04 09:59:07",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457317",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 15.95,
+        "data_venda": "04/07/2026 10:00:11",
+        "ordem": "2026-07-04 10:00:11",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457318",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 20.15,
+        "data_venda": "04/07/2026 10:00:14",
+        "ordem": "2026-07-04 10:00:14",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457319",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 292.0,
+        "data_venda": "04/07/2026 10:04:12",
+        "ordem": "2026-07-04 10:04:12",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457320",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 29.05,
+        "data_venda": "04/07/2026 10:05:27",
+        "ordem": "2026-07-04 10:05:27",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457321",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 8.2,
+        "data_venda": "04/07/2026 10:13:09",
+        "ordem": "2026-07-04 10:13:09",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457322",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 125.0,
+        "data_venda": "04/07/2026 10:14:51",
+        "ordem": "2026-07-04 10:14:51",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457323",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 48.0,
+        "data_venda": "04/07/2026 10:15:07",
+        "ordem": "2026-07-04 10:15:07",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457324",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 28.25,
+        "data_venda": "04/07/2026 10:19:32",
+        "ordem": "2026-07-04 10:19:32",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457325",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 11.9,
+        "data_venda": "04/07/2026 10:21:55",
+        "ordem": "2026-07-04 10:21:55",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457326",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 48.4,
+        "data_venda": "04/07/2026 10:22:46",
+        "ordem": "2026-07-04 10:22:46",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457329",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 2.8,
+        "data_venda": "04/07/2026 10:26:36",
+        "ordem": "2026-07-04 10:26:36",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457330",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 42.05,
+        "data_venda": "04/07/2026 10:29:19",
+        "ordem": "2026-07-04 10:29:19",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457331",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 60.5,
+        "data_venda": "04/07/2026 10:29:35",
+        "ordem": "2026-07-04 10:29:35",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457332",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 13.5,
+        "data_venda": "04/07/2026 10:32:55",
+        "ordem": "2026-07-04 10:32:55",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457333",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 38.9,
+        "data_venda": "04/07/2026 10:32:59",
+        "ordem": "2026-07-04 10:32:59",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457334",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 7.3,
+        "data_venda": "04/07/2026 10:34:29",
+        "ordem": "2026-07-04 10:34:29",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457335",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 19.0,
+        "data_venda": "04/07/2026 10:35:27",
+        "ordem": "2026-07-04 10:35:27",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457336",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 56.95,
+        "data_venda": "04/07/2026 10:37:45",
+        "ordem": "2026-07-04 10:37:45",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457337",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 19.95,
+        "data_venda": "04/07/2026 10:39:48",
+        "ordem": "2026-07-04 10:39:48",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457338",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 13.0,
+        "data_venda": "04/07/2026 10:40:22",
+        "ordem": "2026-07-04 10:40:22",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457339",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 27.8,
+        "data_venda": "04/07/2026 10:43:03",
+        "ordem": "2026-07-04 10:43:03",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457340",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 5.5,
+        "data_venda": "04/07/2026 10:47:16",
+        "ordem": "2026-07-04 10:47:16",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457341",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 9.7,
+        "data_venda": "04/07/2026 10:50:20",
+        "ordem": "2026-07-04 10:50:20",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457342",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 27.95,
+        "data_venda": "04/07/2026 10:52:56",
+        "ordem": "2026-07-04 10:52:56",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457343",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 18.5,
+        "data_venda": "04/07/2026 10:53:04",
+        "ordem": "2026-07-04 10:53:04",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457344",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 1.5,
+        "data_venda": "04/07/2026 10:55:00",
+        "ordem": "2026-07-04 10:55:00",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457345",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 34.65,
+        "data_venda": "04/07/2026 10:56:05",
+        "ordem": "2026-07-04 10:56:05",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457346",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 6.8,
+        "data_venda": "04/07/2026 11:00:02",
+        "ordem": "2026-07-04 11:00:02",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457347",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 9.6,
+        "data_venda": "04/07/2026 11:02:09",
+        "ordem": "2026-07-04 11:02:09",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457348",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 1.2,
+        "data_venda": "04/07/2026 11:03:55",
+        "ordem": "2026-07-04 11:03:55",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457349",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 8.5,
+        "data_venda": "04/07/2026 11:05:09",
+        "ordem": "2026-07-04 11:05:09",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457350",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 7.95,
+        "data_venda": "04/07/2026 11:05:40",
+        "ordem": "2026-07-04 11:05:40",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457351",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 25.0,
+        "data_venda": "04/07/2026 11:08:58",
+        "ordem": "2026-07-04 11:08:58",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457353",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 215.9,
+        "data_venda": "04/07/2026 11:10:05",
+        "ordem": "2026-07-04 11:10:05",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457354",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 16.5,
+        "data_venda": "04/07/2026 11:13:09",
+        "ordem": "2026-07-04 11:13:09",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457355",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 16.75,
+        "data_venda": "04/07/2026 11:15:12",
+        "ordem": "2026-07-04 11:15:12",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457356",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 5.55,
+        "data_venda": "04/07/2026 11:15:35",
+        "ordem": "2026-07-04 11:15:35",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457357",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 815.0,
+        "data_venda": "04/07/2026 11:20:00",
+        "ordem": "2026-07-04 11:20:00",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457358",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 39.95,
+        "data_venda": "04/07/2026 11:21:58",
+        "ordem": "2026-07-04 11:21:58",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457359",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 22.0,
+        "data_venda": "04/07/2026 11:22:46",
+        "ordem": "2026-07-04 11:22:46",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457360",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 69.4,
+        "data_venda": "04/07/2026 11:23:33",
+        "ordem": "2026-07-04 11:23:33",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457361",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 17.7,
+        "data_venda": "04/07/2026 11:24:08",
+        "ordem": "2026-07-04 11:24:08",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457362",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 43.7,
+        "data_venda": "04/07/2026 11:25:07",
+        "ordem": "2026-07-04 11:25:07",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457363",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 492.1,
+        "data_venda": "04/07/2026 11:26:19",
+        "ordem": "2026-07-04 11:26:19",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457365",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 125.9,
+        "data_venda": "04/07/2026 11:31:11",
+        "ordem": "2026-07-04 11:31:11",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457366",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 147.1,
+        "data_venda": "04/07/2026 11:33:56",
+        "ordem": "2026-07-04 11:33:56",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457367",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 34.5,
+        "data_venda": "04/07/2026 11:39:40",
+        "ordem": "2026-07-04 11:39:40",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457368",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 46.3,
+        "data_venda": "04/07/2026 11:41:41",
+        "ordem": "2026-07-04 11:41:41",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457369",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 39.0,
+        "data_venda": "04/07/2026 11:42:41",
+        "ordem": "2026-07-04 11:42:41",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457371",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 23.0,
+        "data_venda": "04/07/2026 11:44:15",
+        "ordem": "2026-07-04 11:44:15",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457372",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 6.0,
+        "data_venda": "04/07/2026 11:47:04",
+        "ordem": "2026-07-04 11:47:04",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457373",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 39.6,
+        "data_venda": "04/07/2026 11:48:40",
+        "ordem": "2026-07-04 11:48:40",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457374",
+        "cliente": "IN SOLO APOIO AEREO EIRELI",
+        "documento": "Finalizado",
+        "valor": 1022.3,
+        "data_venda": "04/07/2026 11:49:39",
+        "ordem": "2026-07-04 11:49:39",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457375",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 2.55,
+        "data_venda": "04/07/2026 11:52:24",
+        "ordem": "2026-07-04 11:52:24",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457376",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 6.95,
+        "data_venda": "04/07/2026 11:53:32",
+        "ordem": "2026-07-04 11:53:32",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457378",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 38.85,
+        "data_venda": "04/07/2026 11:57:05",
+        "ordem": "2026-07-04 11:57:05",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457380",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 8.9,
+        "data_venda": "04/07/2026 12:00:33",
+        "ordem": "2026-07-04 12:00:33",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457382",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 36.9,
+        "data_venda": "04/07/2026 12:00:58",
+        "ordem": "2026-07-04 12:00:58",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457384",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 14.6,
+        "data_venda": "04/07/2026 12:06:42",
+        "ordem": "2026-07-04 12:06:42",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457385",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Finalizado",
+        "valor": 0.9,
+        "data_venda": "04/07/2026 12:07:18",
+        "ordem": "2026-07-04 12:07:18",
+        "origem_mva": "Exportacao de dados"
+      }
+    ],
+    "itens_excluidos": [
+      {
+        "pedido": "0000457305",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Editando",
+        "valor": 62.5,
+        "data_venda": "04/07/2026 09:23:36",
+        "ordem": "2026-07-04 09:23:36",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457309",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Editando",
+        "valor": 0.0,
+        "data_venda": "04/07/2026 09:34:02",
+        "ordem": "2026-07-04 09:34:02",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457327",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Editando",
+        "valor": 10.0,
+        "data_venda": "04/07/2026 10:23:39",
+        "ordem": "2026-07-04 10:23:39",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457328",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Editando",
+        "valor": 10.95,
+        "data_venda": "04/07/2026 10:25:25",
+        "ordem": "2026-07-04 10:25:25",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457352",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Reprovado",
+        "valor": 1.5,
+        "data_venda": "04/07/2026 11:09:41",
+        "ordem": "2026-07-04 11:09:41",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457364",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Editando",
+        "valor": 159.95,
+        "data_venda": "04/07/2026 11:30:05",
+        "ordem": "2026-07-04 11:30:05",
+        "origem_mva": "Exportacao de dados"
+      },
+      {
+        "pedido": "0000457370",
+        "cliente": "CLIENTE BALCAO",
+        "documento": "Editando",
+        "valor": 0.0,
+        "data_venda": "04/07/2026 11:43:40",
+        "ordem": "2026-07-04 11:43:40",
+        "origem_mva": "Exportacao de dados"
+      }
+    ]
+  },
+  "fechamento_lido": {
+    "arquivo": "FECHAMENTO DE CAIXA.pdf",
+    "arquivo_tipo": "fechamento_caixa_clipp_mva",
+    "arquivo_resumo_titulo": "Arquivo Fechamento",
+    "total_resumo_titulo": "Total Fechamento de caixa",
+    "subtitle": "Compara os DAVs finalizados com o fechamento do Clipp e cruza as formas de pagamento com os relatórios da Caixa.",
+    "resumo_modelo": "MVA",
+    "periodo": "04/07/2026 - 04/07/2026",
+    "quantidade_nfce": 100,
+    "total_nfce": 4790.65,
+    "total_geral": 4790.65,
+    "totalizadores": {
+      "Dinheiro": 516.95,
+      "Cartão de Crédito": 1655.85,
+      "Cartão de Débito": 1339.35,
+      "Pagamento Instantâneo (PIX)": 1166.0
+    },
+    "relatorios_pagamento": {
+      "pix_fechamento": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 24,
+        "total_autorizado": 1166.0,
+        "itens_autorizados": [
+          {
+            "numero": "000394025",
+            "numero_exibicao": "394025",
+            "data_venda": "04/07/2026 08:17:57",
+            "valor_bruto": 9.45
+          },
+          {
+            "numero": "000394028",
+            "numero_exibicao": "394028",
+            "data_venda": "04/07/2026 08:21:27",
+            "valor_bruto": 16.0
+          },
+          {
+            "numero": "000394039",
+            "numero_exibicao": "394039",
+            "data_venda": "04/07/2026 08:53:09",
+            "valor_bruto": 92.75
+          },
+          {
+            "numero": "000394040",
+            "numero_exibicao": "394040",
+            "data_venda": "04/07/2026 08:55:38",
+            "valor_bruto": 25.8
+          },
+          {
+            "numero": "000394041",
+            "numero_exibicao": "394041",
+            "data_venda": "04/07/2026 08:56:41",
+            "valor_bruto": 20.4
+          },
+          {
+            "numero": "000394047",
+            "numero_exibicao": "394047",
+            "data_venda": "04/07/2026 09:15:19",
+            "valor_bruto": 63.5
+          },
+          {
+            "numero": "000394048",
+            "numero_exibicao": "394048",
+            "data_venda": "04/07/2026 09:17:40",
+            "valor_bruto": 9.9
+          },
+          {
+            "numero": "000394058",
+            "numero_exibicao": "394058",
+            "data_venda": "04/07/2026 09:40:45",
+            "valor_bruto": 6.95
+          },
+          {
+            "numero": "000394060",
+            "numero_exibicao": "394060",
+            "data_venda": "04/07/2026 09:55:21",
+            "valor_bruto": 115.5
+          },
+          {
+            "numero": "000394062",
+            "numero_exibicao": "394062",
+            "data_venda": "04/07/2026 09:59:34",
+            "valor_bruto": 73.95
+          },
+          {
+            "numero": "000394066",
+            "numero_exibicao": "394066",
+            "data_venda": "04/07/2026 10:09:59",
+            "valor_bruto": 292.0
+          },
+          {
+            "numero": "000394068",
+            "numero_exibicao": "394068",
+            "data_venda": "04/07/2026 10:16:58",
+            "valor_bruto": 29.05
+          },
+          {
+            "numero": "000394070",
+            "numero_exibicao": "394070",
+            "data_venda": "04/07/2026 10:22:42",
+            "valor_bruto": 11.9
+          },
+          {
+            "numero": "000394078",
+            "numero_exibicao": "394078",
+            "data_venda": "04/07/2026 10:40:41",
+            "valor_bruto": 19.0
+          },
+          {
+            "numero": "000394081",
+            "numero_exibicao": "394081",
+            "data_venda": "04/07/2026 10:48:22",
+            "valor_bruto": 5.5
+          },
+          {
+            "numero": "000394082",
+            "numero_exibicao": "394082",
+            "data_venda": "04/07/2026 10:52:10",
+            "valor_bruto": 9.7
+          },
+          {
+            "numero": "000394085",
+            "numero_exibicao": "394085",
+            "data_venda": "04/07/2026 10:56:20",
+            "valor_bruto": 18.5
+          },
+          {
+            "numero": "000394095",
+            "numero_exibicao": "394095",
+            "data_venda": "04/07/2026 11:13:23",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "000394103",
+            "numero_exibicao": "394103",
+            "data_venda": "04/07/2026 11:31:11",
+            "valor_bruto": 43.7
+          },
+          {
+            "numero": "000394104",
+            "numero_exibicao": "394104",
+            "data_venda": "04/07/2026 11:32:52",
+            "valor_bruto": 125.9
+          },
+          {
+            "numero": "000394109",
+            "numero_exibicao": "394109",
+            "data_venda": "04/07/2026 11:45:10",
+            "valor_bruto": 23.0
+          },
+          {
+            "numero": "000394113",
+            "numero_exibicao": "394113",
+            "data_venda": "04/07/2026 11:50:07",
+            "valor_bruto": 6.0
+          },
+          {
+            "numero": "000394115",
+            "numero_exibicao": "394115",
+            "data_venda": "04/07/2026 11:53:47",
+            "valor_bruto": 2.55
+          },
+          {
+            "numero": "000394121",
+            "numero_exibicao": "394121",
+            "data_venda": "04/07/2026 12:06:22",
+            "valor_bruto": 120.0
+          }
+        ],
+        "quantidade_relatorio": 24,
+        "total_relatorio": 1166.0,
+        "consistente": true,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "pix_fechamento",
+        "tab_title": "PIX Fechamento",
+        "menu_text": "Abrir PIX fechamento",
+        "summary_label": "PIX fechamento",
+        "total_label": "Total PIX fechamento",
+        "section_label": "Transações PIX no Fechamento",
+        "empty_message": "Nenhuma transação PIX encontrada no Fechamento para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "hidden_in_menu": true
+      },
+      "cartao_credito": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 19,
+        "total_autorizado": 1655.85,
+        "itens_autorizados": [
+          {
+            "numero": "000394026",
+            "numero_exibicao": "394026",
+            "data_venda": "04/07/2026 08:19:28",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "000394050",
+            "numero_exibicao": "394050",
+            "data_venda": "04/07/2026 09:19:33",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "000394054",
+            "numero_exibicao": "394054",
+            "data_venda": "04/07/2026 09:32:36",
+            "valor_bruto": 18.4
+          },
+          {
+            "numero": "000394056",
+            "numero_exibicao": "394056",
+            "data_venda": "04/07/2026 09:36:15",
+            "valor_bruto": 26.8
+          },
+          {
+            "numero": "000394057",
+            "numero_exibicao": "394057",
+            "data_venda": "04/07/2026 09:37:44",
+            "valor_bruto": 319.8
+          },
+          {
+            "numero": "000394063",
+            "numero_exibicao": "394063",
+            "data_venda": "04/07/2026 10:01:17",
+            "valor_bruto": 35.95
+          },
+          {
+            "numero": "000394065",
+            "numero_exibicao": "394065",
+            "data_venda": "04/07/2026 10:03:23",
+            "valor_bruto": 20.15
+          },
+          {
+            "numero": "000394071",
+            "numero_exibicao": "394071",
+            "data_venda": "04/07/2026 10:25:05",
+            "valor_bruto": 48.4
+          },
+          {
+            "numero": "000394080",
+            "numero_exibicao": "394080",
+            "data_venda": "04/07/2026 10:46:26",
+            "valor_bruto": 56.95
+          },
+          {
+            "numero": "000394084",
+            "numero_exibicao": "394084",
+            "data_venda": "04/07/2026 10:54:02",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "000394087",
+            "numero_exibicao": "394087",
+            "data_venda": "04/07/2026 11:00:49",
+            "valor_bruto": 34.65
+          },
+          {
+            "numero": "000394097",
+            "numero_exibicao": "394097",
+            "data_venda": "04/07/2026 11:16:32",
+            "valor_bruto": 16.75
+          },
+          {
+            "numero": "000394099",
+            "numero_exibicao": "394099",
+            "data_venda": "04/07/2026 11:22:21",
+            "valor_bruto": 815.0
+          },
+          {
+            "numero": "000394100",
+            "numero_exibicao": "394100",
+            "data_venda": "04/07/2026 11:25:10",
+            "valor_bruto": 12.0
+          },
+          {
+            "numero": "000394100",
+            "numero_exibicao": "394100",
+            "data_venda": "04/07/2026 11:25:10",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "000394102",
+            "numero_exibicao": "394102",
+            "data_venda": "04/07/2026 11:26:58",
+            "valor_bruto": 69.4
+          },
+          {
+            "numero": "000394105",
+            "numero_exibicao": "394105",
+            "data_venda": "04/07/2026 11:37:31",
+            "valor_bruto": 17.7
+          },
+          {
+            "numero": "000394108",
+            "numero_exibicao": "394108",
+            "data_venda": "04/07/2026 11:43:35",
+            "valor_bruto": 34.5
+          },
+          {
+            "numero": "000394119",
+            "numero_exibicao": "394119",
+            "data_venda": "04/07/2026 12:04:51",
+            "valor_bruto": 8.9
+          }
+        ],
+        "quantidade_relatorio": 19,
+        "total_relatorio": 1655.85,
+        "consistente": true,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "cartao_credito",
+        "tab_title": "Cartão de Crédito",
+        "menu_text": "Abrir cartão de crédito",
+        "summary_label": "Cartão de crédito",
+        "total_label": "Total cartão de crédito",
+        "section_label": "Transações em cartão de crédito",
+        "empty_message": "Nenhuma transação em cartão de crédito encontrada para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "hidden_in_menu": true
+      },
+      "dinheiro": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 20,
+        "total_autorizado": 516.95,
+        "itens_autorizados": [
+          {
+            "numero": "000394027",
+            "numero_exibicao": "394027",
+            "data_venda": "04/07/2026 08:20:06",
+            "valor_bruto": 4.0
+          },
+          {
+            "numero": "000394029",
+            "numero_exibicao": "394029",
+            "data_venda": "04/07/2026 08:26:05",
+            "valor_bruto": 14.0
+          },
+          {
+            "numero": "000394033",
+            "numero_exibicao": "394033",
+            "data_venda": "04/07/2026 08:36:06",
+            "valor_bruto": 3.5
+          },
+          {
+            "numero": "000394035",
+            "numero_exibicao": "394035",
+            "data_venda": "04/07/2026 08:43:48",
+            "valor_bruto": 132.3
+          },
+          {
+            "numero": "000394049",
+            "numero_exibicao": "394049",
+            "data_venda": "04/07/2026 09:17:41",
+            "valor_bruto": 22.95
+          },
+          {
+            "numero": "000394051",
+            "numero_exibicao": "394051",
+            "data_venda": "04/07/2026 09:22:01",
+            "valor_bruto": 5.5
+          },
+          {
+            "numero": "000394055",
+            "numero_exibicao": "394055",
+            "data_venda": "04/07/2026 09:35:19",
+            "valor_bruto": 6.95
+          },
+          {
+            "numero": "000394064",
+            "numero_exibicao": "394064",
+            "data_venda": "04/07/2026 10:01:48",
+            "valor_bruto": 15.95
+          },
+          {
+            "numero": "000394075",
+            "numero_exibicao": "394075",
+            "data_venda": "04/07/2026 10:34:46",
+            "valor_bruto": 38.9
+          },
+          {
+            "numero": "000394076",
+            "numero_exibicao": "394076",
+            "data_venda": "04/07/2026 10:37:38",
+            "valor_bruto": 8.95
+          },
+          {
+            "numero": "000394090",
+            "numero_exibicao": "394090",
+            "data_venda": "04/07/2026 11:05:55",
+            "valor_bruto": 8.5
+          },
+          {
+            "numero": "000394092",
+            "numero_exibicao": "394092",
+            "data_venda": "04/07/2026 11:08:26",
+            "valor_bruto": 7.95
+          },
+          {
+            "numero": "000394096",
+            "numero_exibicao": "394096",
+            "data_venda": "04/07/2026 11:14:50",
+            "valor_bruto": 16.5
+          },
+          {
+            "numero": "000394098",
+            "numero_exibicao": "394098",
+            "data_venda": "04/07/2026 11:19:11",
+            "valor_bruto": 5.55
+          },
+          {
+            "numero": "000394101",
+            "numero_exibicao": "394101",
+            "data_venda": "04/07/2026 11:26:08",
+            "valor_bruto": 22.0
+          },
+          {
+            "numero": "000394106",
+            "numero_exibicao": "394106",
+            "data_venda": "04/07/2026 11:38:05",
+            "valor_bruto": 147.1
+          },
+          {
+            "numero": "000394110",
+            "numero_exibicao": "394110",
+            "data_venda": "04/07/2026 11:45:52",
+            "valor_bruto": 48.5
+          },
+          {
+            "numero": "000394111",
+            "numero_exibicao": "394111",
+            "data_venda": "04/07/2026 11:46:27",
+            "valor_bruto": 48.5
+          },
+          {
+            "numero": "000394116",
+            "numero_exibicao": "394116",
+            "data_venda": "04/07/2026 11:54:17",
+            "valor_bruto": 6.95
+          },
+          {
+            "numero": "000394123",
+            "numero_exibicao": "394123",
+            "data_venda": "04/07/2026 12:09:13",
+            "valor_bruto": 0.9
+          }
+        ],
+        "quantidade_relatorio": 20,
+        "total_relatorio": 516.95,
+        "consistente": false,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "dinheiro",
+        "tab_title": "Dinheiro",
+        "menu_text": "Abrir dinheiro",
+        "summary_label": "Dinheiro",
+        "total_label": "Total dinheiro",
+        "section_label": "Transações em dinheiro",
+        "empty_message": "Nenhuma transação em dinheiro encontrada para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor"
+      },
+      "cartao_debito": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 39,
+        "total_autorizado": 1339.35,
+        "itens_autorizados": [
+          {
+            "numero": "000394030",
+            "numero_exibicao": "394030",
+            "data_venda": "04/07/2026 08:26:49",
+            "valor_bruto": 53.4
+          },
+          {
+            "numero": "000394031",
+            "numero_exibicao": "394031",
+            "data_venda": "04/07/2026 08:28:11",
+            "valor_bruto": 123.0
+          },
+          {
+            "numero": "000394032",
+            "numero_exibicao": "394032",
+            "data_venda": "04/07/2026 08:30:59",
+            "valor_bruto": 17.2
+          },
+          {
+            "numero": "000394034",
+            "numero_exibicao": "394034",
+            "data_venda": "04/07/2026 08:42:29",
+            "valor_bruto": 56.4
+          },
+          {
+            "numero": "000394036",
+            "numero_exibicao": "394036",
+            "data_venda": "04/07/2026 08:49:06",
+            "valor_bruto": 45.5
+          },
+          {
+            "numero": "000394037",
+            "numero_exibicao": "394037",
+            "data_venda": "04/07/2026 08:50:09",
+            "valor_bruto": 65.5
+          },
+          {
+            "numero": "000394038",
+            "numero_exibicao": "394038",
+            "data_venda": "04/07/2026 08:51:50",
+            "valor_bruto": 6.5
+          },
+          {
+            "numero": "000394042",
+            "numero_exibicao": "394042",
+            "data_venda": "04/07/2026 08:59:27",
+            "valor_bruto": 41.75
+          },
+          {
+            "numero": "000394043",
+            "numero_exibicao": "394043",
+            "data_venda": "04/07/2026 09:00:10",
+            "valor_bruto": 73.85
+          },
+          {
+            "numero": "000394044",
+            "numero_exibicao": "394044",
+            "data_venda": "04/07/2026 09:01:38",
+            "valor_bruto": 72.1
+          },
+          {
+            "numero": "000394045",
+            "numero_exibicao": "394045",
+            "data_venda": "04/07/2026 09:03:21",
+            "valor_bruto": 12.95
+          },
+          {
+            "numero": "000394046",
+            "numero_exibicao": "394046",
+            "data_venda": "04/07/2026 09:12:36",
+            "valor_bruto": 11.0
+          },
+          {
+            "numero": "000394052",
+            "numero_exibicao": "394052",
+            "data_venda": "04/07/2026 09:23:53",
+            "valor_bruto": 47.8
+          },
+          {
+            "numero": "000394053",
+            "numero_exibicao": "394053",
+            "data_venda": "04/07/2026 09:24:33",
+            "valor_bruto": 62.5
+          },
+          {
+            "numero": "000394059",
+            "numero_exibicao": "394059",
+            "data_venda": "04/07/2026 09:43:07",
+            "valor_bruto": 18.45
+          },
+          {
+            "numero": "000394061",
+            "numero_exibicao": "394061",
+            "data_venda": "04/07/2026 09:57:00",
+            "valor_bruto": 21.6
+          },
+          {
+            "numero": "000394067",
+            "numero_exibicao": "394067",
+            "data_venda": "04/07/2026 10:15:39",
+            "valor_bruto": 8.2
+          },
+          {
+            "numero": "000394069",
+            "numero_exibicao": "394069",
+            "data_venda": "04/07/2026 10:19:47",
+            "valor_bruto": 48.0
+          },
+          {
+            "numero": "000394072",
+            "numero_exibicao": "394072",
+            "data_venda": "04/07/2026 10:25:54",
+            "valor_bruto": 28.25
+          },
+          {
+            "numero": "000394073",
+            "numero_exibicao": "394073",
+            "data_venda": "04/07/2026 10:29:09",
+            "valor_bruto": 2.8
+          },
+          {
+            "numero": "000394074",
+            "numero_exibicao": "394074",
+            "data_venda": "04/07/2026 10:32:15",
+            "valor_bruto": 42.05
+          },
+          {
+            "numero": "000394076",
+            "numero_exibicao": "394076",
+            "data_venda": "04/07/2026 10:37:38",
+            "valor_bruto": 4.55
+          },
+          {
+            "numero": "000394077",
+            "numero_exibicao": "394077",
+            "data_venda": "04/07/2026 10:39:21",
+            "valor_bruto": 7.3
+          },
+          {
+            "numero": "000394079",
+            "numero_exibicao": "394079",
+            "data_venda": "04/07/2026 10:43:09",
+            "valor_bruto": 13.0
+          },
+          {
+            "numero": "000394083",
+            "numero_exibicao": "394083",
+            "data_venda": "04/07/2026 10:53:18",
+            "valor_bruto": 19.95
+          },
+          {
+            "numero": "000394088",
+            "numero_exibicao": "394088",
+            "data_venda": "04/07/2026 11:04:09",
+            "valor_bruto": 6.8
+          },
+          {
+            "numero": "000394089",
+            "numero_exibicao": "394089",
+            "data_venda": "04/07/2026 11:04:30",
+            "valor_bruto": 9.6
+          },
+          {
+            "numero": "000394091",
+            "numero_exibicao": "394091",
+            "data_venda": "04/07/2026 11:06:39",
+            "valor_bruto": 1.2
+          },
+          {
+            "numero": "000394094",
+            "numero_exibicao": "394094",
+            "data_venda": "04/07/2026 11:11:09",
+            "valor_bruto": 215.9
+          },
+          {
+            "numero": "000394086",
+            "numero_exibicao": "394086",
+            "data_venda": "04/07/2026 11:23:34",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "000394093",
+            "numero_exibicao": "394093",
+            "data_venda": "04/07/2026 11:24:31",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "000394107",
+            "numero_exibicao": "394107",
+            "data_venda": "04/07/2026 11:42:51",
+            "valor_bruto": 46.3
+          },
+          {
+            "numero": "000394112",
+            "numero_exibicao": "394112",
+            "data_venda": "04/07/2026 11:48:47",
+            "valor_bruto": 39.0
+          },
+          {
+            "numero": "000394114",
+            "numero_exibicao": "394114",
+            "data_venda": "04/07/2026 11:51:49",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "000394117",
+            "numero_exibicao": "394117",
+            "data_venda": "04/07/2026 11:59:05",
+            "valor_bruto": 19.7
+          },
+          {
+            "numero": "000394118",
+            "numero_exibicao": "394118",
+            "data_venda": "04/07/2026 12:01:33",
+            "valor_bruto": 38.85
+          },
+          {
+            "numero": "000394120",
+            "numero_exibicao": "394120",
+            "data_venda": "04/07/2026 12:05:26",
+            "valor_bruto": 36.9
+          },
+          {
+            "numero": "000394122",
+            "numero_exibicao": "394122",
+            "data_venda": "04/07/2026 12:06:56",
+            "valor_bruto": 28.3
+          },
+          {
+            "numero": "000394124",
+            "numero_exibicao": "394124",
+            "data_venda": "04/07/2026 12:10:24",
+            "valor_bruto": 14.6
+          }
+        ],
+        "quantidade_relatorio": 39,
+        "total_relatorio": 1339.35,
+        "consistente": false,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "cartao_debito",
+        "tab_title": "Cartão de Débito",
+        "menu_text": "Abrir cartão de débito",
+        "summary_label": "Cartão de débito",
+        "total_label": "Total cartão de débito",
+        "section_label": "Transações em cartão de débito",
+        "empty_message": "Nenhuma transação em cartão de débito encontrada para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "hidden_in_menu": true
+      },
+      "cartao_credito_caixa": {
+        "arquivo": "Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + cielo_cartoes_04072026_mva_auto.csv",
+        "caminho": "D:\\pdfReader\\Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + D:\\pdfReader\\cielo_cartoes_04072026_mva_auto.csv",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 17,
+        "total_autorizado": 1611.15,
+        "itens_autorizados": [
+          {
+            "numero": "166494",
+            "numero_exibicao": "166494",
+            "data_venda": "04/07/2026 às 08:18",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "029809",
+            "numero_exibicao": "29809",
+            "data_venda": "04/07/2026 às 11:21",
+            "valor_bruto": 815.0
+          },
+          {
+            "numero": "OIQSQA",
+            "numero_exibicao": "OIQSQA",
+            "data_venda": "04/07/2026 às 09:18",
+            "ordem": "2026-07-04 09:18:00",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "R02907",
+            "numero_exibicao": "R02907",
+            "data_venda": "04/07/2026 às 09:31",
+            "ordem": "2026-07-04 09:31:00",
+            "valor_bruto": 18.4
+          },
+          {
+            "numero": "246796",
+            "numero_exibicao": "246796",
+            "data_venda": "04/07/2026 às 09:35",
+            "ordem": "2026-07-04 09:35:00",
+            "valor_bruto": 26.8
+          },
+          {
+            "numero": "205499",
+            "numero_exibicao": "205499",
+            "data_venda": "04/07/2026 às 09:36",
+            "ordem": "2026-07-04 09:36:00",
+            "valor_bruto": 319.8
+          },
+          {
+            "numero": "808627",
+            "numero_exibicao": "808627",
+            "data_venda": "04/07/2026 às 10:00",
+            "ordem": "2026-07-04 10:00:00",
+            "valor_bruto": 35.95
+          },
+          {
+            "numero": "268777",
+            "numero_exibicao": "268777",
+            "data_venda": "04/07/2026 às 10:02",
+            "ordem": "2026-07-04 10:02:00",
+            "valor_bruto": 20.15
+          },
+          {
+            "numero": "729768",
+            "numero_exibicao": "729768",
+            "data_venda": "04/07/2026 às 10:23",
+            "ordem": "2026-07-04 10:23:00",
+            "valor_bruto": 48.4
+          },
+          {
+            "numero": "R28482",
+            "numero_exibicao": "R28482",
+            "data_venda": "04/07/2026 às 10:45",
+            "ordem": "2026-07-04 10:45:00",
+            "valor_bruto": 56.95
+          },
+          {
+            "numero": "OSIDAJ",
+            "numero_exibicao": "OSIDAJ",
+            "data_venda": "04/07/2026 às 10:53",
+            "ordem": "2026-07-04 10:53:00",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "309866",
+            "numero_exibicao": "309866",
+            "data_venda": "04/07/2026 às 10:59",
+            "ordem": "2026-07-04 10:59:00",
+            "valor_bruto": 34.65
+          },
+          {
+            "numero": "TEDT0F",
+            "numero_exibicao": "TEDT0F",
+            "data_venda": "04/07/2026 às 11:23",
+            "ordem": "2026-07-04 11:23:00",
+            "valor_bruto": 12.0
+          },
+          {
+            "numero": "062296",
+            "numero_exibicao": "62296",
+            "data_venda": "04/07/2026 às 11:25",
+            "ordem": "2026-07-04 11:25:00",
+            "valor_bruto": 69.4
+          },
+          {
+            "numero": "048268",
+            "numero_exibicao": "48268",
+            "data_venda": "04/07/2026 às 11:36",
+            "ordem": "2026-07-04 11:36:00",
+            "valor_bruto": 17.7
+          },
+          {
+            "numero": "521875",
+            "numero_exibicao": "521875",
+            "data_venda": "04/07/2026 às 11:42",
+            "ordem": "2026-07-04 11:42:00",
+            "valor_bruto": 34.5
+          },
+          {
+            "numero": "511568",
+            "numero_exibicao": "511568",
+            "data_venda": "04/07/2026 às 12:03",
+            "ordem": "2026-07-04 12:03:00",
+            "valor_bruto": 8.9
+          }
+        ],
+        "quantidade_relatorio": 17,
+        "total_relatorio": 1611.15,
+        "consistente": true,
+        "origem": "caixa_cielo_cartoes",
+        "mensagem": null,
+        "categoria": "cartao_credito_caixa",
+        "tab_title": "Cartão de Crédito CAIXA/Cielo",
+        "menu_text": "Abrir Cartão de crédito CAIXA/Cielo",
+        "summary_label": "Cartão de crédito CAIXA/Cielo",
+        "total_label": "Total Cartão de crédito CAIXA/Cielo",
+        "section_label": "Transações em Cartão de crédito na CAIXA/Cielo",
+        "empty_message": "Nenhuma transação em Cartão de crédito da CAIXA/Cielo encontrada para este dia.",
+        "table_headers": [
+          "Comprovante",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "escopo_horario_aplicado": [
+          {
+            "abertura": "04/07/2026 07:55:15",
+            "fechamento": "04/07/2026 12:17:22"
+          }
+        ],
+        "itens_todos": [
+          {
+            "numero": "166494",
+            "numero_exibicao": "166494",
+            "data_venda": "04/07/2026 às 08:18",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "029809",
+            "numero_exibicao": "29809",
+            "data_venda": "04/07/2026 às 11:21",
+            "valor_bruto": 815.0
+          },
+          {
+            "numero": "OIQSQA",
+            "numero_exibicao": "OIQSQA",
+            "data_venda": "04/07/2026 às 09:18",
+            "ordem": "2026-07-04 09:18:00",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "R02907",
+            "numero_exibicao": "R02907",
+            "data_venda": "04/07/2026 às 09:31",
+            "ordem": "2026-07-04 09:31:00",
+            "valor_bruto": 18.4
+          },
+          {
+            "numero": "246796",
+            "numero_exibicao": "246796",
+            "data_venda": "04/07/2026 às 09:35",
+            "ordem": "2026-07-04 09:35:00",
+            "valor_bruto": 26.8
+          },
+          {
+            "numero": "205499",
+            "numero_exibicao": "205499",
+            "data_venda": "04/07/2026 às 09:36",
+            "ordem": "2026-07-04 09:36:00",
+            "valor_bruto": 319.8
+          },
+          {
+            "numero": "808627",
+            "numero_exibicao": "808627",
+            "data_venda": "04/07/2026 às 10:00",
+            "ordem": "2026-07-04 10:00:00",
+            "valor_bruto": 35.95
+          },
+          {
+            "numero": "268777",
+            "numero_exibicao": "268777",
+            "data_venda": "04/07/2026 às 10:02",
+            "ordem": "2026-07-04 10:02:00",
+            "valor_bruto": 20.15
+          },
+          {
+            "numero": "729768",
+            "numero_exibicao": "729768",
+            "data_venda": "04/07/2026 às 10:23",
+            "ordem": "2026-07-04 10:23:00",
+            "valor_bruto": 48.4
+          },
+          {
+            "numero": "R28482",
+            "numero_exibicao": "R28482",
+            "data_venda": "04/07/2026 às 10:45",
+            "ordem": "2026-07-04 10:45:00",
+            "valor_bruto": 56.95
+          },
+          {
+            "numero": "OSIDAJ",
+            "numero_exibicao": "OSIDAJ",
+            "data_venda": "04/07/2026 às 10:53",
+            "ordem": "2026-07-04 10:53:00",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "309866",
+            "numero_exibicao": "309866",
+            "data_venda": "04/07/2026 às 10:59",
+            "ordem": "2026-07-04 10:59:00",
+            "valor_bruto": 34.65
+          },
+          {
+            "numero": "TEDT0F",
+            "numero_exibicao": "TEDT0F",
+            "data_venda": "04/07/2026 às 11:23",
+            "ordem": "2026-07-04 11:23:00",
+            "valor_bruto": 12.0
+          },
+          {
+            "numero": "062296",
+            "numero_exibicao": "62296",
+            "data_venda": "04/07/2026 às 11:25",
+            "ordem": "2026-07-04 11:25:00",
+            "valor_bruto": 69.4
+          },
+          {
+            "numero": "048268",
+            "numero_exibicao": "48268",
+            "data_venda": "04/07/2026 às 11:36",
+            "ordem": "2026-07-04 11:36:00",
+            "valor_bruto": 17.7
+          },
+          {
+            "numero": "521875",
+            "numero_exibicao": "521875",
+            "data_venda": "04/07/2026 às 11:42",
+            "ordem": "2026-07-04 11:42:00",
+            "valor_bruto": 34.5
+          },
+          {
+            "numero": "511568",
+            "numero_exibicao": "511568",
+            "data_venda": "04/07/2026 às 12:03",
+            "ordem": "2026-07-04 12:03:00",
+            "valor_bruto": 8.9
+          }
+        ],
+        "hidden_in_menu": true
+      },
+      "cartao_debito_caixa": {
+        "arquivo": "Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + cielo_cartoes_04072026_mva_auto.csv",
+        "caminho": "D:\\pdfReader\\Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + D:\\pdfReader\\cielo_cartoes_04072026_mva_auto.csv",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 37,
+        "total_autorizado": 1339.35,
+        "itens_autorizados": [
+          {
+            "numero": "M55507",
+            "numero_exibicao": "M55507",
+            "data_venda": "04/07/2026 às 08:25",
+            "valor_bruto": 53.4
+          },
+          {
+            "numero": "063527",
+            "numero_exibicao": "63527",
+            "data_venda": "04/07/2026 às 08:27",
+            "valor_bruto": 123.0
+          },
+          {
+            "numero": "915264",
+            "numero_exibicao": "915264",
+            "data_venda": "04/07/2026 às 08:29",
+            "valor_bruto": 17.2
+          },
+          {
+            "numero": "857607",
+            "numero_exibicao": "857607",
+            "data_venda": "04/07/2026 às 08:41",
+            "valor_bruto": 56.4
+          },
+          {
+            "numero": "gR263d",
+            "numero_exibicao": "gR263d",
+            "data_venda": "04/07/2026 às 08:47",
+            "valor_bruto": 45.5
+          },
+          {
+            "numero": "WkRWUH",
+            "numero_exibicao": "WkRWUH",
+            "data_venda": "04/07/2026 às 08:49",
+            "valor_bruto": 65.5
+          },
+          {
+            "numero": "993591",
+            "numero_exibicao": "993591",
+            "data_venda": "04/07/2026 às 08:50",
+            "valor_bruto": 6.5
+          },
+          {
+            "numero": "500486",
+            "numero_exibicao": "500486",
+            "data_venda": "04/07/2026 às 09:41",
+            "valor_bruto": 18.45
+          },
+          {
+            "numero": "M68135",
+            "numero_exibicao": "M68135",
+            "data_venda": "04/07/2026 às 11:03",
+            "valor_bruto": 9.6
+          },
+          {
+            "numero": "124881",
+            "numero_exibicao": "124881",
+            "data_venda": "04/07/2026 às 11:05",
+            "valor_bruto": 1.2
+          },
+          {
+            "numero": "Yno7na",
+            "numero_exibicao": "Yno7na",
+            "data_venda": "04/07/2026 às 11:09",
+            "valor_bruto": 215.9
+          },
+          {
+            "numero": "103312",
+            "numero_exibicao": "103312",
+            "data_venda": "04/07/2026 às 08:57",
+            "ordem": "2026-07-04 08:57:00",
+            "valor_bruto": 41.75
+          },
+          {
+            "numero": "021806",
+            "numero_exibicao": "21806",
+            "data_venda": "04/07/2026 às 08:59",
+            "ordem": "2026-07-04 08:59:00",
+            "valor_bruto": 73.85
+          },
+          {
+            "numero": "002870",
+            "numero_exibicao": "2870",
+            "data_venda": "04/07/2026 às 09:00",
+            "ordem": "2026-07-04 09:00:00",
+            "valor_bruto": 72.1
+          },
+          {
+            "numero": "66eI8g",
+            "numero_exibicao": "66eI8g",
+            "data_venda": "04/07/2026 às 09:02",
+            "ordem": "2026-07-04 09:02:00",
+            "valor_bruto": 12.95
+          },
+          {
+            "numero": "388208",
+            "numero_exibicao": "388208",
+            "data_venda": "04/07/2026 às 09:11",
+            "ordem": "2026-07-04 09:11:00",
+            "valor_bruto": 11.0
+          },
+          {
+            "numero": "M12164",
+            "numero_exibicao": "M12164",
+            "data_venda": "04/07/2026 às 09:22",
+            "ordem": "2026-07-04 09:22:00",
+            "valor_bruto": 47.8
+          },
+          {
+            "numero": "M35653",
+            "numero_exibicao": "M35653",
+            "data_venda": "04/07/2026 às 09:55",
+            "ordem": "2026-07-04 09:55:00",
+            "valor_bruto": 21.6
+          },
+          {
+            "numero": "697070",
+            "numero_exibicao": "697070",
+            "data_venda": "04/07/2026 às 10:14",
+            "ordem": "2026-07-04 10:14:00",
+            "valor_bruto": 8.2
+          },
+          {
+            "numero": "284633",
+            "numero_exibicao": "284633",
+            "data_venda": "04/07/2026 às 10:18",
+            "ordem": "2026-07-04 10:18:00",
+            "valor_bruto": 48.0
+          },
+          {
+            "numero": "M26917",
+            "numero_exibicao": "M26917",
+            "data_venda": "04/07/2026 às 10:24",
+            "ordem": "2026-07-04 10:24:00",
+            "valor_bruto": 28.25
+          },
+          {
+            "numero": "522405",
+            "numero_exibicao": "522405",
+            "data_venda": "04/07/2026 às 10:27",
+            "ordem": "2026-07-04 10:27:00",
+            "valor_bruto": 2.8
+          },
+          {
+            "numero": "961207",
+            "numero_exibicao": "961207",
+            "data_venda": "04/07/2026 às 10:30",
+            "ordem": "2026-07-04 10:30:00",
+            "valor_bruto": 42.05
+          },
+          {
+            "numero": "103808",
+            "numero_exibicao": "103808",
+            "data_venda": "04/07/2026 às 10:36",
+            "ordem": "2026-07-04 10:36:00",
+            "valor_bruto": 4.55
+          },
+          {
+            "numero": "M61884",
+            "numero_exibicao": "M61884",
+            "data_venda": "04/07/2026 às 10:38",
+            "ordem": "2026-07-04 10:38:00",
+            "valor_bruto": 7.3
+          },
+          {
+            "numero": "420281",
+            "numero_exibicao": "420281",
+            "data_venda": "04/07/2026 às 10:42",
+            "ordem": "2026-07-04 10:42:00",
+            "valor_bruto": 13.0
+          },
+          {
+            "numero": "514763",
+            "numero_exibicao": "514763",
+            "data_venda": "04/07/2026 às 10:51",
+            "ordem": "2026-07-04 10:51:00",
+            "valor_bruto": 19.95
+          },
+          {
+            "numero": "325858",
+            "numero_exibicao": "325858",
+            "data_venda": "04/07/2026 às 10:56",
+            "ordem": "2026-07-04 10:56:00",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "413338",
+            "numero_exibicao": "413338",
+            "data_venda": "04/07/2026 às 11:03",
+            "ordem": "2026-07-04 11:03:00",
+            "valor_bruto": 6.8
+          },
+          {
+            "numero": "065435",
+            "numero_exibicao": "65435",
+            "data_venda": "04/07/2026 às 11:41",
+            "ordem": "2026-07-04 11:41:00",
+            "valor_bruto": 46.3
+          },
+          {
+            "numero": "828429",
+            "numero_exibicao": "828429",
+            "data_venda": "04/07/2026 às 11:46",
+            "ordem": "2026-07-04 11:46:00",
+            "valor_bruto": 39.0
+          },
+          {
+            "numero": "670669",
+            "numero_exibicao": "670669",
+            "data_venda": "04/07/2026 às 11:50",
+            "ordem": "2026-07-04 11:50:00",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "250981",
+            "numero_exibicao": "250981",
+            "data_venda": "04/07/2026 às 11:58",
+            "ordem": "2026-07-04 11:58:00",
+            "valor_bruto": 19.7
+          },
+          {
+            "numero": "950827",
+            "numero_exibicao": "950827",
+            "data_venda": "04/07/2026 às 12:00",
+            "ordem": "2026-07-04 12:00:00",
+            "valor_bruto": 38.85
+          },
+          {
+            "numero": "M86855",
+            "numero_exibicao": "M86855",
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "valor_bruto": 36.9
+          },
+          {
+            "numero": "697702",
+            "numero_exibicao": "697702",
+            "data_venda": "04/07/2026 às 12:05",
+            "ordem": "2026-07-04 12:05:00",
+            "valor_bruto": 28.3
+          },
+          {
+            "numero": "yfTooS",
+            "numero_exibicao": "yfTooS",
+            "data_venda": "04/07/2026 às 12:09",
+            "ordem": "2026-07-04 12:09:00",
+            "valor_bruto": 14.6
+          }
+        ],
+        "quantidade_relatorio": 37,
+        "total_relatorio": 1339.35,
+        "consistente": true,
+        "origem": "caixa_cielo_cartoes",
+        "mensagem": null,
+        "categoria": "cartao_debito_caixa",
+        "tab_title": "Cartão de Débito CAIXA/Cielo",
+        "menu_text": "Abrir Cartão de débito CAIXA/Cielo",
+        "summary_label": "Cartão de débito CAIXA/Cielo",
+        "total_label": "Total Cartão de débito CAIXA/Cielo",
+        "section_label": "Transações em Cartão de débito na CAIXA/Cielo",
+        "empty_message": "Nenhuma transação em Cartão de débito da CAIXA/Cielo encontrada para este dia.",
+        "table_headers": [
+          "Comprovante",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "escopo_horario_aplicado": [
+          {
+            "abertura": "04/07/2026 07:55:15",
+            "fechamento": "04/07/2026 12:17:22"
+          }
+        ],
+        "itens_todos": [
+          {
+            "numero": "M55507",
+            "numero_exibicao": "M55507",
+            "data_venda": "04/07/2026 às 08:25",
+            "valor_bruto": 53.4
+          },
+          {
+            "numero": "063527",
+            "numero_exibicao": "63527",
+            "data_venda": "04/07/2026 às 08:27",
+            "valor_bruto": 123.0
+          },
+          {
+            "numero": "915264",
+            "numero_exibicao": "915264",
+            "data_venda": "04/07/2026 às 08:29",
+            "valor_bruto": 17.2
+          },
+          {
+            "numero": "857607",
+            "numero_exibicao": "857607",
+            "data_venda": "04/07/2026 às 08:41",
+            "valor_bruto": 56.4
+          },
+          {
+            "numero": "gR263d",
+            "numero_exibicao": "gR263d",
+            "data_venda": "04/07/2026 às 08:47",
+            "valor_bruto": 45.5
+          },
+          {
+            "numero": "WkRWUH",
+            "numero_exibicao": "WkRWUH",
+            "data_venda": "04/07/2026 às 08:49",
+            "valor_bruto": 65.5
+          },
+          {
+            "numero": "993591",
+            "numero_exibicao": "993591",
+            "data_venda": "04/07/2026 às 08:50",
+            "valor_bruto": 6.5
+          },
+          {
+            "numero": "500486",
+            "numero_exibicao": "500486",
+            "data_venda": "04/07/2026 às 09:41",
+            "valor_bruto": 18.45
+          },
+          {
+            "numero": "M68135",
+            "numero_exibicao": "M68135",
+            "data_venda": "04/07/2026 às 11:03",
+            "valor_bruto": 9.6
+          },
+          {
+            "numero": "124881",
+            "numero_exibicao": "124881",
+            "data_venda": "04/07/2026 às 11:05",
+            "valor_bruto": 1.2
+          },
+          {
+            "numero": "Yno7na",
+            "numero_exibicao": "Yno7na",
+            "data_venda": "04/07/2026 às 11:09",
+            "valor_bruto": 215.9
+          },
+          {
+            "numero": "103312",
+            "numero_exibicao": "103312",
+            "data_venda": "04/07/2026 às 08:57",
+            "ordem": "2026-07-04 08:57:00",
+            "valor_bruto": 41.75
+          },
+          {
+            "numero": "021806",
+            "numero_exibicao": "21806",
+            "data_venda": "04/07/2026 às 08:59",
+            "ordem": "2026-07-04 08:59:00",
+            "valor_bruto": 73.85
+          },
+          {
+            "numero": "002870",
+            "numero_exibicao": "2870",
+            "data_venda": "04/07/2026 às 09:00",
+            "ordem": "2026-07-04 09:00:00",
+            "valor_bruto": 72.1
+          },
+          {
+            "numero": "66eI8g",
+            "numero_exibicao": "66eI8g",
+            "data_venda": "04/07/2026 às 09:02",
+            "ordem": "2026-07-04 09:02:00",
+            "valor_bruto": 12.95
+          },
+          {
+            "numero": "388208",
+            "numero_exibicao": "388208",
+            "data_venda": "04/07/2026 às 09:11",
+            "ordem": "2026-07-04 09:11:00",
+            "valor_bruto": 11.0
+          },
+          {
+            "numero": "M12164",
+            "numero_exibicao": "M12164",
+            "data_venda": "04/07/2026 às 09:22",
+            "ordem": "2026-07-04 09:22:00",
+            "valor_bruto": 47.8
+          },
+          {
+            "numero": "M35653",
+            "numero_exibicao": "M35653",
+            "data_venda": "04/07/2026 às 09:55",
+            "ordem": "2026-07-04 09:55:00",
+            "valor_bruto": 21.6
+          },
+          {
+            "numero": "697070",
+            "numero_exibicao": "697070",
+            "data_venda": "04/07/2026 às 10:14",
+            "ordem": "2026-07-04 10:14:00",
+            "valor_bruto": 8.2
+          },
+          {
+            "numero": "284633",
+            "numero_exibicao": "284633",
+            "data_venda": "04/07/2026 às 10:18",
+            "ordem": "2026-07-04 10:18:00",
+            "valor_bruto": 48.0
+          },
+          {
+            "numero": "M26917",
+            "numero_exibicao": "M26917",
+            "data_venda": "04/07/2026 às 10:24",
+            "ordem": "2026-07-04 10:24:00",
+            "valor_bruto": 28.25
+          },
+          {
+            "numero": "522405",
+            "numero_exibicao": "522405",
+            "data_venda": "04/07/2026 às 10:27",
+            "ordem": "2026-07-04 10:27:00",
+            "valor_bruto": 2.8
+          },
+          {
+            "numero": "961207",
+            "numero_exibicao": "961207",
+            "data_venda": "04/07/2026 às 10:30",
+            "ordem": "2026-07-04 10:30:00",
+            "valor_bruto": 42.05
+          },
+          {
+            "numero": "103808",
+            "numero_exibicao": "103808",
+            "data_venda": "04/07/2026 às 10:36",
+            "ordem": "2026-07-04 10:36:00",
+            "valor_bruto": 4.55
+          },
+          {
+            "numero": "M61884",
+            "numero_exibicao": "M61884",
+            "data_venda": "04/07/2026 às 10:38",
+            "ordem": "2026-07-04 10:38:00",
+            "valor_bruto": 7.3
+          },
+          {
+            "numero": "420281",
+            "numero_exibicao": "420281",
+            "data_venda": "04/07/2026 às 10:42",
+            "ordem": "2026-07-04 10:42:00",
+            "valor_bruto": 13.0
+          },
+          {
+            "numero": "514763",
+            "numero_exibicao": "514763",
+            "data_venda": "04/07/2026 às 10:51",
+            "ordem": "2026-07-04 10:51:00",
+            "valor_bruto": 19.95
+          },
+          {
+            "numero": "325858",
+            "numero_exibicao": "325858",
+            "data_venda": "04/07/2026 às 10:56",
+            "ordem": "2026-07-04 10:56:00",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "413338",
+            "numero_exibicao": "413338",
+            "data_venda": "04/07/2026 às 11:03",
+            "ordem": "2026-07-04 11:03:00",
+            "valor_bruto": 6.8
+          },
+          {
+            "numero": "065435",
+            "numero_exibicao": "65435",
+            "data_venda": "04/07/2026 às 11:41",
+            "ordem": "2026-07-04 11:41:00",
+            "valor_bruto": 46.3
+          },
+          {
+            "numero": "828429",
+            "numero_exibicao": "828429",
+            "data_venda": "04/07/2026 às 11:46",
+            "ordem": "2026-07-04 11:46:00",
+            "valor_bruto": 39.0
+          },
+          {
+            "numero": "670669",
+            "numero_exibicao": "670669",
+            "data_venda": "04/07/2026 às 11:50",
+            "ordem": "2026-07-04 11:50:00",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "250981",
+            "numero_exibicao": "250981",
+            "data_venda": "04/07/2026 às 11:58",
+            "ordem": "2026-07-04 11:58:00",
+            "valor_bruto": 19.7
+          },
+          {
+            "numero": "950827",
+            "numero_exibicao": "950827",
+            "data_venda": "04/07/2026 às 12:00",
+            "ordem": "2026-07-04 12:00:00",
+            "valor_bruto": 38.85
+          },
+          {
+            "numero": "M86855",
+            "numero_exibicao": "M86855",
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "valor_bruto": 36.9
+          },
+          {
+            "numero": "697702",
+            "numero_exibicao": "697702",
+            "data_venda": "04/07/2026 às 12:05",
+            "ordem": "2026-07-04 12:05:00",
+            "valor_bruto": 28.3
+          },
+          {
+            "numero": "yfTooS",
+            "numero_exibicao": "yfTooS",
+            "data_venda": "04/07/2026 às 12:09",
+            "ordem": "2026-07-04 12:09:00",
+            "valor_bruto": 14.6
+          }
+        ],
+        "hidden_in_menu": true
+      },
+      "pix_caixa": {
+        "arquivo": "Relatorio_de_Vendas_Pix_04-07-2026_mva_auto.csv",
+        "caminho": "D:\\pdfReader\\Relatorio_de_Vendas_Pix_04-07-2026_mva_auto.csv",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 24,
+        "total_autorizado": 1111.0,
+        "itens_autorizados": [
+          {
+            "data_venda": "04/07/2026 às 08:08",
+            "ordem": "2026-07-04 08:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000BIB99NAYO6WQM2PJEFLD",
+            "valor_bruto": 9.45
+          },
+          {
+            "data_venda": "04/07/2026 às 08:19",
+            "ordem": "2026-07-04 08:19:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000HRTIGGE32N7HHZHWZZ7N",
+            "valor_bruto": 16.0
+          },
+          {
+            "data_venda": "04/07/2026 às 08:51",
+            "ordem": "2026-07-04 08:51:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000K6BO5AFI8NAAN6GN2V1B",
+            "valor_bruto": 92.75
+          },
+          {
+            "data_venda": "04/07/2026 às 08:53",
+            "ordem": "2026-07-04 08:53:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000008LNLNZQQVRO3C00LE8K0",
+            "valor_bruto": 25.8
+          },
+          {
+            "data_venda": "04/07/2026 às 08:55",
+            "ordem": "2026-07-04 08:55:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EEO1EF5YQHGBAG1BQY9L",
+            "valor_bruto": 20.4
+          },
+          {
+            "data_venda": "04/07/2026 às 09:13",
+            "ordem": "2026-07-04 09:13:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000G6M3QLL4DHRSFW83STRT",
+            "valor_bruto": 63.5
+          },
+          {
+            "data_venda": "04/07/2026 às 09:16",
+            "ordem": "2026-07-04 09:16:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GHDUJLC40K4FML4YSRXQ",
+            "valor_bruto": 9.9
+          },
+          {
+            "data_venda": "04/07/2026 às 09:39",
+            "ordem": "2026-07-04 09:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000O3T80Q0NVBXL82TU7JJS",
+            "valor_bruto": 6.95
+          },
+          {
+            "data_venda": "04/07/2026 às 09:56",
+            "ordem": "2026-07-04 09:56:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C935RYEVO0AECBXE71L1",
+            "valor_bruto": 73.95
+          },
+          {
+            "data_venda": "04/07/2026 às 10:08",
+            "ordem": "2026-07-04 10:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000096FY58TMBL0W8FY0QPRA",
+            "valor_bruto": 292.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:15",
+            "ordem": "2026-07-04 10:15:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003V62FSJIC41L3D5KE8F9",
+            "valor_bruto": 29.05
+          },
+          {
+            "data_venda": "04/07/2026 às 10:21",
+            "ordem": "2026-07-04 10:21:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OR4EYN82S6JUHD8BMA15",
+            "valor_bruto": 11.9
+          },
+          {
+            "data_venda": "04/07/2026 às 10:32",
+            "ordem": "2026-07-04 10:32:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000I8CMX3Z8QLV31JX1G76X",
+            "valor_bruto": 60.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:39",
+            "ordem": "2026-07-04 10:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000004X4NMXS4PM86HWJDWHDC",
+            "valor_bruto": 19.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:46",
+            "ordem": "2026-07-04 10:46:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EDGLU3LZJR7MUKH0FVA6",
+            "valor_bruto": 5.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:50",
+            "ordem": "2026-07-04 10:50:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000DKVL4WSKM6U4M1M04BGX",
+            "valor_bruto": 9.7
+          },
+          {
+            "data_venda": "04/07/2026 às 10:54",
+            "ordem": "2026-07-04 10:54:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003EWD1LTKM8LZHTIM0C7W",
+            "valor_bruto": 18.5
+          },
+          {
+            "data_venda": "04/07/2026 às 11:10",
+            "ordem": "2026-07-04 11:10:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GJSKA3J9RB324LTRH3N5",
+            "valor_bruto": 25.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:29",
+            "ordem": "2026-07-04 11:29:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OQQTMJLJMSMTN75ANU89",
+            "valor_bruto": 43.7
+          },
+          {
+            "data_venda": "04/07/2026 às 11:31",
+            "ordem": "2026-07-04 11:31:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000F8VA5N08Z8WOWMIRC3J0",
+            "valor_bruto": 125.9
+          },
+          {
+            "data_venda": "04/07/2026 às 11:43",
+            "ordem": "2026-07-04 11:43:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000069UYVCCRHYIMZFP6RGE4",
+            "valor_bruto": 23.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:48",
+            "ordem": "2026-07-04 11:48:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FPEG5RFB4RV4BFPBJXJE",
+            "valor_bruto": 6.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:52",
+            "ordem": "2026-07-04 11:52:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FQVBKA9GIDH7MYFISX70",
+            "valor_bruto": 2.55
+          },
+          {
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C5MD4MUHNKN8MNBO1IIO",
+            "valor_bruto": 120.0
+          }
+        ],
+        "quantidade_relatorio": 24,
+        "total_relatorio": 1111.0,
+        "consistente": true,
+        "origem": "caixa_pix_csv",
+        "mensagem": null,
+        "itens_todos": [
+          {
+            "data_venda": "04/07/2026 às 08:08",
+            "ordem": "2026-07-04 08:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000BIB99NAYO6WQM2PJEFLD",
+            "valor_bruto": 9.45
+          },
+          {
+            "data_venda": "04/07/2026 às 08:19",
+            "ordem": "2026-07-04 08:19:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000HRTIGGE32N7HHZHWZZ7N",
+            "valor_bruto": 16.0
+          },
+          {
+            "data_venda": "04/07/2026 às 08:46",
+            "ordem": "2026-07-04 08:46:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "CANCELADA",
+            "nome": "-",
+            "valor_bruto": 45.5
+          },
+          {
+            "data_venda": "04/07/2026 às 08:51",
+            "ordem": "2026-07-04 08:51:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000K6BO5AFI8NAAN6GN2V1B",
+            "valor_bruto": 92.75
+          },
+          {
+            "data_venda": "04/07/2026 às 08:53",
+            "ordem": "2026-07-04 08:53:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000008LNLNZQQVRO3C00LE8K0",
+            "valor_bruto": 25.8
+          },
+          {
+            "data_venda": "04/07/2026 às 08:55",
+            "ordem": "2026-07-04 08:55:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EEO1EF5YQHGBAG1BQY9L",
+            "valor_bruto": 20.4
+          },
+          {
+            "data_venda": "04/07/2026 às 09:13",
+            "ordem": "2026-07-04 09:13:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000G6M3QLL4DHRSFW83STRT",
+            "valor_bruto": 63.5
+          },
+          {
+            "data_venda": "04/07/2026 às 09:16",
+            "ordem": "2026-07-04 09:16:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GHDUJLC40K4FML4YSRXQ",
+            "valor_bruto": 9.9
+          },
+          {
+            "data_venda": "04/07/2026 às 09:39",
+            "ordem": "2026-07-04 09:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000O3T80Q0NVBXL82TU7JJS",
+            "valor_bruto": 6.95
+          },
+          {
+            "data_venda": "04/07/2026 às 09:56",
+            "ordem": "2026-07-04 09:56:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C935RYEVO0AECBXE71L1",
+            "valor_bruto": 73.95
+          },
+          {
+            "data_venda": "04/07/2026 às 10:08",
+            "ordem": "2026-07-04 10:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000096FY58TMBL0W8FY0QPRA",
+            "valor_bruto": 292.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:15",
+            "ordem": "2026-07-04 10:15:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003V62FSJIC41L3D5KE8F9",
+            "valor_bruto": 29.05
+          },
+          {
+            "data_venda": "04/07/2026 às 10:21",
+            "ordem": "2026-07-04 10:21:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OR4EYN82S6JUHD8BMA15",
+            "valor_bruto": 11.9
+          },
+          {
+            "data_venda": "04/07/2026 às 10:32",
+            "ordem": "2026-07-04 10:32:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000I8CMX3Z8QLV31JX1G76X",
+            "valor_bruto": 60.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:39",
+            "ordem": "2026-07-04 10:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000004X4NMXS4PM86HWJDWHDC",
+            "valor_bruto": 19.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:46",
+            "ordem": "2026-07-04 10:46:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EDGLU3LZJR7MUKH0FVA6",
+            "valor_bruto": 5.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:50",
+            "ordem": "2026-07-04 10:50:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000DKVL4WSKM6U4M1M04BGX",
+            "valor_bruto": 9.7
+          },
+          {
+            "data_venda": "04/07/2026 às 10:54",
+            "ordem": "2026-07-04 10:54:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003EWD1LTKM8LZHTIM0C7W",
+            "valor_bruto": 18.5
+          },
+          {
+            "data_venda": "04/07/2026 às 11:10",
+            "ordem": "2026-07-04 11:10:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GJSKA3J9RB324LTRH3N5",
+            "valor_bruto": 25.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:29",
+            "ordem": "2026-07-04 11:29:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OQQTMJLJMSMTN75ANU89",
+            "valor_bruto": 43.7
+          },
+          {
+            "data_venda": "04/07/2026 às 11:31",
+            "ordem": "2026-07-04 11:31:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000F8VA5N08Z8WOWMIRC3J0",
+            "valor_bruto": 125.9
+          },
+          {
+            "data_venda": "04/07/2026 às 11:43",
+            "ordem": "2026-07-04 11:43:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000069UYVCCRHYIMZFP6RGE4",
+            "valor_bruto": 23.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:48",
+            "ordem": "2026-07-04 11:48:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FPEG5RFB4RV4BFPBJXJE",
+            "valor_bruto": 6.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:52",
+            "ordem": "2026-07-04 11:52:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FQVBKA9GIDH7MYFISX70",
+            "valor_bruto": 2.55
+          },
+          {
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C5MD4MUHNKN8MNBO1IIO",
+            "valor_bruto": 120.0
+          },
+          {
+            "data_venda": "04/07/2026 às 12:07",
+            "ordem": "2026-07-04 12:07:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "RECUSADA",
+            "nome": "-",
+            "valor_bruto": 0.9
+          }
+        ],
+        "tab_title": "PIX",
+        "menu_text": "Abrir PIX CAIXA",
+        "summary_label": "PIX",
+        "total_label": "Total PIX CAIXA",
+        "section_label": "Transações PIX recebidas na CAIXA",
+        "empty_message": "Nenhuma transação PIX recebida encontrada para este dia.",
+        "table_headers": [
+          "Data da venda",
+          "Valor bruto"
+        ],
+        "table_mode": "data_valor",
+        "categoria": "pix_caixa",
+        "escopo_horario_aplicado": [
+          {
+            "abertura": "04/07/2026 07:55:15",
+            "fechamento": "04/07/2026 12:17:22"
+          }
+        ],
+        "hidden_in_menu": true
+      }
+    },
+    "fechamento_janelas": [
+      {
+        "abertura": "04/07/2026 07:55:15",
+        "fechamento": "04/07/2026 12:17:22"
+      }
+    ],
+    "fechamento_parcial": true,
+    "nfces": [
+      {
+        "numero": "000394025",
+        "numero_exibicao": "394025",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 08:17:57",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 9.45
+      },
+      {
+        "numero": "000394026",
+        "numero_exibicao": "394026",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 08:19:28",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 39.6
+      },
+      {
+        "numero": "000394027",
+        "numero_exibicao": "394027",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 08:20:06",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 4.0
+      },
+      {
+        "numero": "000394028",
+        "numero_exibicao": "394028",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 08:21:27",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 16.0
+      },
+      {
+        "numero": "000394029",
+        "numero_exibicao": "394029",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 08:26:05",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 14.0
+      },
+      {
+        "numero": "000394030",
+        "numero_exibicao": "394030",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:26:49",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 53.4
+      },
+      {
+        "numero": "000394031",
+        "numero_exibicao": "394031",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:28:11",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 123.0
+      },
+      {
+        "numero": "000394032",
+        "numero_exibicao": "394032",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:30:59",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 17.2
+      },
+      {
+        "numero": "000394033",
+        "numero_exibicao": "394033",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 08:36:06",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 3.5
+      },
+      {
+        "numero": "000394034",
+        "numero_exibicao": "394034",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:42:29",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 56.4
+      },
+      {
+        "numero": "000394035",
+        "numero_exibicao": "394035",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 08:43:48",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 132.3
+      },
+      {
+        "numero": "000394036",
+        "numero_exibicao": "394036",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:49:06",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 45.5
+      },
+      {
+        "numero": "000394037",
+        "numero_exibicao": "394037",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:50:09",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 65.5
+      },
+      {
+        "numero": "000394038",
+        "numero_exibicao": "394038",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:51:50",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 6.5
+      },
+      {
+        "numero": "000394039",
+        "numero_exibicao": "394039",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 08:53:09",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 92.75
+      },
+      {
+        "numero": "000394040",
+        "numero_exibicao": "394040",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 08:55:38",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 25.8
+      },
+      {
+        "numero": "000394041",
+        "numero_exibicao": "394041",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 08:56:41",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 20.4
+      },
+      {
+        "numero": "000394042",
+        "numero_exibicao": "394042",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 08:59:27",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 41.75
+      },
+      {
+        "numero": "000394043",
+        "numero_exibicao": "394043",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:00:10",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 73.85
+      },
+      {
+        "numero": "000394044",
+        "numero_exibicao": "394044",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:01:38",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 72.1
+      },
+      {
+        "numero": "000394045",
+        "numero_exibicao": "394045",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:03:21",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 12.95
+      },
+      {
+        "numero": "000394046",
+        "numero_exibicao": "394046",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:12:36",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 11.0
+      },
+      {
+        "numero": "000394047",
+        "numero_exibicao": "394047",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 09:15:19",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 63.5
+      },
+      {
+        "numero": "000394048",
+        "numero_exibicao": "394048",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 09:17:40",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 9.9
+      },
+      {
+        "numero": "000394049",
+        "numero_exibicao": "394049",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 09:17:41",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 22.95
+      },
+      {
+        "numero": "000394050",
+        "numero_exibicao": "394050",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 09:19:33",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 25.0
+      },
+      {
+        "numero": "000394051",
+        "numero_exibicao": "394051",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 09:22:01",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 5.5
+      },
+      {
+        "numero": "000394052",
+        "numero_exibicao": "394052",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:23:53",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 47.8
+      },
+      {
+        "numero": "000394053",
+        "numero_exibicao": "394053",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:24:33",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 62.5
+      },
+      {
+        "numero": "000394054",
+        "numero_exibicao": "394054",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 09:32:36",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 18.4
+      },
+      {
+        "numero": "000394055",
+        "numero_exibicao": "394055",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 09:35:19",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 6.95
+      },
+      {
+        "numero": "000394056",
+        "numero_exibicao": "394056",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 09:36:15",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 26.8
+      },
+      {
+        "numero": "000394057",
+        "numero_exibicao": "394057",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 09:37:44",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 319.8
+      },
+      {
+        "numero": "000394058",
+        "numero_exibicao": "394058",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 09:40:45",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 6.95
+      },
+      {
+        "numero": "000394059",
+        "numero_exibicao": "394059",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:43:07",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 18.45
+      },
+      {
+        "numero": "000394060",
+        "numero_exibicao": "394060",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 09:55:21",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 115.5
+      },
+      {
+        "numero": "000394061",
+        "numero_exibicao": "394061",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 09:57:00",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 21.6
+      },
+      {
+        "numero": "000394062",
+        "numero_exibicao": "394062",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 09:59:34",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 73.95
+      },
+      {
+        "numero": "000394063",
+        "numero_exibicao": "394063",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 10:01:17",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 35.95
+      },
+      {
+        "numero": "000394064",
+        "numero_exibicao": "394064",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 10:01:48",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 15.95
+      },
+      {
+        "numero": "000394065",
+        "numero_exibicao": "394065",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 10:03:23",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 20.15
+      },
+      {
+        "numero": "000394066",
+        "numero_exibicao": "394066",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:09:59",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 292.0
+      },
+      {
+        "numero": "000394067",
+        "numero_exibicao": "394067",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:15:39",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 8.2
+      },
+      {
+        "numero": "000394068",
+        "numero_exibicao": "394068",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:16:58",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 29.05
+      },
+      {
+        "numero": "000394069",
+        "numero_exibicao": "394069",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:19:47",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 48.0
+      },
+      {
+        "numero": "000394070",
+        "numero_exibicao": "394070",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:22:42",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 11.9
+      },
+      {
+        "numero": "000394071",
+        "numero_exibicao": "394071",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 10:25:05",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 48.4
+      },
+      {
+        "numero": "000394072",
+        "numero_exibicao": "394072",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:25:54",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 28.25
+      },
+      {
+        "numero": "000394073",
+        "numero_exibicao": "394073",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:29:09",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 2.8
+      },
+      {
+        "numero": "000394074",
+        "numero_exibicao": "394074",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:32:15",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 42.05
+      },
+      {
+        "numero": "000394075",
+        "numero_exibicao": "394075",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 10:34:46",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 38.9
+      },
+      {
+        "numero": "000394076",
+        "numero_exibicao": "394076",
+        "descricao": "Cartão de Débito + Dinheiro",
+        "data_venda": "04/07/2026 10:37:38",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 13.5
+      },
+      {
+        "numero": "000394077",
+        "numero_exibicao": "394077",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:39:21",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 7.3
+      },
+      {
+        "numero": "000394078",
+        "numero_exibicao": "394078",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:40:41",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 19.0
+      },
+      {
+        "numero": "000394079",
+        "numero_exibicao": "394079",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:43:09",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 13.0
+      },
+      {
+        "numero": "000394080",
+        "numero_exibicao": "394080",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 10:46:26",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 56.95
+      },
+      {
+        "numero": "000394081",
+        "numero_exibicao": "394081",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:48:22",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 5.5
+      },
+      {
+        "numero": "000394082",
+        "numero_exibicao": "394082",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:52:10",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 9.7
+      },
+      {
+        "numero": "000394083",
+        "numero_exibicao": "394083",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 10:53:18",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 19.95
+      },
+      {
+        "numero": "000394084",
+        "numero_exibicao": "394084",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 10:54:02",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 27.95
+      },
+      {
+        "numero": "000394085",
+        "numero_exibicao": "394085",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 10:56:20",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 18.5
+      },
+      {
+        "numero": "000394086",
+        "numero_exibicao": "394086",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:23:34",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 1.5
+      },
+      {
+        "numero": "000394087",
+        "numero_exibicao": "394087",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:00:49",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 34.65
+      },
+      {
+        "numero": "000394088",
+        "numero_exibicao": "394088",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:04:09",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 6.8
+      },
+      {
+        "numero": "000394089",
+        "numero_exibicao": "394089",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:04:30",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 9.6
+      },
+      {
+        "numero": "000394090",
+        "numero_exibicao": "394090",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:05:55",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 8.5
+      },
+      {
+        "numero": "000394091",
+        "numero_exibicao": "394091",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:06:39",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 1.2
+      },
+      {
+        "numero": "000394092",
+        "numero_exibicao": "394092",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:08:26",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 7.95
+      },
+      {
+        "numero": "000394093",
+        "numero_exibicao": "394093",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:24:31",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 1.5
+      },
+      {
+        "numero": "000394094",
+        "numero_exibicao": "394094",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:11:09",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 215.9
+      },
+      {
+        "numero": "000394095",
+        "numero_exibicao": "394095",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 11:13:23",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 25.0
+      },
+      {
+        "numero": "000394096",
+        "numero_exibicao": "394096",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:14:50",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 16.5
+      },
+      {
+        "numero": "000394097",
+        "numero_exibicao": "394097",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:16:32",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 16.75
+      },
+      {
+        "numero": "000394098",
+        "numero_exibicao": "394098",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:19:11",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 5.55
+      },
+      {
+        "numero": "000394099",
+        "numero_exibicao": "394099",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:22:21",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 815.0
+      },
+      {
+        "numero": "000394100",
+        "numero_exibicao": "394100",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:25:10",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 39.95
+      },
+      {
+        "numero": "000394101",
+        "numero_exibicao": "394101",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:26:08",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 22.0
+      },
+      {
+        "numero": "000394102",
+        "numero_exibicao": "394102",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:26:58",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 69.4
+      },
+      {
+        "numero": "000394103",
+        "numero_exibicao": "394103",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 11:31:11",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 43.7
+      },
+      {
+        "numero": "000394104",
+        "numero_exibicao": "394104",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 11:32:52",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 125.9
+      },
+      {
+        "numero": "000394105",
+        "numero_exibicao": "394105",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:37:31",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 17.7
+      },
+      {
+        "numero": "000394106",
+        "numero_exibicao": "394106",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:38:05",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 147.1
+      },
+      {
+        "numero": "000394107",
+        "numero_exibicao": "394107",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:42:51",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 46.3
+      },
+      {
+        "numero": "000394108",
+        "numero_exibicao": "394108",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 11:43:35",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 34.5
+      },
+      {
+        "numero": "000394109",
+        "numero_exibicao": "394109",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 11:45:10",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 23.0
+      },
+      {
+        "numero": "000394110",
+        "numero_exibicao": "394110",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:45:52",
+        "cliente": "CLIENTES DIVERSOS",
+        "valor": 48.5
+      },
+      {
+        "numero": "000394111",
+        "numero_exibicao": "394111",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:46:27",
+        "cliente": "CLIENTES DIVERSOS",
+        "valor": 48.5
+      },
+      {
+        "numero": "000394112",
+        "numero_exibicao": "394112",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:48:47",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 39.0
+      },
+      {
+        "numero": "000394113",
+        "numero_exibicao": "394113",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 11:50:07",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 6.0
+      },
+      {
+        "numero": "000394114",
+        "numero_exibicao": "394114",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:51:49",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 39.6
+      },
+      {
+        "numero": "000394115",
+        "numero_exibicao": "394115",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 11:53:47",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 2.55
+      },
+      {
+        "numero": "000394116",
+        "numero_exibicao": "394116",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 11:54:17",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 6.95
+      },
+      {
+        "numero": "000394117",
+        "numero_exibicao": "394117",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 11:59:05",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 19.7
+      },
+      {
+        "numero": "000394118",
+        "numero_exibicao": "394118",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 12:01:33",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 38.85
+      },
+      {
+        "numero": "000394119",
+        "numero_exibicao": "394119",
+        "descricao": "Cartão de Crédito",
+        "data_venda": "04/07/2026 12:04:51",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 8.9
+      },
+      {
+        "numero": "000394120",
+        "numero_exibicao": "394120",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 12:05:26",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 36.9
+      },
+      {
+        "numero": "000394121",
+        "numero_exibicao": "394121",
+        "descricao": "Pagamento Instantâneo (PIX)",
+        "data_venda": "04/07/2026 12:06:22",
+        "cliente": "CLIENTE BALCAO Pagamento Instantâneo",
+        "valor": 120.0
+      },
+      {
+        "numero": "000394122",
+        "numero_exibicao": "394122",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 12:06:56",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 28.3
+      },
+      {
+        "numero": "000394123",
+        "numero_exibicao": "394123",
+        "descricao": "Dinheiro",
+        "data_venda": "04/07/2026 12:09:13",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 0.9
+      },
+      {
+        "numero": "000394124",
+        "numero_exibicao": "394124",
+        "descricao": "Cartão de Débito",
+        "data_venda": "04/07/2026 12:10:24",
+        "cliente": "CLIENTE BALCAO",
+        "valor": 14.6
+      }
+    ],
+    "nfces_faltantes_sequencia": [],
+    "fiscal_status_map": {}
+  },
+  "fechamento": {
+    "fechamento_modelo": "MVA",
+    "caixa_modelo": "MVA",
+    "subtitle": "Compara os DAVs finalizados com o fechamento do Clipp e cruza as formas de pagamento com os relatórios da Caixa. Cupons cancelados identificados no Minhas Notas: 3.",
+    "arquivo_caixa": "DAV.pdf",
+    "arquivo_resumo": "FECHAMENTO DE CAIXA.pdf",
+    "arquivo_resumo_titulo": "Arquivo Fechamento",
+    "periodo": "04/07/2026",
+    "total_caixa": 6199.6,
+    "total_caixa_titulo": "Total DAVs finalizados",
+    "total_resumo_nfce": 4790.65,
+    "total_resumo_titulo": "Total Fechamento de caixa",
+    "nfces_faltantes_count": 0,
+    "faltantes_titulo": "DAVs/CF faltantes",
+    "valor_faltantes": 220.7,
+    "status": "Faltante",
+    "cupons_cancelados_count": 3,
+    "cupons_cancelados_valor": 112.5,
+    "secao_titulo": "DAVs/CF para conferência",
+    "empty_message": "Nenhum DAV/CF faltante encontrado.",
+    "escopo_relatorio": null,
+    "escopo_horario_aplicado": [],
+    "registros_conferencia": [],
+    "relatorios_pagamento": {
+      "pix_fechamento": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 24,
+        "total_autorizado": 1166.0,
+        "itens_autorizados": [
+          {
+            "numero": "000394025",
+            "numero_exibicao": "394025",
+            "data_venda": "04/07/2026 08:17:57",
+            "valor_bruto": 9.45
+          },
+          {
+            "numero": "000394028",
+            "numero_exibicao": "394028",
+            "data_venda": "04/07/2026 08:21:27",
+            "valor_bruto": 16.0
+          },
+          {
+            "numero": "000394039",
+            "numero_exibicao": "394039",
+            "data_venda": "04/07/2026 08:53:09",
+            "valor_bruto": 92.75
+          },
+          {
+            "numero": "000394040",
+            "numero_exibicao": "394040",
+            "data_venda": "04/07/2026 08:55:38",
+            "valor_bruto": 25.8
+          },
+          {
+            "numero": "000394041",
+            "numero_exibicao": "394041",
+            "data_venda": "04/07/2026 08:56:41",
+            "valor_bruto": 20.4
+          },
+          {
+            "numero": "000394047",
+            "numero_exibicao": "394047",
+            "data_venda": "04/07/2026 09:15:19",
+            "valor_bruto": 63.5
+          },
+          {
+            "numero": "000394048",
+            "numero_exibicao": "394048",
+            "data_venda": "04/07/2026 09:17:40",
+            "valor_bruto": 9.9
+          },
+          {
+            "numero": "000394058",
+            "numero_exibicao": "394058",
+            "data_venda": "04/07/2026 09:40:45",
+            "valor_bruto": 6.95
+          },
+          {
+            "numero": "000394060",
+            "numero_exibicao": "394060",
+            "data_venda": "04/07/2026 09:55:21",
+            "valor_bruto": 115.5
+          },
+          {
+            "numero": "000394062",
+            "numero_exibicao": "394062",
+            "data_venda": "04/07/2026 09:59:34",
+            "valor_bruto": 73.95
+          },
+          {
+            "numero": "000394066",
+            "numero_exibicao": "394066",
+            "data_venda": "04/07/2026 10:09:59",
+            "valor_bruto": 292.0
+          },
+          {
+            "numero": "000394068",
+            "numero_exibicao": "394068",
+            "data_venda": "04/07/2026 10:16:58",
+            "valor_bruto": 29.05
+          },
+          {
+            "numero": "000394070",
+            "numero_exibicao": "394070",
+            "data_venda": "04/07/2026 10:22:42",
+            "valor_bruto": 11.9
+          },
+          {
+            "numero": "000394078",
+            "numero_exibicao": "394078",
+            "data_venda": "04/07/2026 10:40:41",
+            "valor_bruto": 19.0
+          },
+          {
+            "numero": "000394081",
+            "numero_exibicao": "394081",
+            "data_venda": "04/07/2026 10:48:22",
+            "valor_bruto": 5.5
+          },
+          {
+            "numero": "000394082",
+            "numero_exibicao": "394082",
+            "data_venda": "04/07/2026 10:52:10",
+            "valor_bruto": 9.7
+          },
+          {
+            "numero": "000394085",
+            "numero_exibicao": "394085",
+            "data_venda": "04/07/2026 10:56:20",
+            "valor_bruto": 18.5
+          },
+          {
+            "numero": "000394095",
+            "numero_exibicao": "394095",
+            "data_venda": "04/07/2026 11:13:23",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "000394103",
+            "numero_exibicao": "394103",
+            "data_venda": "04/07/2026 11:31:11",
+            "valor_bruto": 43.7
+          },
+          {
+            "numero": "000394104",
+            "numero_exibicao": "394104",
+            "data_venda": "04/07/2026 11:32:52",
+            "valor_bruto": 125.9
+          },
+          {
+            "numero": "000394109",
+            "numero_exibicao": "394109",
+            "data_venda": "04/07/2026 11:45:10",
+            "valor_bruto": 23.0
+          },
+          {
+            "numero": "000394113",
+            "numero_exibicao": "394113",
+            "data_venda": "04/07/2026 11:50:07",
+            "valor_bruto": 6.0
+          },
+          {
+            "numero": "000394115",
+            "numero_exibicao": "394115",
+            "data_venda": "04/07/2026 11:53:47",
+            "valor_bruto": 2.55
+          },
+          {
+            "numero": "000394121",
+            "numero_exibicao": "394121",
+            "data_venda": "04/07/2026 12:06:22",
+            "valor_bruto": 120.0
+          }
+        ],
+        "quantidade_relatorio": 24,
+        "total_relatorio": 1166.0,
+        "consistente": true,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "pix_fechamento",
+        "tab_title": "PIX Fechamento",
+        "menu_text": "Abrir PIX fechamento",
+        "summary_label": "PIX fechamento",
+        "total_label": "Total PIX fechamento",
+        "section_label": "Transações PIX no Fechamento",
+        "empty_message": "Nenhuma transação PIX encontrada no Fechamento para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "hidden_in_menu": true
+      },
+      "cartao_credito": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 19,
+        "total_autorizado": 1655.85,
+        "itens_autorizados": [
+          {
+            "numero": "000394026",
+            "numero_exibicao": "394026",
+            "data_venda": "04/07/2026 08:19:28",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "000394050",
+            "numero_exibicao": "394050",
+            "data_venda": "04/07/2026 09:19:33",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "000394054",
+            "numero_exibicao": "394054",
+            "data_venda": "04/07/2026 09:32:36",
+            "valor_bruto": 18.4
+          },
+          {
+            "numero": "000394056",
+            "numero_exibicao": "394056",
+            "data_venda": "04/07/2026 09:36:15",
+            "valor_bruto": 26.8
+          },
+          {
+            "numero": "000394057",
+            "numero_exibicao": "394057",
+            "data_venda": "04/07/2026 09:37:44",
+            "valor_bruto": 319.8
+          },
+          {
+            "numero": "000394063",
+            "numero_exibicao": "394063",
+            "data_venda": "04/07/2026 10:01:17",
+            "valor_bruto": 35.95
+          },
+          {
+            "numero": "000394065",
+            "numero_exibicao": "394065",
+            "data_venda": "04/07/2026 10:03:23",
+            "valor_bruto": 20.15
+          },
+          {
+            "numero": "000394071",
+            "numero_exibicao": "394071",
+            "data_venda": "04/07/2026 10:25:05",
+            "valor_bruto": 48.4
+          },
+          {
+            "numero": "000394080",
+            "numero_exibicao": "394080",
+            "data_venda": "04/07/2026 10:46:26",
+            "valor_bruto": 56.95
+          },
+          {
+            "numero": "000394084",
+            "numero_exibicao": "394084",
+            "data_venda": "04/07/2026 10:54:02",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "000394087",
+            "numero_exibicao": "394087",
+            "data_venda": "04/07/2026 11:00:49",
+            "valor_bruto": 34.65
+          },
+          {
+            "numero": "000394097",
+            "numero_exibicao": "394097",
+            "data_venda": "04/07/2026 11:16:32",
+            "valor_bruto": 16.75
+          },
+          {
+            "numero": "000394099",
+            "numero_exibicao": "394099",
+            "data_venda": "04/07/2026 11:22:21",
+            "valor_bruto": 815.0
+          },
+          {
+            "numero": "000394100",
+            "numero_exibicao": "394100",
+            "data_venda": "04/07/2026 11:25:10",
+            "valor_bruto": 12.0
+          },
+          {
+            "numero": "000394100",
+            "numero_exibicao": "394100",
+            "data_venda": "04/07/2026 11:25:10",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "000394102",
+            "numero_exibicao": "394102",
+            "data_venda": "04/07/2026 11:26:58",
+            "valor_bruto": 69.4
+          },
+          {
+            "numero": "000394105",
+            "numero_exibicao": "394105",
+            "data_venda": "04/07/2026 11:37:31",
+            "valor_bruto": 17.7
+          },
+          {
+            "numero": "000394108",
+            "numero_exibicao": "394108",
+            "data_venda": "04/07/2026 11:43:35",
+            "valor_bruto": 34.5
+          },
+          {
+            "numero": "000394119",
+            "numero_exibicao": "394119",
+            "data_venda": "04/07/2026 12:04:51",
+            "valor_bruto": 8.9
+          }
+        ],
+        "quantidade_relatorio": 19,
+        "total_relatorio": 1655.85,
+        "consistente": true,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "cartao_credito",
+        "tab_title": "Cartão de Crédito",
+        "menu_text": "Abrir cartão de crédito",
+        "summary_label": "Cartão de crédito",
+        "total_label": "Total cartão de crédito",
+        "section_label": "Transações em cartão de crédito",
+        "empty_message": "Nenhuma transação em cartão de crédito encontrada para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "hidden_in_menu": true
+      },
+      "dinheiro": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 20,
+        "total_autorizado": 516.95,
+        "itens_autorizados": [
+          {
+            "numero": "000394027",
+            "numero_exibicao": "394027",
+            "data_venda": "04/07/2026 08:20:06",
+            "valor_bruto": 4.0
+          },
+          {
+            "numero": "000394029",
+            "numero_exibicao": "394029",
+            "data_venda": "04/07/2026 08:26:05",
+            "valor_bruto": 14.0
+          },
+          {
+            "numero": "000394033",
+            "numero_exibicao": "394033",
+            "data_venda": "04/07/2026 08:36:06",
+            "valor_bruto": 3.5
+          },
+          {
+            "numero": "000394035",
+            "numero_exibicao": "394035",
+            "data_venda": "04/07/2026 08:43:48",
+            "valor_bruto": 132.3
+          },
+          {
+            "numero": "000394049",
+            "numero_exibicao": "394049",
+            "data_venda": "04/07/2026 09:17:41",
+            "valor_bruto": 22.95
+          },
+          {
+            "numero": "000394051",
+            "numero_exibicao": "394051",
+            "data_venda": "04/07/2026 09:22:01",
+            "valor_bruto": 5.5
+          },
+          {
+            "numero": "000394055",
+            "numero_exibicao": "394055",
+            "data_venda": "04/07/2026 09:35:19",
+            "valor_bruto": 6.95
+          },
+          {
+            "numero": "000394064",
+            "numero_exibicao": "394064",
+            "data_venda": "04/07/2026 10:01:48",
+            "valor_bruto": 15.95
+          },
+          {
+            "numero": "000394075",
+            "numero_exibicao": "394075",
+            "data_venda": "04/07/2026 10:34:46",
+            "valor_bruto": 38.9
+          },
+          {
+            "numero": "000394076",
+            "numero_exibicao": "394076",
+            "data_venda": "04/07/2026 10:37:38",
+            "valor_bruto": 8.95
+          },
+          {
+            "numero": "000394090",
+            "numero_exibicao": "394090",
+            "data_venda": "04/07/2026 11:05:55",
+            "valor_bruto": 8.5
+          },
+          {
+            "numero": "000394092",
+            "numero_exibicao": "394092",
+            "data_venda": "04/07/2026 11:08:26",
+            "valor_bruto": 7.95
+          },
+          {
+            "numero": "000394096",
+            "numero_exibicao": "394096",
+            "data_venda": "04/07/2026 11:14:50",
+            "valor_bruto": 16.5
+          },
+          {
+            "numero": "000394098",
+            "numero_exibicao": "394098",
+            "data_venda": "04/07/2026 11:19:11",
+            "valor_bruto": 5.55
+          },
+          {
+            "numero": "000394101",
+            "numero_exibicao": "394101",
+            "data_venda": "04/07/2026 11:26:08",
+            "valor_bruto": 22.0
+          },
+          {
+            "numero": "000394106",
+            "numero_exibicao": "394106",
+            "data_venda": "04/07/2026 11:38:05",
+            "valor_bruto": 147.1
+          },
+          {
+            "numero": "000394110",
+            "numero_exibicao": "394110",
+            "data_venda": "04/07/2026 11:45:52",
+            "valor_bruto": 48.5
+          },
+          {
+            "numero": "000394111",
+            "numero_exibicao": "394111",
+            "data_venda": "04/07/2026 11:46:27",
+            "valor_bruto": 48.5
+          },
+          {
+            "numero": "000394116",
+            "numero_exibicao": "394116",
+            "data_venda": "04/07/2026 11:54:17",
+            "valor_bruto": 6.95
+          },
+          {
+            "numero": "000394123",
+            "numero_exibicao": "394123",
+            "data_venda": "04/07/2026 12:09:13",
+            "valor_bruto": 0.9
+          }
+        ],
+        "quantidade_relatorio": 20,
+        "total_relatorio": 516.95,
+        "consistente": false,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "dinheiro",
+        "tab_title": "Dinheiro",
+        "menu_text": "Abrir dinheiro",
+        "summary_label": "Dinheiro",
+        "total_label": "Total dinheiro",
+        "section_label": "Transações em dinheiro",
+        "empty_message": "Nenhuma transação em dinheiro encontrada para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor"
+      },
+      "cartao_debito": {
+        "arquivo": "FECHAMENTO DE CAIXA.pdf",
+        "caminho": "C:\\Users\\TI\\Downloads\\FECHAMENTO DE CAIXA.pdf",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 39,
+        "total_autorizado": 1339.35,
+        "itens_autorizados": [
+          {
+            "numero": "000394030",
+            "numero_exibicao": "394030",
+            "data_venda": "04/07/2026 08:26:49",
+            "valor_bruto": 53.4
+          },
+          {
+            "numero": "000394031",
+            "numero_exibicao": "394031",
+            "data_venda": "04/07/2026 08:28:11",
+            "valor_bruto": 123.0
+          },
+          {
+            "numero": "000394032",
+            "numero_exibicao": "394032",
+            "data_venda": "04/07/2026 08:30:59",
+            "valor_bruto": 17.2
+          },
+          {
+            "numero": "000394034",
+            "numero_exibicao": "394034",
+            "data_venda": "04/07/2026 08:42:29",
+            "valor_bruto": 56.4
+          },
+          {
+            "numero": "000394036",
+            "numero_exibicao": "394036",
+            "data_venda": "04/07/2026 08:49:06",
+            "valor_bruto": 45.5
+          },
+          {
+            "numero": "000394037",
+            "numero_exibicao": "394037",
+            "data_venda": "04/07/2026 08:50:09",
+            "valor_bruto": 65.5
+          },
+          {
+            "numero": "000394038",
+            "numero_exibicao": "394038",
+            "data_venda": "04/07/2026 08:51:50",
+            "valor_bruto": 6.5
+          },
+          {
+            "numero": "000394042",
+            "numero_exibicao": "394042",
+            "data_venda": "04/07/2026 08:59:27",
+            "valor_bruto": 41.75
+          },
+          {
+            "numero": "000394043",
+            "numero_exibicao": "394043",
+            "data_venda": "04/07/2026 09:00:10",
+            "valor_bruto": 73.85
+          },
+          {
+            "numero": "000394044",
+            "numero_exibicao": "394044",
+            "data_venda": "04/07/2026 09:01:38",
+            "valor_bruto": 72.1
+          },
+          {
+            "numero": "000394045",
+            "numero_exibicao": "394045",
+            "data_venda": "04/07/2026 09:03:21",
+            "valor_bruto": 12.95
+          },
+          {
+            "numero": "000394046",
+            "numero_exibicao": "394046",
+            "data_venda": "04/07/2026 09:12:36",
+            "valor_bruto": 11.0
+          },
+          {
+            "numero": "000394052",
+            "numero_exibicao": "394052",
+            "data_venda": "04/07/2026 09:23:53",
+            "valor_bruto": 47.8
+          },
+          {
+            "numero": "000394053",
+            "numero_exibicao": "394053",
+            "data_venda": "04/07/2026 09:24:33",
+            "valor_bruto": 62.5
+          },
+          {
+            "numero": "000394059",
+            "numero_exibicao": "394059",
+            "data_venda": "04/07/2026 09:43:07",
+            "valor_bruto": 18.45
+          },
+          {
+            "numero": "000394061",
+            "numero_exibicao": "394061",
+            "data_venda": "04/07/2026 09:57:00",
+            "valor_bruto": 21.6
+          },
+          {
+            "numero": "000394067",
+            "numero_exibicao": "394067",
+            "data_venda": "04/07/2026 10:15:39",
+            "valor_bruto": 8.2
+          },
+          {
+            "numero": "000394069",
+            "numero_exibicao": "394069",
+            "data_venda": "04/07/2026 10:19:47",
+            "valor_bruto": 48.0
+          },
+          {
+            "numero": "000394072",
+            "numero_exibicao": "394072",
+            "data_venda": "04/07/2026 10:25:54",
+            "valor_bruto": 28.25
+          },
+          {
+            "numero": "000394073",
+            "numero_exibicao": "394073",
+            "data_venda": "04/07/2026 10:29:09",
+            "valor_bruto": 2.8
+          },
+          {
+            "numero": "000394074",
+            "numero_exibicao": "394074",
+            "data_venda": "04/07/2026 10:32:15",
+            "valor_bruto": 42.05
+          },
+          {
+            "numero": "000394076",
+            "numero_exibicao": "394076",
+            "data_venda": "04/07/2026 10:37:38",
+            "valor_bruto": 4.55
+          },
+          {
+            "numero": "000394077",
+            "numero_exibicao": "394077",
+            "data_venda": "04/07/2026 10:39:21",
+            "valor_bruto": 7.3
+          },
+          {
+            "numero": "000394079",
+            "numero_exibicao": "394079",
+            "data_venda": "04/07/2026 10:43:09",
+            "valor_bruto": 13.0
+          },
+          {
+            "numero": "000394083",
+            "numero_exibicao": "394083",
+            "data_venda": "04/07/2026 10:53:18",
+            "valor_bruto": 19.95
+          },
+          {
+            "numero": "000394088",
+            "numero_exibicao": "394088",
+            "data_venda": "04/07/2026 11:04:09",
+            "valor_bruto": 6.8
+          },
+          {
+            "numero": "000394089",
+            "numero_exibicao": "394089",
+            "data_venda": "04/07/2026 11:04:30",
+            "valor_bruto": 9.6
+          },
+          {
+            "numero": "000394091",
+            "numero_exibicao": "394091",
+            "data_venda": "04/07/2026 11:06:39",
+            "valor_bruto": 1.2
+          },
+          {
+            "numero": "000394094",
+            "numero_exibicao": "394094",
+            "data_venda": "04/07/2026 11:11:09",
+            "valor_bruto": 215.9
+          },
+          {
+            "numero": "000394086",
+            "numero_exibicao": "394086",
+            "data_venda": "04/07/2026 11:23:34",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "000394093",
+            "numero_exibicao": "394093",
+            "data_venda": "04/07/2026 11:24:31",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "000394107",
+            "numero_exibicao": "394107",
+            "data_venda": "04/07/2026 11:42:51",
+            "valor_bruto": 46.3
+          },
+          {
+            "numero": "000394112",
+            "numero_exibicao": "394112",
+            "data_venda": "04/07/2026 11:48:47",
+            "valor_bruto": 39.0
+          },
+          {
+            "numero": "000394114",
+            "numero_exibicao": "394114",
+            "data_venda": "04/07/2026 11:51:49",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "000394117",
+            "numero_exibicao": "394117",
+            "data_venda": "04/07/2026 11:59:05",
+            "valor_bruto": 19.7
+          },
+          {
+            "numero": "000394118",
+            "numero_exibicao": "394118",
+            "data_venda": "04/07/2026 12:01:33",
+            "valor_bruto": 38.85
+          },
+          {
+            "numero": "000394120",
+            "numero_exibicao": "394120",
+            "data_venda": "04/07/2026 12:05:26",
+            "valor_bruto": 36.9
+          },
+          {
+            "numero": "000394122",
+            "numero_exibicao": "394122",
+            "data_venda": "04/07/2026 12:06:56",
+            "valor_bruto": 28.3
+          },
+          {
+            "numero": "000394124",
+            "numero_exibicao": "394124",
+            "data_venda": "04/07/2026 12:10:24",
+            "valor_bruto": 14.6
+          }
+        ],
+        "quantidade_relatorio": 39,
+        "total_relatorio": 1339.35,
+        "consistente": false,
+        "origem": "clipp_fechamento_caixa_mva",
+        "mensagem": null,
+        "categoria": "cartao_debito",
+        "tab_title": "Cartão de Débito",
+        "menu_text": "Abrir cartão de débito",
+        "summary_label": "Cartão de débito",
+        "total_label": "Total cartão de débito",
+        "section_label": "Transações em cartão de débito",
+        "empty_message": "Nenhuma transação em cartão de débito encontrada para este dia.",
+        "table_headers": [
+          "NFC-e",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "hidden_in_menu": true
+      },
+      "cartao_credito_caixa": {
+        "arquivo": "Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + cielo_cartoes_04072026_mva_auto.csv",
+        "caminho": "D:\\pdfReader\\Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + D:\\pdfReader\\cielo_cartoes_04072026_mva_auto.csv",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 17,
+        "total_autorizado": 1611.15,
+        "itens_autorizados": [
+          {
+            "numero": "166494",
+            "numero_exibicao": "166494",
+            "data_venda": "04/07/2026 às 08:18",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "029809",
+            "numero_exibicao": "29809",
+            "data_venda": "04/07/2026 às 11:21",
+            "valor_bruto": 815.0
+          },
+          {
+            "numero": "OIQSQA",
+            "numero_exibicao": "OIQSQA",
+            "data_venda": "04/07/2026 às 09:18",
+            "ordem": "2026-07-04 09:18:00",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "R02907",
+            "numero_exibicao": "R02907",
+            "data_venda": "04/07/2026 às 09:31",
+            "ordem": "2026-07-04 09:31:00",
+            "valor_bruto": 18.4
+          },
+          {
+            "numero": "246796",
+            "numero_exibicao": "246796",
+            "data_venda": "04/07/2026 às 09:35",
+            "ordem": "2026-07-04 09:35:00",
+            "valor_bruto": 26.8
+          },
+          {
+            "numero": "205499",
+            "numero_exibicao": "205499",
+            "data_venda": "04/07/2026 às 09:36",
+            "ordem": "2026-07-04 09:36:00",
+            "valor_bruto": 319.8
+          },
+          {
+            "numero": "808627",
+            "numero_exibicao": "808627",
+            "data_venda": "04/07/2026 às 10:00",
+            "ordem": "2026-07-04 10:00:00",
+            "valor_bruto": 35.95
+          },
+          {
+            "numero": "268777",
+            "numero_exibicao": "268777",
+            "data_venda": "04/07/2026 às 10:02",
+            "ordem": "2026-07-04 10:02:00",
+            "valor_bruto": 20.15
+          },
+          {
+            "numero": "729768",
+            "numero_exibicao": "729768",
+            "data_venda": "04/07/2026 às 10:23",
+            "ordem": "2026-07-04 10:23:00",
+            "valor_bruto": 48.4
+          },
+          {
+            "numero": "R28482",
+            "numero_exibicao": "R28482",
+            "data_venda": "04/07/2026 às 10:45",
+            "ordem": "2026-07-04 10:45:00",
+            "valor_bruto": 56.95
+          },
+          {
+            "numero": "OSIDAJ",
+            "numero_exibicao": "OSIDAJ",
+            "data_venda": "04/07/2026 às 10:53",
+            "ordem": "2026-07-04 10:53:00",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "309866",
+            "numero_exibicao": "309866",
+            "data_venda": "04/07/2026 às 10:59",
+            "ordem": "2026-07-04 10:59:00",
+            "valor_bruto": 34.65
+          },
+          {
+            "numero": "TEDT0F",
+            "numero_exibicao": "TEDT0F",
+            "data_venda": "04/07/2026 às 11:23",
+            "ordem": "2026-07-04 11:23:00",
+            "valor_bruto": 12.0
+          },
+          {
+            "numero": "062296",
+            "numero_exibicao": "62296",
+            "data_venda": "04/07/2026 às 11:25",
+            "ordem": "2026-07-04 11:25:00",
+            "valor_bruto": 69.4
+          },
+          {
+            "numero": "048268",
+            "numero_exibicao": "48268",
+            "data_venda": "04/07/2026 às 11:36",
+            "ordem": "2026-07-04 11:36:00",
+            "valor_bruto": 17.7
+          },
+          {
+            "numero": "521875",
+            "numero_exibicao": "521875",
+            "data_venda": "04/07/2026 às 11:42",
+            "ordem": "2026-07-04 11:42:00",
+            "valor_bruto": 34.5
+          },
+          {
+            "numero": "511568",
+            "numero_exibicao": "511568",
+            "data_venda": "04/07/2026 às 12:03",
+            "ordem": "2026-07-04 12:03:00",
+            "valor_bruto": 8.9
+          }
+        ],
+        "quantidade_relatorio": 17,
+        "total_relatorio": 1611.15,
+        "consistente": true,
+        "origem": "caixa_cielo_cartoes",
+        "mensagem": null,
+        "categoria": "cartao_credito_caixa",
+        "tab_title": "Cartão de Crédito CAIXA/Cielo",
+        "menu_text": "Abrir Cartão de crédito CAIXA/Cielo",
+        "summary_label": "Cartão de crédito CAIXA/Cielo",
+        "total_label": "Total Cartão de crédito CAIXA/Cielo",
+        "section_label": "Transações em Cartão de crédito na CAIXA/Cielo",
+        "empty_message": "Nenhuma transação em Cartão de crédito da CAIXA/Cielo encontrada para este dia.",
+        "table_headers": [
+          "Comprovante",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "escopo_horario_aplicado": [
+          {
+            "abertura": "04/07/2026 07:55:15",
+            "fechamento": "04/07/2026 12:17:22"
+          }
+        ],
+        "itens_todos": [
+          {
+            "numero": "166494",
+            "numero_exibicao": "166494",
+            "data_venda": "04/07/2026 às 08:18",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "029809",
+            "numero_exibicao": "29809",
+            "data_venda": "04/07/2026 às 11:21",
+            "valor_bruto": 815.0
+          },
+          {
+            "numero": "OIQSQA",
+            "numero_exibicao": "OIQSQA",
+            "data_venda": "04/07/2026 às 09:18",
+            "ordem": "2026-07-04 09:18:00",
+            "valor_bruto": 25.0
+          },
+          {
+            "numero": "R02907",
+            "numero_exibicao": "R02907",
+            "data_venda": "04/07/2026 às 09:31",
+            "ordem": "2026-07-04 09:31:00",
+            "valor_bruto": 18.4
+          },
+          {
+            "numero": "246796",
+            "numero_exibicao": "246796",
+            "data_venda": "04/07/2026 às 09:35",
+            "ordem": "2026-07-04 09:35:00",
+            "valor_bruto": 26.8
+          },
+          {
+            "numero": "205499",
+            "numero_exibicao": "205499",
+            "data_venda": "04/07/2026 às 09:36",
+            "ordem": "2026-07-04 09:36:00",
+            "valor_bruto": 319.8
+          },
+          {
+            "numero": "808627",
+            "numero_exibicao": "808627",
+            "data_venda": "04/07/2026 às 10:00",
+            "ordem": "2026-07-04 10:00:00",
+            "valor_bruto": 35.95
+          },
+          {
+            "numero": "268777",
+            "numero_exibicao": "268777",
+            "data_venda": "04/07/2026 às 10:02",
+            "ordem": "2026-07-04 10:02:00",
+            "valor_bruto": 20.15
+          },
+          {
+            "numero": "729768",
+            "numero_exibicao": "729768",
+            "data_venda": "04/07/2026 às 10:23",
+            "ordem": "2026-07-04 10:23:00",
+            "valor_bruto": 48.4
+          },
+          {
+            "numero": "R28482",
+            "numero_exibicao": "R28482",
+            "data_venda": "04/07/2026 às 10:45",
+            "ordem": "2026-07-04 10:45:00",
+            "valor_bruto": 56.95
+          },
+          {
+            "numero": "OSIDAJ",
+            "numero_exibicao": "OSIDAJ",
+            "data_venda": "04/07/2026 às 10:53",
+            "ordem": "2026-07-04 10:53:00",
+            "valor_bruto": 27.95
+          },
+          {
+            "numero": "309866",
+            "numero_exibicao": "309866",
+            "data_venda": "04/07/2026 às 10:59",
+            "ordem": "2026-07-04 10:59:00",
+            "valor_bruto": 34.65
+          },
+          {
+            "numero": "TEDT0F",
+            "numero_exibicao": "TEDT0F",
+            "data_venda": "04/07/2026 às 11:23",
+            "ordem": "2026-07-04 11:23:00",
+            "valor_bruto": 12.0
+          },
+          {
+            "numero": "062296",
+            "numero_exibicao": "62296",
+            "data_venda": "04/07/2026 às 11:25",
+            "ordem": "2026-07-04 11:25:00",
+            "valor_bruto": 69.4
+          },
+          {
+            "numero": "048268",
+            "numero_exibicao": "48268",
+            "data_venda": "04/07/2026 às 11:36",
+            "ordem": "2026-07-04 11:36:00",
+            "valor_bruto": 17.7
+          },
+          {
+            "numero": "521875",
+            "numero_exibicao": "521875",
+            "data_venda": "04/07/2026 às 11:42",
+            "ordem": "2026-07-04 11:42:00",
+            "valor_bruto": 34.5
+          },
+          {
+            "numero": "511568",
+            "numero_exibicao": "511568",
+            "data_venda": "04/07/2026 às 12:03",
+            "ordem": "2026-07-04 12:03:00",
+            "valor_bruto": 8.9
+          }
+        ],
+        "hidden_in_menu": true
+      },
+      "cartao_debito_caixa": {
+        "arquivo": "Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + cielo_cartoes_04072026_mva_auto.csv",
+        "caminho": "D:\\pdfReader\\Historico_Simplificado_de_vendas_04-07-2026_mva_auto.xlsx + D:\\pdfReader\\cielo_cartoes_04072026_mva_auto.csv",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 37,
+        "total_autorizado": 1339.35,
+        "itens_autorizados": [
+          {
+            "numero": "M55507",
+            "numero_exibicao": "M55507",
+            "data_venda": "04/07/2026 às 08:25",
+            "valor_bruto": 53.4
+          },
+          {
+            "numero": "063527",
+            "numero_exibicao": "63527",
+            "data_venda": "04/07/2026 às 08:27",
+            "valor_bruto": 123.0
+          },
+          {
+            "numero": "915264",
+            "numero_exibicao": "915264",
+            "data_venda": "04/07/2026 às 08:29",
+            "valor_bruto": 17.2
+          },
+          {
+            "numero": "857607",
+            "numero_exibicao": "857607",
+            "data_venda": "04/07/2026 às 08:41",
+            "valor_bruto": 56.4
+          },
+          {
+            "numero": "gR263d",
+            "numero_exibicao": "gR263d",
+            "data_venda": "04/07/2026 às 08:47",
+            "valor_bruto": 45.5
+          },
+          {
+            "numero": "WkRWUH",
+            "numero_exibicao": "WkRWUH",
+            "data_venda": "04/07/2026 às 08:49",
+            "valor_bruto": 65.5
+          },
+          {
+            "numero": "993591",
+            "numero_exibicao": "993591",
+            "data_venda": "04/07/2026 às 08:50",
+            "valor_bruto": 6.5
+          },
+          {
+            "numero": "500486",
+            "numero_exibicao": "500486",
+            "data_venda": "04/07/2026 às 09:41",
+            "valor_bruto": 18.45
+          },
+          {
+            "numero": "M68135",
+            "numero_exibicao": "M68135",
+            "data_venda": "04/07/2026 às 11:03",
+            "valor_bruto": 9.6
+          },
+          {
+            "numero": "124881",
+            "numero_exibicao": "124881",
+            "data_venda": "04/07/2026 às 11:05",
+            "valor_bruto": 1.2
+          },
+          {
+            "numero": "Yno7na",
+            "numero_exibicao": "Yno7na",
+            "data_venda": "04/07/2026 às 11:09",
+            "valor_bruto": 215.9
+          },
+          {
+            "numero": "103312",
+            "numero_exibicao": "103312",
+            "data_venda": "04/07/2026 às 08:57",
+            "ordem": "2026-07-04 08:57:00",
+            "valor_bruto": 41.75
+          },
+          {
+            "numero": "021806",
+            "numero_exibicao": "21806",
+            "data_venda": "04/07/2026 às 08:59",
+            "ordem": "2026-07-04 08:59:00",
+            "valor_bruto": 73.85
+          },
+          {
+            "numero": "002870",
+            "numero_exibicao": "2870",
+            "data_venda": "04/07/2026 às 09:00",
+            "ordem": "2026-07-04 09:00:00",
+            "valor_bruto": 72.1
+          },
+          {
+            "numero": "66eI8g",
+            "numero_exibicao": "66eI8g",
+            "data_venda": "04/07/2026 às 09:02",
+            "ordem": "2026-07-04 09:02:00",
+            "valor_bruto": 12.95
+          },
+          {
+            "numero": "388208",
+            "numero_exibicao": "388208",
+            "data_venda": "04/07/2026 às 09:11",
+            "ordem": "2026-07-04 09:11:00",
+            "valor_bruto": 11.0
+          },
+          {
+            "numero": "M12164",
+            "numero_exibicao": "M12164",
+            "data_venda": "04/07/2026 às 09:22",
+            "ordem": "2026-07-04 09:22:00",
+            "valor_bruto": 47.8
+          },
+          {
+            "numero": "M35653",
+            "numero_exibicao": "M35653",
+            "data_venda": "04/07/2026 às 09:55",
+            "ordem": "2026-07-04 09:55:00",
+            "valor_bruto": 21.6
+          },
+          {
+            "numero": "697070",
+            "numero_exibicao": "697070",
+            "data_venda": "04/07/2026 às 10:14",
+            "ordem": "2026-07-04 10:14:00",
+            "valor_bruto": 8.2
+          },
+          {
+            "numero": "284633",
+            "numero_exibicao": "284633",
+            "data_venda": "04/07/2026 às 10:18",
+            "ordem": "2026-07-04 10:18:00",
+            "valor_bruto": 48.0
+          },
+          {
+            "numero": "M26917",
+            "numero_exibicao": "M26917",
+            "data_venda": "04/07/2026 às 10:24",
+            "ordem": "2026-07-04 10:24:00",
+            "valor_bruto": 28.25
+          },
+          {
+            "numero": "522405",
+            "numero_exibicao": "522405",
+            "data_venda": "04/07/2026 às 10:27",
+            "ordem": "2026-07-04 10:27:00",
+            "valor_bruto": 2.8
+          },
+          {
+            "numero": "961207",
+            "numero_exibicao": "961207",
+            "data_venda": "04/07/2026 às 10:30",
+            "ordem": "2026-07-04 10:30:00",
+            "valor_bruto": 42.05
+          },
+          {
+            "numero": "103808",
+            "numero_exibicao": "103808",
+            "data_venda": "04/07/2026 às 10:36",
+            "ordem": "2026-07-04 10:36:00",
+            "valor_bruto": 4.55
+          },
+          {
+            "numero": "M61884",
+            "numero_exibicao": "M61884",
+            "data_venda": "04/07/2026 às 10:38",
+            "ordem": "2026-07-04 10:38:00",
+            "valor_bruto": 7.3
+          },
+          {
+            "numero": "420281",
+            "numero_exibicao": "420281",
+            "data_venda": "04/07/2026 às 10:42",
+            "ordem": "2026-07-04 10:42:00",
+            "valor_bruto": 13.0
+          },
+          {
+            "numero": "514763",
+            "numero_exibicao": "514763",
+            "data_venda": "04/07/2026 às 10:51",
+            "ordem": "2026-07-04 10:51:00",
+            "valor_bruto": 19.95
+          },
+          {
+            "numero": "325858",
+            "numero_exibicao": "325858",
+            "data_venda": "04/07/2026 às 10:56",
+            "ordem": "2026-07-04 10:56:00",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "413338",
+            "numero_exibicao": "413338",
+            "data_venda": "04/07/2026 às 11:03",
+            "ordem": "2026-07-04 11:03:00",
+            "valor_bruto": 6.8
+          },
+          {
+            "numero": "065435",
+            "numero_exibicao": "65435",
+            "data_venda": "04/07/2026 às 11:41",
+            "ordem": "2026-07-04 11:41:00",
+            "valor_bruto": 46.3
+          },
+          {
+            "numero": "828429",
+            "numero_exibicao": "828429",
+            "data_venda": "04/07/2026 às 11:46",
+            "ordem": "2026-07-04 11:46:00",
+            "valor_bruto": 39.0
+          },
+          {
+            "numero": "670669",
+            "numero_exibicao": "670669",
+            "data_venda": "04/07/2026 às 11:50",
+            "ordem": "2026-07-04 11:50:00",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "250981",
+            "numero_exibicao": "250981",
+            "data_venda": "04/07/2026 às 11:58",
+            "ordem": "2026-07-04 11:58:00",
+            "valor_bruto": 19.7
+          },
+          {
+            "numero": "950827",
+            "numero_exibicao": "950827",
+            "data_venda": "04/07/2026 às 12:00",
+            "ordem": "2026-07-04 12:00:00",
+            "valor_bruto": 38.85
+          },
+          {
+            "numero": "M86855",
+            "numero_exibicao": "M86855",
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "valor_bruto": 36.9
+          },
+          {
+            "numero": "697702",
+            "numero_exibicao": "697702",
+            "data_venda": "04/07/2026 às 12:05",
+            "ordem": "2026-07-04 12:05:00",
+            "valor_bruto": 28.3
+          },
+          {
+            "numero": "yfTooS",
+            "numero_exibicao": "yfTooS",
+            "data_venda": "04/07/2026 às 12:09",
+            "ordem": "2026-07-04 12:09:00",
+            "valor_bruto": 14.6
+          }
+        ],
+        "quantidade_relatorio": 37,
+        "total_relatorio": 1339.35,
+        "consistente": true,
+        "origem": "caixa_cielo_cartoes",
+        "mensagem": null,
+        "categoria": "cartao_debito_caixa",
+        "tab_title": "Cartão de Débito CAIXA/Cielo",
+        "menu_text": "Abrir Cartão de débito CAIXA/Cielo",
+        "summary_label": "Cartão de débito CAIXA/Cielo",
+        "total_label": "Total Cartão de débito CAIXA/Cielo",
+        "section_label": "Transações em Cartão de débito na CAIXA/Cielo",
+        "empty_message": "Nenhuma transação em Cartão de débito da CAIXA/Cielo encontrada para este dia.",
+        "table_headers": [
+          "Comprovante",
+          "Data",
+          "Valor"
+        ],
+        "table_mode": "numero_data_valor",
+        "escopo_horario_aplicado": [
+          {
+            "abertura": "04/07/2026 07:55:15",
+            "fechamento": "04/07/2026 12:17:22"
+          }
+        ],
+        "itens_todos": [
+          {
+            "numero": "M55507",
+            "numero_exibicao": "M55507",
+            "data_venda": "04/07/2026 às 08:25",
+            "valor_bruto": 53.4
+          },
+          {
+            "numero": "063527",
+            "numero_exibicao": "63527",
+            "data_venda": "04/07/2026 às 08:27",
+            "valor_bruto": 123.0
+          },
+          {
+            "numero": "915264",
+            "numero_exibicao": "915264",
+            "data_venda": "04/07/2026 às 08:29",
+            "valor_bruto": 17.2
+          },
+          {
+            "numero": "857607",
+            "numero_exibicao": "857607",
+            "data_venda": "04/07/2026 às 08:41",
+            "valor_bruto": 56.4
+          },
+          {
+            "numero": "gR263d",
+            "numero_exibicao": "gR263d",
+            "data_venda": "04/07/2026 às 08:47",
+            "valor_bruto": 45.5
+          },
+          {
+            "numero": "WkRWUH",
+            "numero_exibicao": "WkRWUH",
+            "data_venda": "04/07/2026 às 08:49",
+            "valor_bruto": 65.5
+          },
+          {
+            "numero": "993591",
+            "numero_exibicao": "993591",
+            "data_venda": "04/07/2026 às 08:50",
+            "valor_bruto": 6.5
+          },
+          {
+            "numero": "500486",
+            "numero_exibicao": "500486",
+            "data_venda": "04/07/2026 às 09:41",
+            "valor_bruto": 18.45
+          },
+          {
+            "numero": "M68135",
+            "numero_exibicao": "M68135",
+            "data_venda": "04/07/2026 às 11:03",
+            "valor_bruto": 9.6
+          },
+          {
+            "numero": "124881",
+            "numero_exibicao": "124881",
+            "data_venda": "04/07/2026 às 11:05",
+            "valor_bruto": 1.2
+          },
+          {
+            "numero": "Yno7na",
+            "numero_exibicao": "Yno7na",
+            "data_venda": "04/07/2026 às 11:09",
+            "valor_bruto": 215.9
+          },
+          {
+            "numero": "103312",
+            "numero_exibicao": "103312",
+            "data_venda": "04/07/2026 às 08:57",
+            "ordem": "2026-07-04 08:57:00",
+            "valor_bruto": 41.75
+          },
+          {
+            "numero": "021806",
+            "numero_exibicao": "21806",
+            "data_venda": "04/07/2026 às 08:59",
+            "ordem": "2026-07-04 08:59:00",
+            "valor_bruto": 73.85
+          },
+          {
+            "numero": "002870",
+            "numero_exibicao": "2870",
+            "data_venda": "04/07/2026 às 09:00",
+            "ordem": "2026-07-04 09:00:00",
+            "valor_bruto": 72.1
+          },
+          {
+            "numero": "66eI8g",
+            "numero_exibicao": "66eI8g",
+            "data_venda": "04/07/2026 às 09:02",
+            "ordem": "2026-07-04 09:02:00",
+            "valor_bruto": 12.95
+          },
+          {
+            "numero": "388208",
+            "numero_exibicao": "388208",
+            "data_venda": "04/07/2026 às 09:11",
+            "ordem": "2026-07-04 09:11:00",
+            "valor_bruto": 11.0
+          },
+          {
+            "numero": "M12164",
+            "numero_exibicao": "M12164",
+            "data_venda": "04/07/2026 às 09:22",
+            "ordem": "2026-07-04 09:22:00",
+            "valor_bruto": 47.8
+          },
+          {
+            "numero": "M35653",
+            "numero_exibicao": "M35653",
+            "data_venda": "04/07/2026 às 09:55",
+            "ordem": "2026-07-04 09:55:00",
+            "valor_bruto": 21.6
+          },
+          {
+            "numero": "697070",
+            "numero_exibicao": "697070",
+            "data_venda": "04/07/2026 às 10:14",
+            "ordem": "2026-07-04 10:14:00",
+            "valor_bruto": 8.2
+          },
+          {
+            "numero": "284633",
+            "numero_exibicao": "284633",
+            "data_venda": "04/07/2026 às 10:18",
+            "ordem": "2026-07-04 10:18:00",
+            "valor_bruto": 48.0
+          },
+          {
+            "numero": "M26917",
+            "numero_exibicao": "M26917",
+            "data_venda": "04/07/2026 às 10:24",
+            "ordem": "2026-07-04 10:24:00",
+            "valor_bruto": 28.25
+          },
+          {
+            "numero": "522405",
+            "numero_exibicao": "522405",
+            "data_venda": "04/07/2026 às 10:27",
+            "ordem": "2026-07-04 10:27:00",
+            "valor_bruto": 2.8
+          },
+          {
+            "numero": "961207",
+            "numero_exibicao": "961207",
+            "data_venda": "04/07/2026 às 10:30",
+            "ordem": "2026-07-04 10:30:00",
+            "valor_bruto": 42.05
+          },
+          {
+            "numero": "103808",
+            "numero_exibicao": "103808",
+            "data_venda": "04/07/2026 às 10:36",
+            "ordem": "2026-07-04 10:36:00",
+            "valor_bruto": 4.55
+          },
+          {
+            "numero": "M61884",
+            "numero_exibicao": "M61884",
+            "data_venda": "04/07/2026 às 10:38",
+            "ordem": "2026-07-04 10:38:00",
+            "valor_bruto": 7.3
+          },
+          {
+            "numero": "420281",
+            "numero_exibicao": "420281",
+            "data_venda": "04/07/2026 às 10:42",
+            "ordem": "2026-07-04 10:42:00",
+            "valor_bruto": 13.0
+          },
+          {
+            "numero": "514763",
+            "numero_exibicao": "514763",
+            "data_venda": "04/07/2026 às 10:51",
+            "ordem": "2026-07-04 10:51:00",
+            "valor_bruto": 19.95
+          },
+          {
+            "numero": "325858",
+            "numero_exibicao": "325858",
+            "data_venda": "04/07/2026 às 10:56",
+            "ordem": "2026-07-04 10:56:00",
+            "valor_bruto": 1.5
+          },
+          {
+            "numero": "413338",
+            "numero_exibicao": "413338",
+            "data_venda": "04/07/2026 às 11:03",
+            "ordem": "2026-07-04 11:03:00",
+            "valor_bruto": 6.8
+          },
+          {
+            "numero": "065435",
+            "numero_exibicao": "65435",
+            "data_venda": "04/07/2026 às 11:41",
+            "ordem": "2026-07-04 11:41:00",
+            "valor_bruto": 46.3
+          },
+          {
+            "numero": "828429",
+            "numero_exibicao": "828429",
+            "data_venda": "04/07/2026 às 11:46",
+            "ordem": "2026-07-04 11:46:00",
+            "valor_bruto": 39.0
+          },
+          {
+            "numero": "670669",
+            "numero_exibicao": "670669",
+            "data_venda": "04/07/2026 às 11:50",
+            "ordem": "2026-07-04 11:50:00",
+            "valor_bruto": 39.6
+          },
+          {
+            "numero": "250981",
+            "numero_exibicao": "250981",
+            "data_venda": "04/07/2026 às 11:58",
+            "ordem": "2026-07-04 11:58:00",
+            "valor_bruto": 19.7
+          },
+          {
+            "numero": "950827",
+            "numero_exibicao": "950827",
+            "data_venda": "04/07/2026 às 12:00",
+            "ordem": "2026-07-04 12:00:00",
+            "valor_bruto": 38.85
+          },
+          {
+            "numero": "M86855",
+            "numero_exibicao": "M86855",
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "valor_bruto": 36.9
+          },
+          {
+            "numero": "697702",
+            "numero_exibicao": "697702",
+            "data_venda": "04/07/2026 às 12:05",
+            "ordem": "2026-07-04 12:05:00",
+            "valor_bruto": 28.3
+          },
+          {
+            "numero": "yfTooS",
+            "numero_exibicao": "yfTooS",
+            "data_venda": "04/07/2026 às 12:09",
+            "ordem": "2026-07-04 12:09:00",
+            "valor_bruto": 14.6
+          }
+        ],
+        "hidden_in_menu": true
+      },
+      "pix_caixa": {
+        "arquivo": "Relatorio_de_Vendas_Pix_04-07-2026_mva_auto.csv",
+        "caminho": "D:\\pdfReader\\Relatorio_de_Vendas_Pix_04-07-2026_mva_auto.csv",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 24,
+        "total_autorizado": 1111.0,
+        "itens_autorizados": [
+          {
+            "data_venda": "04/07/2026 às 08:08",
+            "ordem": "2026-07-04 08:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000BIB99NAYO6WQM2PJEFLD",
+            "valor_bruto": 9.45
+          },
+          {
+            "data_venda": "04/07/2026 às 08:19",
+            "ordem": "2026-07-04 08:19:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000HRTIGGE32N7HHZHWZZ7N",
+            "valor_bruto": 16.0
+          },
+          {
+            "data_venda": "04/07/2026 às 08:51",
+            "ordem": "2026-07-04 08:51:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000K6BO5AFI8NAAN6GN2V1B",
+            "valor_bruto": 92.75
+          },
+          {
+            "data_venda": "04/07/2026 às 08:53",
+            "ordem": "2026-07-04 08:53:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000008LNLNZQQVRO3C00LE8K0",
+            "valor_bruto": 25.8
+          },
+          {
+            "data_venda": "04/07/2026 às 08:55",
+            "ordem": "2026-07-04 08:55:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EEO1EF5YQHGBAG1BQY9L",
+            "valor_bruto": 20.4
+          },
+          {
+            "data_venda": "04/07/2026 às 09:13",
+            "ordem": "2026-07-04 09:13:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000G6M3QLL4DHRSFW83STRT",
+            "valor_bruto": 63.5
+          },
+          {
+            "data_venda": "04/07/2026 às 09:16",
+            "ordem": "2026-07-04 09:16:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GHDUJLC40K4FML4YSRXQ",
+            "valor_bruto": 9.9
+          },
+          {
+            "data_venda": "04/07/2026 às 09:39",
+            "ordem": "2026-07-04 09:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000O3T80Q0NVBXL82TU7JJS",
+            "valor_bruto": 6.95
+          },
+          {
+            "data_venda": "04/07/2026 às 09:56",
+            "ordem": "2026-07-04 09:56:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C935RYEVO0AECBXE71L1",
+            "valor_bruto": 73.95
+          },
+          {
+            "data_venda": "04/07/2026 às 10:08",
+            "ordem": "2026-07-04 10:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000096FY58TMBL0W8FY0QPRA",
+            "valor_bruto": 292.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:15",
+            "ordem": "2026-07-04 10:15:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003V62FSJIC41L3D5KE8F9",
+            "valor_bruto": 29.05
+          },
+          {
+            "data_venda": "04/07/2026 às 10:21",
+            "ordem": "2026-07-04 10:21:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OR4EYN82S6JUHD8BMA15",
+            "valor_bruto": 11.9
+          },
+          {
+            "data_venda": "04/07/2026 às 10:32",
+            "ordem": "2026-07-04 10:32:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000I8CMX3Z8QLV31JX1G76X",
+            "valor_bruto": 60.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:39",
+            "ordem": "2026-07-04 10:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000004X4NMXS4PM86HWJDWHDC",
+            "valor_bruto": 19.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:46",
+            "ordem": "2026-07-04 10:46:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EDGLU3LZJR7MUKH0FVA6",
+            "valor_bruto": 5.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:50",
+            "ordem": "2026-07-04 10:50:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000DKVL4WSKM6U4M1M04BGX",
+            "valor_bruto": 9.7
+          },
+          {
+            "data_venda": "04/07/2026 às 10:54",
+            "ordem": "2026-07-04 10:54:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003EWD1LTKM8LZHTIM0C7W",
+            "valor_bruto": 18.5
+          },
+          {
+            "data_venda": "04/07/2026 às 11:10",
+            "ordem": "2026-07-04 11:10:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GJSKA3J9RB324LTRH3N5",
+            "valor_bruto": 25.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:29",
+            "ordem": "2026-07-04 11:29:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OQQTMJLJMSMTN75ANU89",
+            "valor_bruto": 43.7
+          },
+          {
+            "data_venda": "04/07/2026 às 11:31",
+            "ordem": "2026-07-04 11:31:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000F8VA5N08Z8WOWMIRC3J0",
+            "valor_bruto": 125.9
+          },
+          {
+            "data_venda": "04/07/2026 às 11:43",
+            "ordem": "2026-07-04 11:43:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000069UYVCCRHYIMZFP6RGE4",
+            "valor_bruto": 23.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:48",
+            "ordem": "2026-07-04 11:48:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FPEG5RFB4RV4BFPBJXJE",
+            "valor_bruto": 6.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:52",
+            "ordem": "2026-07-04 11:52:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FQVBKA9GIDH7MYFISX70",
+            "valor_bruto": 2.55
+          },
+          {
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C5MD4MUHNKN8MNBO1IIO",
+            "valor_bruto": 120.0
+          }
+        ],
+        "quantidade_relatorio": 24,
+        "total_relatorio": 1111.0,
+        "consistente": true,
+        "origem": "caixa_pix_csv",
+        "mensagem": null,
+        "itens_todos": [
+          {
+            "data_venda": "04/07/2026 às 08:08",
+            "ordem": "2026-07-04 08:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000BIB99NAYO6WQM2PJEFLD",
+            "valor_bruto": 9.45
+          },
+          {
+            "data_venda": "04/07/2026 às 08:19",
+            "ordem": "2026-07-04 08:19:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000HRTIGGE32N7HHZHWZZ7N",
+            "valor_bruto": 16.0
+          },
+          {
+            "data_venda": "04/07/2026 às 08:46",
+            "ordem": "2026-07-04 08:46:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "CANCELADA",
+            "nome": "-",
+            "valor_bruto": 45.5
+          },
+          {
+            "data_venda": "04/07/2026 às 08:51",
+            "ordem": "2026-07-04 08:51:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000K6BO5AFI8NAAN6GN2V1B",
+            "valor_bruto": 92.75
+          },
+          {
+            "data_venda": "04/07/2026 às 08:53",
+            "ordem": "2026-07-04 08:53:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000008LNLNZQQVRO3C00LE8K0",
+            "valor_bruto": 25.8
+          },
+          {
+            "data_venda": "04/07/2026 às 08:55",
+            "ordem": "2026-07-04 08:55:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EEO1EF5YQHGBAG1BQY9L",
+            "valor_bruto": 20.4
+          },
+          {
+            "data_venda": "04/07/2026 às 09:13",
+            "ordem": "2026-07-04 09:13:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000G6M3QLL4DHRSFW83STRT",
+            "valor_bruto": 63.5
+          },
+          {
+            "data_venda": "04/07/2026 às 09:16",
+            "ordem": "2026-07-04 09:16:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GHDUJLC40K4FML4YSRXQ",
+            "valor_bruto": 9.9
+          },
+          {
+            "data_venda": "04/07/2026 às 09:39",
+            "ordem": "2026-07-04 09:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000O3T80Q0NVBXL82TU7JJS",
+            "valor_bruto": 6.95
+          },
+          {
+            "data_venda": "04/07/2026 às 09:56",
+            "ordem": "2026-07-04 09:56:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C935RYEVO0AECBXE71L1",
+            "valor_bruto": 73.95
+          },
+          {
+            "data_venda": "04/07/2026 às 10:08",
+            "ordem": "2026-07-04 10:08:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000096FY58TMBL0W8FY0QPRA",
+            "valor_bruto": 292.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:15",
+            "ordem": "2026-07-04 10:15:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003V62FSJIC41L3D5KE8F9",
+            "valor_bruto": 29.05
+          },
+          {
+            "data_venda": "04/07/2026 às 10:21",
+            "ordem": "2026-07-04 10:21:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OR4EYN82S6JUHD8BMA15",
+            "valor_bruto": 11.9
+          },
+          {
+            "data_venda": "04/07/2026 às 10:32",
+            "ordem": "2026-07-04 10:32:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000I8CMX3Z8QLV31JX1G76X",
+            "valor_bruto": 60.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:39",
+            "ordem": "2026-07-04 10:39:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000004X4NMXS4PM86HWJDWHDC",
+            "valor_bruto": 19.0
+          },
+          {
+            "data_venda": "04/07/2026 às 10:46",
+            "ordem": "2026-07-04 10:46:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000EDGLU3LZJR7MUKH0FVA6",
+            "valor_bruto": 5.5
+          },
+          {
+            "data_venda": "04/07/2026 às 10:50",
+            "ordem": "2026-07-04 10:50:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000DKVL4WSKM6U4M1M04BGX",
+            "valor_bruto": 9.7
+          },
+          {
+            "data_venda": "04/07/2026 às 10:54",
+            "ordem": "2026-07-04 10:54:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE0010000000003EWD1LTKM8LZHTIM0C7W",
+            "valor_bruto": 18.5
+          },
+          {
+            "data_venda": "04/07/2026 às 11:10",
+            "ordem": "2026-07-04 11:10:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000GJSKA3J9RB324LTRH3N5",
+            "valor_bruto": 25.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:29",
+            "ordem": "2026-07-04 11:29:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000OQQTMJLJMSMTN75ANU89",
+            "valor_bruto": 43.7
+          },
+          {
+            "data_venda": "04/07/2026 às 11:31",
+            "ordem": "2026-07-04 11:31:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000F8VA5N08Z8WOWMIRC3J0",
+            "valor_bruto": 125.9
+          },
+          {
+            "data_venda": "04/07/2026 às 11:43",
+            "ordem": "2026-07-04 11:43:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE00100000000069UYVCCRHYIMZFP6RGE4",
+            "valor_bruto": 23.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:48",
+            "ordem": "2026-07-04 11:48:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FPEG5RFB4RV4BFPBJXJE",
+            "valor_bruto": 6.0
+          },
+          {
+            "data_venda": "04/07/2026 às 11:52",
+            "ordem": "2026-07-04 11:52:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000FQVBKA9GIDH7MYFISX70",
+            "valor_bruto": 2.55
+          },
+          {
+            "data_venda": "04/07/2026 às 12:04",
+            "ordem": "2026-07-04 12:04:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "APROVADA",
+            "nome": "SE001000000000C5MD4MUHNKN8MNBO1IIO",
+            "valor_bruto": 120.0
+          },
+          {
+            "data_venda": "04/07/2026 às 12:07",
+            "ordem": "2026-07-04 12:07:00",
+            "tipo_pix": "RECEBIDO",
+            "situacao": "RECUSADA",
+            "nome": "-",
+            "valor_bruto": 0.9
+          }
+        ],
+        "tab_title": "PIX",
+        "menu_text": "Abrir PIX CAIXA",
+        "summary_label": "PIX",
+        "total_label": "Total PIX CAIXA",
+        "section_label": "Transações PIX recebidas na CAIXA",
+        "empty_message": "Nenhuma transação PIX recebida encontrada para este dia.",
+        "table_headers": [
+          "Data da venda",
+          "Valor bruto"
+        ],
+        "table_mode": "data_valor",
+        "categoria": "pix_caixa",
+        "escopo_horario_aplicado": [
+          {
+            "abertura": "04/07/2026 07:55:15",
+            "fechamento": "04/07/2026 12:17:22"
+          }
+        ],
+        "hidden_in_menu": true
+      },
+      "alertas_eh": {
+        "arquivo": "",
+        "caminho": "",
+        "periodo": "04/07/2026 - 04/07/2026",
+        "quantidade_autorizados": 4,
+        "total_autorizado": 220.7,
+        "itens_autorizados": [],
+        "quantidade_relatorio": 4,
+        "total_relatorio": 220.7,
+        "consistente": true,
+        "origem": "eh_auxiliar",
+        "mensagem": null,
+        "categoria": "alertas_eh",
+        "tab_title": "Conciliação Bancária",
+        "menu_text": "Abrir conciliação bancária",
+        "summary_label": "Pendências",
+        "total_label": "Total pendências",
+        "section_label": "Pendências e sobras da conciliação bancária",
+        "empty_message": "Nenhum alerta encontrado.",
+        "table_headers": [
+          "Tipo",
+          "Detalhe",
+          "Valor"
+        ],
+        "table_rows": [
+          [
+            "Cupons Cancelados",
+            "",
+            ""
+          ],
+          [
+            "CF 394110",
+            "R$ 48,50"
+          ],
+          [
+            "CF 394053",
+            "R$ 62,50"
+          ],
+          [
+            "CF 394093",
+            "R$ 1,50"
+          ],
+          [
+            "PIX - CF sem Transação Bancária",
+            "",
+            ""
+          ],
+          [
+            "CF 394060",
+            "R$ 115,50"
+          ],
+          [
+            "PIX - Transação Bancária sem CF/NF",
+            "",
+            ""
+          ],
+          [
+            "PIX",
+            "04/07/2026 às 10:32",
+            "R$ 60,50"
+          ],
+          [
+            "Cartões - CF sem Transação Bancária",
+            "",
+            ""
+          ],
+          [
+            "Cartão Crédito: CF 394100",
+            "R$ 27,95"
+          ],
+          [
+            "Cartão Crédito: CF 394097",
+            "R$ 16,75"
+          ]
+        ],
+        "table_widths": [
+          170,
+          360,
+          110
+        ],
+        "table_mode": "custom",
+        "pix_fechamento_rows": [
+          [
+            "CF 394060",
+            "R$ 115,50"
+          ]
+        ],
+        "pix_maquina_rows": [
+          [
+            "PIX",
+            "04/07/2026 às 10:32",
+            "R$ 60,50"
+          ]
+        ],
+        "cartao_fechamento_rows": [
+          [
+            "Cartão Crédito: CF 394100",
+            "R$ 27,95"
+          ],
+          [
+            "Cartão Crédito: CF 394097",
+            "R$ 16,75"
+          ]
+        ],
+        "cartao_maquina_rows": [],
+        "cancelados_rows": [
+          [
+            "CF 394110",
+            "R$ 48,50"
+          ],
+          [
+            "CF 394053",
+            "R$ 62,50"
+          ],
+          [
+            "CF 394093",
+            "R$ 1,50"
+          ]
+        ],
+        "observacao_rows": [],
+        "hidden_in_menu": true,
+        "caixa_modelo": "MVA",
+        "summary_items": [
+          [
+            "Período",
+            "04/07/2026 - 04/07/2026"
+          ],
+          [
+            "Pendências",
+            "4"
+          ],
+          [
+            "Total Pendências",
+            "R$ 220,70"
+          ]
+        ],
+        "correlacao_rows": [
+          [
+            "Dinheiro",
+            "R$ 516,95",
+            "-",
+            "Interno"
+          ],
+          [
+            "PIX",
+            "R$ 1.166,00",
+            "R$ 1.111,00",
+            "Divergente"
+          ],
+          [
+            "Cartão Crédito",
+            "R$ 1.655,85",
+            "R$ 1.611,15",
+            "Divergente"
+          ],
+          [
+            "Cartão Débito",
+            "R$ 1.339,35",
+            "R$ 1.339,35",
+            "Finalizado"
+          ]
+        ],
+        "valor_total_vendas": 6199.6,
+        "valor_pendente": 220.7,
+        "texto_informativo": "",
+        "status": "Faltante"
+      }
+    },
+    "alertas_count": 4,
+    "avisos_usuario": []
+  }
+}

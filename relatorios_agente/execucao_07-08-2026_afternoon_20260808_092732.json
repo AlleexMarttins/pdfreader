@@ -1,0 +1,19 @@
+{
+  "executado_em": "2026-08-08T09:27:32",
+  "escopo": "afternoon",
+  "data_alvo": "07/08/2026",
+  "mva": {
+    "status": "ok",
+    "pedidos": 164,
+    "nfce": 125,
+    "total_vendas": 0,
+    "arquivos": [
+      "D:\\pdfReader\\relatorios_agente\\Historico_Simplificado_de_vendas_07-08-2026_mva_agente.xlsx",
+      "D:\\pdfReader\\relatorios_agente\\Fechamento_de_Caixa_07-08-2026_mva_agente.json"
+    ]
+  },
+  "eh": {
+    "status": "erro",
+    "mensagem": "name 'day_name' is not defined"
+  }
+}

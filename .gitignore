@@ -61,3 +61,11 @@ passo-a-passo.txt
 # OS / editor
 .DS_Store
 Thumbs.db
+
+# agent/test junk
+.agent_execution_state/
+.agent_retry_state/
+.pytest_*/
+.cielo_*.py
+
+runtime/

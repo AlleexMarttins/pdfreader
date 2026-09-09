@@ -1,0 +1,6 @@
+Relatorio Cielo
+Data da venda;Hora;Forma de pagamento;Status;Valor da venda;Codigo de autorizacao
+05/05/2026;13:45;Credito a vista;Aprovada;R$ 100,50;000123
+05/05/2026;14:10;Debito;Autorizada;50,00;000124
+05/05/2026;15:00;Credito;Cancelada;70,00;000125
+04/05/2026;16:00;Credito;Aprovada;20,00;000126

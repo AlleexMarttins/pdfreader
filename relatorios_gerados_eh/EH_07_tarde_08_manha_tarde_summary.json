@@ -1,0 +1,41 @@
+[
+  {
+    "date": "07/07/2026",
+    "scope": "afternoon",
+    "pedidos": 29,
+    "total_pedidos": 3169.8,
+    "nfces": 32,
+    "total_fechamento": 3295.92,
+    "status": "Faltante",
+    "warnings": [],
+    "files": [
+      "relatorios_gerados_eh\\EH_07-07-2026_afternoon_01_Fechamento_de_Caixa_-_Eletr_nica_Horizonte_T.html"
+    ]
+  },
+  {
+    "date": "08/07/2026",
+    "scope": "morning",
+    "pedidos": 38,
+    "total_pedidos": 2727.8,
+    "nfces": 42,
+    "total_fechamento": 3700.6,
+    "status": "Faltante",
+    "warnings": [],
+    "files": [
+      "relatorios_gerados_eh\\EH_08-07-2026_morning_01_Fechamento_de_Caixa_-_Eletr_nica_Horizonte_M.html"
+    ]
+  },
+  {
+    "date": "08/07/2026",
+    "scope": "afternoon",
+    "pedidos": 31,
+    "total_pedidos": 2469.96,
+    "nfces": 35,
+    "total_fechamento": 2897.11,
+    "status": "Faltante",
+    "warnings": [],
+    "files": [
+      "relatorios_gerados_eh\\EH_08-07-2026_afternoon_01_Fechamento_de_Caixa_-_Eletr_nica_Horizonte_T.html"
+    ]
+  }
+]

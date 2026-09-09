@@ -19,6 +19,7 @@ import unicodedata
 from urllib.parse import urljoin
 from datetime import datetime, timedelta
 from pathlib import Path
+from typing import Iterable
 
 import requests
 
@@ -41,6 +42,9 @@ progress_queue = queue.Queue()
 cancel_event = threading.Event()
 LAST_STATE_SPREADSHEET = {}
 _MINHAS_NOTAS_CACHE = {}
+
+# Correções confirmadas no fechamento, quando a maquininha registrou cartão mas o CF foi pago em dinheiro.
+_EH_CARD_MACHINE_CASH_COUPONS = {("29/08/2026", "110220")}
 
 _UI_REFS = {
     "btn_cancel": None,
@@ -369,8 +373,6 @@ def _poll_queue(root, tree, progress_var, progress_bar, label_files_var=None, pa
         tree_update(tree)
         _scroll_tree_to_top(tree)
         messagebox.showinfo("Concluído", f"Processamento finalizado ({source})!")
-        for vendedor in results.keys():
-            registrar_vendedor_db(vendedor)
 
     elif kind == "error":
         set_btn_cancel()
@@ -618,8 +620,6 @@ def _build_zweb_fiscal_status_map(itens: list[dict]) -> dict:
 
 def _analisar_html_pedidos_importados_eh(html_text: str, arquivo: str = "Pedidos importados - Zweb") -> dict:
     from bs4 import BeautifulSoup
-    with open("debug_zweb.html", "w", encoding="utf-8") as f:
-        f.write(html_text)
     periodo = _extract_zweb_period(html_text)
     itens_brutos = []
 
@@ -1124,6 +1124,47 @@ def _browser_debug_visible_enabled() -> bool:
     return False
 
 
+def _browser_debug_keep_open_enabled() -> bool:
+    value = str(os.environ.get("PDFREADER_KEEP_BROWSER_OPEN") or "").strip().casefold()
+    return _browser_debug_visible_enabled() and value in {"1", "true", "yes", "sim", "on"}
+
+
+def _azulzinha_sales_period_shortcut(data_br: str, reference_date=None) -> str | None:
+    """Returns the safe relative-period shortcut supported by the sales portal."""
+    try:
+        target_date = datetime.strptime(str(data_br or ""), "%d/%m/%Y").date()
+    except ValueError:
+        return None
+
+    current_date = reference_date or datetime.now().date()
+    if target_date == current_date - timedelta(days=1):
+        return "ontem"
+    return None
+
+
+def _is_azulzinha_captcha_page(
+    url: str,
+    title: str,
+    body_text: str,
+    frame_sources: Iterable[str],
+) -> bool:
+    url_normalized = str(url or "").casefold()
+    title_normalized = _normalize_ascii_text(title)
+    text_normalized = _normalize_ascii_text(body_text)
+    frame_text = " ".join(str(source or "") for source in frame_sources).casefold()
+
+    return (
+        "validate.perfdrive.com" in url_normalized
+        or "radware bot manager captcha" in title_normalized
+        or "hcaptcha" in frame_text
+        or "h-captcha" in frame_text
+        or (
+            "captcha" in text_normalized
+            and any(marker in text_normalized for marker in ("verificacao", "seguranca", "robo"))
+        )
+    )
+
+
 def _save_zweb_html_report(data_br: str, report_key: str, html_text: str) -> str:
     report_dir = Path(_active_report_dir())
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -1535,10 +1576,21 @@ def _find_eh_local_payment_reports(data_br: str, *, company: str = "EH") -> dict
         latest = max(paths, key=_score)
         return str(latest)
 
+    pix_match = _pick_latest(pix_csv_matches + pix_xlsx_matches) or _pick_latest(pix_pdf_matches)
+    card_match = _pick_latest(card_matches)
+    avisos_filtrados = []
+    for aviso in avisos:
+        aviso_norm = _normalize_ascii_text(aviso)
+        if pix_match and "relatorio de pix" in aviso_norm:
+            continue
+        if card_match and "relatorio de cart" in aviso_norm:
+            continue
+        avisos_filtrados.append(aviso)
+
     return {
-        "pix": _pick_latest(pix_csv_matches + pix_xlsx_matches) or _pick_latest(pix_pdf_matches),
-        "cartoes": _pick_latest(card_matches),
-        "avisos": list(dict.fromkeys(avisos)),
+        "pix": pix_match,
+        "cartoes": card_match,
+        "avisos": list(dict.fromkeys(avisos_filtrados)),
     }
 
 
@@ -1656,6 +1708,18 @@ def _load_azulzinha_credentials(company: str = "EH") -> dict | None:
                     "sales_url": "https://portal.azulzinhadacaixa.com.br/MinhasVendas?Router=0",
                 }
     return None
+
+
+def _format_azulzinha_login_rejected_message(error_message: str, company_label: str = "EH") -> str:
+    detail = str(error_message or "").strip()
+    prefix = f"A Azulzinha/Caixa recusou o login da {company_label}."
+    if detail:
+        prefix = f"{prefix}\nMotivo informado pelo portal: {detail}"
+    return (
+        f"{prefix}\n\n"
+        "Credenciais mudaram? Confira o CNPJ e a senha no arquivo credenciais.txt, "
+        "na seção CONTA AZULZINHA / CAIXA, e atualize esse arquivo para os próximos usos."
+    )
 
 
 def _load_cielo_credentials(company: str = "MVA") -> dict | None:
@@ -3862,8 +3926,12 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 content_selector = (
                     f"#{tab_id}Content [role='tabpanel']"
                     if tab_id
-                    else "header[role='tablist'], #HistoricoVendas button[role='tab'], #Pix button[role='tab']"
+                    else (
+                        "header[role='tablist'], #HistoricoVendas button[role='tab'], #Pix button[role='tab'], "
+                        "[data-testid='vendas-btn-exportar'], [data-testid='vendas-periodo-hoje']"
+                    )
                 )
+                has_tab_id_js = "true" if tab_id else "false"
                 settle_expression = f"""
                     (() => {{
                         const text = (document.body?.innerText || '')
@@ -3917,11 +3985,14 @@ def baixar_relatorios_caixa_eh_azulzinha(
                                 !invalidVisible
                             )
                         ) return 'login';
-                        const content = document.querySelector({content_selector!r});
-                        if (!content || (content.getAttribute && content.getAttribute('aria-hidden') === 'true')) return '';
                         const busyNodes = [
                             ...document.querySelectorAll('[aria-busy="true"], .ph-item, .ph-picture, .ph-picture-small, .spinner-border, .spinner-grow, .loading, .skeleton, .ant-skeleton')
                         ].filter(visible);
+                        if (!{has_tab_id_js} && visible(document.querySelector('[data-testid="vendas-btn-exportar"]'))) {{
+                            return busyNodes.length ? '' : 'ready';
+                        }}
+                        const content = document.querySelector({content_selector!r});
+                        if (!content || (content.getAttribute && content.getAttribute('aria-hidden') === 'true')) return '';
                         if (busyNodes.length) return '';
                         const body = (content.innerText || content.textContent || document.body?.innerText || '').trim();
                         return body.length > 20 ? 'ready' : '';
@@ -4004,7 +4075,6 @@ def baixar_relatorios_caixa_eh_azulzinha(
                             const el = document.querySelector({selector!r});
                             if (!el) return false;
                             el.focus();
-                            if ('value' in el) el.value = '';
                             return true;
                         }})()
                         """,
@@ -4014,6 +4084,36 @@ def baixar_relatorios_caixa_eh_azulzinha(
             async def insert_text(session_id: str, selector: str, text: str) -> None:
                 if not await focus_selector(session_id, selector):
                     raise RuntimeError(f"Não foi possível localizar o campo {selector} na Azulzinha/Caixa.")
+                await cdp(
+                    "Input.dispatchKeyEvent",
+                    {"type": "keyDown", "windowsVirtualKeyCode": 17, "nativeVirtualKeyCode": 17, "key": "Control", "code": "ControlLeft", "modifiers": 2},
+                    session_id=session_id,
+                )
+                await cdp(
+                    "Input.dispatchKeyEvent",
+                    {"type": "keyDown", "windowsVirtualKeyCode": 65, "nativeVirtualKeyCode": 65, "key": "a", "code": "KeyA", "modifiers": 2},
+                    session_id=session_id,
+                )
+                await cdp(
+                    "Input.dispatchKeyEvent",
+                    {"type": "keyUp", "windowsVirtualKeyCode": 65, "nativeVirtualKeyCode": 65, "key": "a", "code": "KeyA", "modifiers": 2},
+                    session_id=session_id,
+                )
+                await cdp(
+                    "Input.dispatchKeyEvent",
+                    {"type": "keyUp", "windowsVirtualKeyCode": 17, "nativeVirtualKeyCode": 17, "key": "Control", "code": "ControlLeft"},
+                    session_id=session_id,
+                )
+                await cdp(
+                    "Input.dispatchKeyEvent",
+                    {"type": "keyDown", "windowsVirtualKeyCode": 8, "nativeVirtualKeyCode": 8, "key": "Backspace", "code": "Backspace"},
+                    session_id=session_id,
+                )
+                await cdp(
+                    "Input.dispatchKeyEvent",
+                    {"type": "keyUp", "windowsVirtualKeyCode": 8, "nativeVirtualKeyCode": 8, "key": "Backspace", "code": "Backspace"},
+                    session_id=session_id,
+                )
                 for char in str(text or ""):
                     await cdp("Input.insertText", {"text": char}, session_id=session_id)
                     await asyncio.sleep(0.04)
@@ -4044,11 +4144,12 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 )
 
             async def click_selector_native(session_id: str, selector: str, root_selector: str | None = None) -> bool:
+                root_selector_js = json.dumps(root_selector) if root_selector else "null"
                 rect = await eval_js(
                     session_id,
                     f"""
                     (() => {{
-                        const root = {root_selector!r} ? document.querySelector({root_selector!r}) : document;
+                        const root = {root_selector_js} ? document.querySelector({root_selector_js}) : document;
                         if (!root) return null;
                         const el = [...root.querySelectorAll({selector!r})].find((candidate) => {{
                             const r = candidate.getBoundingClientRect();
@@ -4081,6 +4182,50 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 return True
 
             async def set_date_inputs(session_id: str) -> None:
+                shortcut = _azulzinha_sales_period_shortcut(data_br)
+                if shortcut == "ontem":
+                    shortcut_selector = '[data-testid="vendas-periodo-ontem"]'
+                    try:
+                        await wait_for_condition(
+                            session_id,
+                            f"""
+                            (() => {{
+                                const button = document.querySelector({shortcut_selector!r});
+                                if (!button) return false;
+                                const rect = button.getBoundingClientRect();
+                                const style = getComputedStyle(button);
+                                return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+                            }})()
+                            """,
+                            timeout=15.0,
+                            step=0.25,
+                        )
+                    except TimeoutError:
+                        # Portais antigos não têm atalhos relativos; preserva o calendário legado.
+                        pass
+                    else:
+                        if not await click_selector_native(session_id, shortcut_selector):
+                            raise RuntimeError("A Caixa exibiu o atalho Ontem, mas o clique não foi aceito.")
+                        try:
+                            await wait_for_condition(
+                                session_id,
+                                f"""
+                                (() => {{
+                                    const expected = {data_br!r};
+                                    const expectedRange = expected + ' - ' + expected;
+                                    const period = document.querySelector('[data-testid="generic-calendar-periodo-calendar"]');
+                                    return String(period?.innerText || '').replace(/\\s+/g, ' ').trim() === expectedRange;
+                                }})()
+                                """,
+                                timeout=20.0,
+                                step=0.25,
+                            )
+                            return
+                        except TimeoutError as exc:
+                            raise RuntimeError(
+                                f"A Caixa nao confirmou o atalho Ontem para o periodo {data_br}; o relatorio nao sera exportado."
+                            ) from exc
+
                 ok = await eval_js(
                     session_id,
                     f"""
@@ -5190,6 +5335,8 @@ def baixar_relatorios_caixa_eh_azulzinha(
                             const style = getComputedStyle(el);
                             return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
                         }};
+                        const currentDigits = (el) => String(el?.value || el?.getAttribute('value') || '').replace(/\\D/g, '');
+                        const currentValue = (el) => String(el?.value || el?.getAttribute('value') || '');
                         const setNativeValue = (el, value) => {{
                             const proto = el instanceof HTMLTextAreaElement ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
                             const setter = Object.getOwnPropertyDescriptor(proto, 'value')?.set;
@@ -5938,7 +6085,9 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 const hasSalesTabs = Boolean(
                     visible(document.querySelector('header[role="tablist"]')) ||
                     [...document.querySelectorAll('header[role="tablist"] button[role="tab"], #HistoricoVendas button[role="tab"], #Pix button[role="tab"], #HistoricoVendas [role="tabpanel"], #Pix [role="tabpanel"]')]
-                        .some(visible)
+                        .some(visible) ||
+                    visible(document.querySelector('[data-testid="vendas-btn-exportar"]')) ||
+                    visible(document.querySelector('[data-testid="vendas-periodo-hoje"]'))
                 );
                 const loginInput = document.querySelector('#b2-b1-b4-InputMask');
                 const passwordInput = document.querySelector('#b2-b1-Input_Password');
@@ -6119,7 +6268,9 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 const hasSalesTabs = Boolean(
                     visible(document.querySelector('header[role="tablist"]')) ||
                     [...document.querySelectorAll('header[role="tablist"] button[role="tab"], #HistoricoVendas button[role="tab"], #Pix button[role="tab"], #HistoricoVendas [role="tabpanel"], #Pix [role="tabpanel"]')]
-                        .some(visible)
+                        .some(visible) ||
+                    visible(document.querySelector('[data-testid="vendas-btn-exportar"]')) ||
+                    visible(document.querySelector('[data-testid="vendas-periodo-hoje"]'))
                 );
                 const loginInput = document.querySelector('#b2-b1-b4-InputMask');
                 const passwordInput = document.querySelector('#b2-b1-Input_Password');
@@ -6199,9 +6350,60 @@ def baixar_relatorios_caixa_eh_azulzinha(
 
             async def get_portal_state_v2(session_id: str, timeout: float = 15.0) -> str:
                 try:
+                    captcha_snapshot = await eval_js(
+                        session_id,
+                        """
+                        (() => JSON.stringify({
+                            url: String(location.href || ''),
+                            title: String(document.title || ''),
+                            text: String(document.body?.innerText || ''),
+                            frames: [...document.querySelectorAll('iframe')]
+                                .filter((frame) => {
+                                    const rect = frame.getBoundingClientRect();
+                                    const style = getComputedStyle(frame);
+                                    return rect.width > 5 && rect.height > 5 && style.visibility !== 'hidden' && style.display !== 'none';
+                                })
+                                .map((frame) => String(frame.src || '')),
+                        }))()
+                        """,
+                        timeout=timeout,
+                    )
+                    captcha_page = json.loads(str(captcha_snapshot or "{}"))
+                    if _is_azulzinha_captcha_page(
+                        captcha_page.get("url", ""),
+                        captcha_page.get("title", ""),
+                        captcha_page.get("text", ""),
+                        captcha_page.get("frames", ()),
+                    ):
+                        return "captcha_manual"
                     return str(await eval_js(session_id, portal_state_expression_v2, timeout=timeout) or "").strip()
                 except Exception:
                     return ""
+
+            async def wait_for_manual_captcha_resolution_v2(session_id: str) -> str:
+                _emit_pix_status(
+                    on_status,
+                    "A Caixa solicitou uma verificacao CAPTCHA. O navegador foi exibido para resolucao manual; a automacao esta pausada.",
+                )
+                try:
+                    await _show_chromium_window(cdp, target_id)
+                    await cdp("Page.bringToFront", session_id=session_id, timeout=5.0)
+                except Exception:
+                    pass
+
+                deadline = time.time() + 600.0
+                while time.time() < deadline:
+                    _check_cancelled()
+                    state = await get_portal_state_v2(session_id)
+                    if state != "captcha_manual":
+                        _emit_pix_status(on_status, "A verificacao CAPTCHA foi concluida; retomando a leitura do portal da Caixa.")
+                        return state
+                    await asyncio.sleep(1.0)
+
+                raise RuntimeError(
+                    "A Caixa solicitou uma verificacao CAPTCHA que nao foi concluida em 10 minutos. "
+                    "Nenhum relatorio foi baixado e nenhum PDF foi publicado."
+                )
 
             async def wait_for_portal_state_v2(
                 session_id: str,
@@ -6585,9 +6787,19 @@ def baixar_relatorios_caixa_eh_azulzinha(
                         const password = document.querySelector({login_password_selector!r}) || [...document.querySelectorAll('input[type="password"]')].filter(visible)[0];
                         if (!user || !password) return null;
                         user.focus();
-                        setNativeValue(user, {cnpj_digits!r});
+                        if (currentDigits(user).length < {len(cnpj_digits)!r}) {{
+                            setNativeValue(user, {cnpj_digits!r});
+                        }} else {{
+                            user.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                            user.dispatchEvent(new Event('blur', {{ bubbles: true }}));
+                        }}
                         password.focus();
-                        setNativeValue(password, {password_text!r});
+                        if (currentValue(password).length < {len(password_text)!r}) {{
+                            setNativeValue(password, {password_text!r});
+                        }} else {{
+                            password.dispatchEvent(new Event('change', {{ bubbles: true }}));
+                            password.dispatchEvent(new Event('blur', {{ bubbles: true }}));
+                        }}
                         const userValue = String(user?.value || user?.getAttribute('value') || '').replace(/\\D/g, '');
                         const passwordValue = String(password?.value || password?.getAttribute('value') || '');
                         return {{
@@ -6712,26 +6924,93 @@ def baixar_relatorios_caixa_eh_azulzinha(
                             pass
                         await capture_portal_html_debug_v2(session_id, "azulzinha_login_confirm_debug.html")
                         raise
-                clicou = await eval_js(
-                    session_id,
-                    """
-                    (() => {
-                        const botao = document.querySelector('#b2-b1-confirmar');
-                        if (!botao || botao.disabled) return false;
-                        botao.click();
-                        return true;
-                    })()
-                    """,
-                    timeout=10.0,
-                )
+                login_event_start_index = len(event_log)
+                clicou = await click_selector_native(session_id, "#b2-b1-confirmar")
+                if not clicou:
+                    clicou = await eval_js(
+                        session_id,
+                        """
+                        (() => {
+                            const botao = document.querySelector('#b2-b1-confirmar');
+                            if (!botao || botao.disabled) return false;
+                            botao.focus();
+                            botao.click();
+                            return true;
+                        })()
+                        """,
+                        timeout=10.0,
+                    )
+                await asyncio.sleep(0.4)
+                state_after_click = await get_portal_state_v2(session_id)
+                if state_after_click == "login":
+                    await cdp(
+                        "Input.dispatchKeyEvent",
+                        {"type": "keyDown", "windowsVirtualKeyCode": 13, "nativeVirtualKeyCode": 13, "key": "Enter", "code": "Enter"},
+                        session_id=session_id,
+                    )
+                    await cdp(
+                        "Input.dispatchKeyEvent",
+                        {"type": "keyUp", "windowsVirtualKeyCode": 13, "nativeVirtualKeyCode": 13, "key": "Enter", "code": "Enter"},
+                        session_id=session_id,
+                    )
                 if not clicou:
                     raise RuntimeError("Nao foi possivel confirmar o login da Azulzinha/Caixa.")
-                return await wait_for_portal_state_v2(
-                    session_id,
-                    {"sales", "home", "device", "token_delivery", "token", "login", "portal_error", "invalid"},
-                    timeout=90.0,
-                    description="A Caixa nao concluiu a etapa inicial do login",
-                )
+                login_response = None
+                login_response_deadline = time.time() + 25.0
+                seen_login_request_ids = set()
+                while time.time() < login_response_deadline and login_response is None:
+                    for event in list(event_log[login_event_start_index:]):
+                        params = event.get("params") or {}
+                        response = params.get("response") or {}
+                        url = str(response.get("url") or "")
+                        request_id = str(params.get("requestId") or "")
+                        if (
+                            event.get("method") != "Network.responseReceived"
+                            or "ActionLoginDevicesApi" not in url
+                            or not request_id
+                            or request_id in seen_login_request_ids
+                        ):
+                            continue
+                        seen_login_request_ids.add(request_id)
+                        try:
+                            body_payload = await cdp(
+                                "Network.getResponseBody",
+                                {"requestId": request_id},
+                                session_id=session_id,
+                                timeout=10.0,
+                            )
+                            login_response = json.loads(str(body_payload.get("body") or "{}"))
+                            break
+                        except Exception:
+                            continue
+                    if login_response is None:
+                        await asyncio.sleep(0.5)
+                if isinstance(login_response, dict):
+                    login_data = login_response.get("data") or {}
+                    login_error = login_data.get("Erro") or login_response.get("Erro") or {}
+                    if login_response.get("Success") is False or login_data.get("Success") is False:
+                        error_message = str(login_error.get("Mensagem") or "").strip()
+                        error_code = str(login_error.get("Codigo") or "").strip()
+                        wait_match = re.search(r"(\d+)\s*min", error_message, re.IGNORECASE)
+                        if error_code == "423" and wait_match:
+                            wait_seconds = (int(wait_match.group(1)) * 60) + 15
+                            _emit_pix_status(
+                                on_status,
+                                f"A Azulzinha bloqueou novas tentativas de login: {error_message} Aguardando {wait_seconds // 60} min...",
+                            )
+                            await asyncio.sleep(wait_seconds)
+                            return "login"
+                        if error_message:
+                            raise RuntimeError(_format_azulzinha_login_rejected_message(error_message, company_label))
+                try:
+                    return await wait_for_portal_state_v2(
+                        session_id,
+                        {"sales", "home", "device", "token_delivery", "token", "portal_error", "invalid"},
+                        timeout=90.0,
+                        description="A Caixa nao concluiu a etapa inicial do login",
+                    )
+                except TimeoutError:
+                    return await get_portal_state_v2(session_id) or "login"
 
             async def perform_device_selection_step_v2(session_id: str) -> str:
                 _emit_pix_status(on_status, "Selecionando dispositivo da Caixa...")
@@ -6757,7 +7036,7 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 if state_local not in {"token", "token_delivery", "invalid"}:
                     state_local = await wait_for_portal_state_v2(
                         session_id,
-                        {"sales", "home", "login", "device", "token_delivery", "token", "portal_error", "invalid"},
+                        {"sales", "home", "login", "device", "token_delivery", "token", "portal_error", "invalid", "captcha_manual"},
                         timeout=30.0,
                         description="A Caixa nao exibiu a etapa de token por e-mail",
                     )
@@ -7218,23 +7497,32 @@ def baixar_relatorios_caixa_eh_azulzinha(
                         abriu_vendas = False
                 if abriu_vendas:
                     await asyncio.sleep(1.0)
-                    state_after_click = await wait_for_portal_state_v2(
-                        session_id,
-                        {"sales", "home", "login", "device", "token_delivery", "token", "portal_error", "invalid"},
-                        timeout=60.0,
-                        description=f"A Caixa nao abriu o Relatorio de vendas para {context_label}",
-                    )
+                    try:
+                        state_after_click = await wait_for_portal_state_v2(
+                            session_id,
+                            {"sales", "login", "device", "token_delivery", "token", "portal_error", "invalid", "captcha_manual"},
+                            timeout=60.0,
+                            description=f"A Caixa nao abriu o Relatorio de vendas para {context_label}",
+                        )
+                    except TimeoutError:
+                        # A pagina de Vendas as vezes carrega o layout antes dos dados; nao
+                        # forcar outra navegacao aqui evita recarregar o portal repetidas
+                        # vezes, o que a Caixa trata como comportamento suspeito.
+                        state_after_click = "home"
                     _emit_pix_status(on_status, f"Estado do portal apos abrir Relatorio de vendas: {state_after_click or 'desconhecido'}.")
                     if state_after_click != "home":
                         return state_after_click
 
                 await navigate(session_id, credenciais["sales_url"])
-                state_after_navigation = await wait_for_portal_state_v2(
-                    session_id,
-                    {"sales", "home", "login", "device", "token_delivery", "token", "portal_error", "invalid"},
-                    timeout=60.0,
-                    description=f"A Caixa nao abriu a area de vendas para {context_label}",
-                )
+                try:
+                    state_after_navigation = await wait_for_portal_state_v2(
+                        session_id,
+                        {"sales", "login", "device", "token_delivery", "token", "portal_error", "invalid", "captcha_manual"},
+                        timeout=90.0,
+                        description=f"A Caixa nao abriu a area de vendas para {context_label}",
+                    )
+                except TimeoutError:
+                    state_after_navigation = "home"
                 _emit_pix_status(on_status, f"Estado do portal apos abrir a URL da area de vendas: {state_after_navigation or 'desconhecido'}.")
                 return state_after_navigation
 
@@ -7253,11 +7541,15 @@ def baixar_relatorios_caixa_eh_azulzinha(
                             await navigate(session_id, credenciais["sales_url"])
                         state = await wait_for_portal_state_v2(
                             session_id,
-                            {"sales", "home", "login", "device", "token_delivery", "token", "portal_error", "invalid"},
+                            {"sales", "home", "login", "device", "token_delivery", "token", "portal_error", "invalid", "captcha_manual"},
                             timeout=90.0,
                             description=f"A Caixa nao exibiu a tela esperada para {context_label}",
                         )
                         last_state = state
+
+                    if state == "captcha_manual":
+                        state = await wait_for_manual_captcha_resolution_v2(session_id)
+                        last_state = state or last_state
 
                     if state == "portal_error":
                         _emit_pix_status(
@@ -7311,27 +7603,181 @@ def baixar_relatorios_caixa_eh_azulzinha(
                         await asyncio.sleep(2.0)
                         continue
 
-                    state = await open_sales_area_from_home_v2(session_id, context_label)
-                    last_state = state
-                    if state == "sales":
-                        try:
-                            await wait_for_portal_settle(
-                                session_id,
-                                timeout=25.0,
-                                context_label=f"abrir {context_label}",
-                            )
-                            return
-                        except Exception:
-                            state = await get_portal_state_v2(session_id)
-                            last_state = state or last_state
-                            if state in {"login", "portal_error"}:
-                                continue
-                            raise
+                    # `open_sales_area_from_home_v2` ja foi tentado acima quando state == "home".
+                    # Nao tentar de novo aqui: cada tentativa pode envolver uma navegacao completa,
+                    # e recarregar o portal repetidas vezes no mesmo ciclo e o que faz a Caixa
+                    # escalar para um captcha manual. So aguardar um pouco e deixar o proximo
+                    # ciclo reler o estado (a pagina pode so estar terminando de carregar).
+                    await asyncio.sleep(2.0)
+                    continue
 
+                if AZULZINHA_DEBUG_ARTIFACTS_ENABLED:
+                    try:
+                        network_events = [
+                            {
+                                "method": event.get("method"),
+                                "requestId": (event.get("params") or {}).get("requestId"),
+                                "url": ((event.get("params") or {}).get("request") or {}).get("url")
+                                or ((event.get("params") or {}).get("response") or {}).get("url"),
+                                "status": ((event.get("params") or {}).get("response") or {}).get("status"),
+                                "type": (event.get("params") or {}).get("type"),
+                                "errorText": (event.get("params") or {}).get("errorText"),
+                            }
+                            for event in event_log
+                            if str(event.get("method") or "").startswith("Network.")
+                        ]
+                        (artifacts_dir / f"azulzinha_network_debug_{kind}.json").write_text(
+                            json.dumps(network_events[-200:], ensure_ascii=False, indent=2),
+                            encoding="utf-8",
+                        )
+                        response_bodies = []
+                        seen_request_ids = set()
+                        for event in event_log:
+                            params = event.get("params") or {}
+                            response = params.get("response") or {}
+                            url = str(response.get("url") or "")
+                            request_id = str(params.get("requestId") or "")
+                            if not request_id or request_id in seen_request_ids:
+                                continue
+                            if "ActionLoginDevicesApi" not in url:
+                                continue
+                            seen_request_ids.add(request_id)
+                            try:
+                                body = await cdp("Network.getResponseBody", {"requestId": request_id}, session_id=session_id, timeout=10.0)
+                            except Exception as exc:
+                                body = {"error": str(exc)}
+                            response_bodies.append({"url": url, "requestId": request_id, "body": body})
+                        if response_bodies:
+                            (artifacts_dir / f"azulzinha_login_response_debug_{kind}.json").write_text(
+                                json.dumps(response_bodies[-10:], ensure_ascii=False, indent=2),
+                                encoding="utf-8",
+                            )
+                    except Exception:
+                        pass
                 await capture_portal_html_debug_v2(session_id, f"azulzinha_sales_area_debug_{kind}.html")
                 raise RuntimeError(
                     f"A Caixa não concluiu a autenticação para abrir {context_label}. Último estado observado: {last_state or 'desconhecido'}."
                 )
+
+            _new_vendas_unified_cache: dict[str, dict[str, str | None]] = {}
+
+            async def click_selector_native_retry(
+                session_id: str,
+                selector: str,
+                attempts: int = 6,
+                delay: float = 0.5,
+            ) -> bool:
+                # A tela nova de Vendas re-renderiza trechos da UI apos filtros/aplicacoes
+                # (ex.: trocar o periodo), entao um elemento que acabou de ficar visivel pode
+                # sumir por um instante durante o re-render. Uma unica tentativa de clique e
+                # fragil aqui; repetir por alguns instantes cobre esse intervalo.
+                for _ in range(attempts):
+                    if await click_selector_native(session_id, selector):
+                        return True
+                    await asyncio.sleep(delay)
+                return False
+
+            async def dismiss_new_vendas_onboarding_v2(session_id: str) -> None:
+                # Em perfis de navegador novos a Caixa mostra um tour de onboarding
+                # ("Menu de vendas ainda melhor!") sobre a tela de Vendas, que bloqueia
+                # os cliques em Exportar/Gerar arquivo ate ser dispensado.
+                try:
+                    await click_by_text(session_id, ["Pular", "Fechar", "Entendi"], timeout=3.0)
+                except Exception:
+                    pass
+                return False
+
+            async def is_new_vendas_screen_v2(session_id: str) -> bool:
+                return bool(
+                    await eval_js(
+                        session_id,
+                        """
+                        (() => {
+                            const el = document.querySelector('[data-testid="vendas-btn-exportar"]');
+                            if (!el) return false;
+                            const rect = el.getBoundingClientRect();
+                            const style = getComputedStyle(el);
+                            return rect.width > 0 && rect.height > 0 && style.visibility !== 'hidden' && style.display !== 'none';
+                        })()
+                        """,
+                        timeout=10.0,
+                    )
+                )
+
+            async def set_new_vendas_period_v2(session_id: str) -> None:
+                today_br = datetime.now().strftime("%d/%m/%Y")
+                if data_br == today_br:
+                    await click_selector_native_retry(session_id, '[data-testid="vendas-periodo-hoje"]')
+                    await asyncio.sleep(0.4)
+                    return
+                opened = await click_selector_native_retry(session_id, '[data-testid="vendas-periodo-outros"]')
+                if not opened:
+                    raise RuntimeError("Não foi possível abrir o seletor de período na nova tela de Vendas da Caixa.")
+                await asyncio.sleep(0.6)
+                await insert_text(session_id, 'input[id$="FilterDateInit"]', data_br)
+                await insert_text(session_id, 'input[id$="FilterDateEnd"]', data_br)
+                applied = await click_selector_native_retry(session_id, '[data-testid="generic-calendar-button-aplicar"]')
+                if not applied:
+                    raise RuntimeError("Não foi possível aplicar o período selecionado na nova tela de Vendas da Caixa.")
+                await asyncio.sleep(1.0)
+
+            async def export_new_vendas_report_v2(session_id: str) -> str:
+                await dismiss_new_vendas_onboarding_v2(session_id)
+                opened = await click_selector_native_retry(session_id, '[data-testid="vendas-btn-exportar"]')
+                if not opened:
+                    raise RuntimeError("Não foi possível abrir o modal de exportação na nova tela de Vendas da Caixa.")
+                await asyncio.sleep(0.6)
+                await dismiss_new_vendas_onboarding_v2(session_id)
+                started_at = _download_start_time()
+                gerar = await click_selector_native_retry(session_id, '[data-testid="historico-vendas-gerar-arquivo"]')
+                if not gerar:
+                    raise RuntimeError("Não foi possível clicar em 'Gerar arquivo' na nova tela de Vendas da Caixa.")
+
+                deadline = time.time() + 90.0
+                downloaded: Path | None = None
+                while time.time() < deadline:
+                    _check_cancelled()
+                    try:
+                        candidates = sorted(
+                            Path(browser_download_dir).glob("Relatorio_Simplificado_Vendas_*.xlsx"),
+                            key=lambda item: item.stat().st_mtime,
+                            reverse=True,
+                        )
+                    except Exception:
+                        candidates = []
+                    for candidate in candidates:
+                        try:
+                            if candidate.stat().st_mtime >= started_at - 2:
+                                downloaded = candidate
+                                break
+                        except Exception:
+                            continue
+                    if downloaded:
+                        break
+                    await asyncio.sleep(0.6)
+                if not downloaded:
+                    raise RuntimeError("A Caixa não entregou o arquivo da nova tela de Vendas.")
+                return str(downloaded)
+
+            async def get_new_vendas_report_paths_v2(session_id: str) -> dict[str, str | None]:
+                cache_key = f"{company_norm}:{data_br}"
+                cached = _new_vendas_unified_cache.get(cache_key)
+                if cached is not None:
+                    return cached
+                await dismiss_new_vendas_onboarding_v2(session_id)
+                await set_new_vendas_period_v2(session_id)
+                try:
+                    await wait_for_portal_settle(
+                        session_id,
+                        timeout=20.0,
+                        context_label="carregar a lista de vendas apos aplicar o periodo",
+                    )
+                except Exception:
+                    pass
+                downloaded_path = await export_new_vendas_report_v2(session_id)
+                result = _write_azulzinha_unified_report_files(downloaded_path, data_br, company_norm, download_dir)
+                _new_vendas_unified_cache[cache_key] = result
+                return result
 
             async def download_report(session_id: str, kind: str) -> str | None:
                 context_label = f"o relatorio de {'cartoes' if kind == 'cartoes' else 'PIX'}"
@@ -7496,6 +7942,18 @@ def baixar_relatorios_caixa_eh_azulzinha(
                 for attempt in range(2):
                     try:
                         await ensure_authenticated_sales_area(session_id, kind, context_label)
+                        if await is_new_vendas_screen_v2(session_id):
+                            _emit_pix_status(
+                                on_status,
+                                f"Usando a nova tela de Vendas da Caixa para baixar o relatorio de {'cartoes' if kind == 'cartoes' else 'PIX'}...",
+                            )
+                            paths = await get_new_vendas_report_paths_v2(session_id)
+                            saved = paths.get(kind)
+                            if saved:
+                                return saved
+                            raise RuntimeError(
+                                f"A nova tela de Vendas da Caixa não retornou transações de {'cartões' if kind == 'cartoes' else 'PIX'} para o período solicitado."
+                            )
                         if kind == "cartoes":
                             _emit_pix_status(on_status, "Baixando relatorio de cartoes da Caixa...")
                             await activate_sales_tab(session_id, active_tab_id, timeout=35.0)
@@ -7826,16 +8284,14 @@ def _wait_for_cielo_downloaded_report(
                     normalized_path = _finalize_local_report_path(path)
                     if require_detailed and not _cielo_report_looks_detailed(normalized_path):
                         continue
-                    if require_detailed and not _cielo_report_has_exact_sale_date_range(normalized_path, data_br):
-                        continue
-                    if fallback is None and _matches_requested_date(Path(normalized_path)):
-                        fallback = normalized_path
                     try:
                         reports = _build_card_reports_from_cielo(normalized_path, data_br)
                     except Exception:
                         reports = {}
                     if any((report.get("itens_autorizados") or []) for report in reports.values()):
                         return normalized_path
+                    if fallback is None and not require_detailed and _matches_requested_date(Path(normalized_path)):
+                        fallback = normalized_path
                 except Exception:
                     continue
         return fallback
@@ -9263,24 +9719,66 @@ def baixar_relatorio_cielo_mva(
                     }
                     return null;
                   };
-                  const directIconMatches = [...document.querySelectorAll('i[name="download"], [name="download"].icon-download, .icon-download')]
-                    .filter(visible)
+                  const matchingReportRows = [...document.querySelectorAll('tr')]
+                    .map(row => ({row, rowText: norm(row.innerText || row.textContent || '')}))
+                    .filter(({row, rowText}) => visible(row) && rowLooksLikeExactReport(rowText))
+                    .map(({row, rowText}) => {
+                      const target = row.querySelector('td:last-child') || row.lastElementChild || row;
+                      const rect = target.getBoundingClientRect();
+                      const rowRect = row.getBoundingClientRect();
+                      if (rect.width <= 0 || rect.height <= 0) return null;
+                      return {
+                        target,
+                        rowText: rowText.slice(0, 260),
+                        x: Math.round(rect.x),
+                        y: Math.round(rect.y),
+                        w: Math.round(rect.width),
+                        h: Math.round(rect.height),
+                        rowY: Math.round(rowRect.y),
+                        clickX: Math.round(rect.left + rect.width / 2),
+                        clickY: Math.round(rect.top + rect.height / 2),
+                        score: Math.max(0, 1600 - rowRect.top) + Math.max(0, rect.left),
+                      };
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) => b.score - a.score);
+                  const matchingReportRow = matchingReportRows[0];
+                  if (matchingReportRow) {
+                    matchingReportRow.target.scrollIntoView({block: 'center', inline: 'center'});
+                    return {
+                      clicked: true,
+                      method: 'matching_report_row_last_cell',
+                      targetText: 'download-cell',
+                      rowText: matchingReportRow.rowText,
+                      tag: matchingReportRow.target.tagName,
+                      role: matchingReportRow.target.getAttribute('role') || '',
+                      href: location.href,
+                      clickX: matchingReportRow.clickX,
+                      clickY: matchingReportRow.clickY,
+                      candidates: matchingReportRows.slice(0, 8).map(({rowText, x, y, w, h, rowY, score, clickX, clickY}) => ({rowText, x, y, w, h, rowY, score, clickX, clickY}))
+                    };
+                  }
+                  const directIconMatches = [...document.querySelectorAll('i[name="download"], [name="download"].icon-download, .icon-download, svg, path, use, [class*="download"], [class*="Download"], [aria-label*="download" i], [title*="download" i], [aria-label*="baixar" i], [title*="baixar" i]')]
+                    .filter(icon => visible(icon) || visible(icon.closest('td') || icon.parentElement))
                     .map(icon => {
                       const rowInfo = reportRowForIcon(icon);
                       if (!rowInfo) return null;
                       const {row, rowText} = rowInfo;
-                      const rect = icon.getBoundingClientRect();
+                      const iconRect = icon.getBoundingClientRect();
+                      const clickable = icon.closest('button,a,[role=button]')
+                        || ((iconRect.width > 0 && iconRect.height > 0) ? icon : (icon.closest('td') || icon.parentElement));
+                      const rect = clickable.getBoundingClientRect();
                       const rowRect = row.getBoundingClientRect();
                       const ready = !/processando|gerando|aguarde|pendente|em andamento|solicitado/.test(rowText);
                       const detailBonus = /historico detalhado|hist.rico detalhado|detalhado/.test(rowText) ? 5000 : 0;
                       const summaryPenalty = /historico resumo|hist.rico resumo/.test(rowText) ? 1200 : 0;
                       return {
-                        e: icon,
-                        text: norm(icon.getAttribute('name') || icon.className || 'download'),
+                        e: clickable,
+                        text: norm(clickable.innerText || clickable.getAttribute('aria-label') || clickable.getAttribute('title') || icon.getAttribute('name') || icon.className || 'download'),
                         rowText: rowText.slice(0, 260),
                         score: (ready ? 3000 : -1500) + detailBonus - summaryPenalty + Math.max(0, 1600 - rowRect.top) + Math.max(0, rect.left),
-                        tag: icon.tagName,
-                        role: icon.getAttribute('role') || '',
+                        tag: clickable.tagName,
+                        role: clickable.getAttribute('role') || '',
                         x: Math.round(rect.x),
                         y: Math.round(rect.y),
                         w: Math.round(rect.width),
@@ -9300,6 +9798,7 @@ def baixar_relatorio_cielo_mva(
                     return {
                       clicked: true,
                       method: 'direct_download_icon',
+                      nativeClickRequired: true,
                       targetText: directIconChosen.text,
                       rowText: directIconChosen.rowText,
                       tag: directIconChosen.tag,
@@ -9646,9 +10145,6 @@ def baixar_relatorio_cielo_mva(
                   if (!chosen) return {clicked: false, candidates: summary, href: location.href};
                   chosen.e.scrollIntoView({block: 'center', inline: 'center'});
                   chosen.e.focus && chosen.e.focus();
-                  chosen.e.dispatchEvent(new MouseEvent('mousedown', {bubbles: true, cancelable: true, view: window}));
-                  chosen.e.dispatchEvent(new MouseEvent('mouseup', {bubbles: true, cancelable: true, view: window}));
-                  chosen.e.click();
                   const clickRect = chosen.e.getBoundingClientRect();
                   return {
                     clicked: true,
@@ -9855,6 +10351,27 @@ def baixar_relatorio_cielo_mva(
                         except Exception as exc:
                             reports_state = {"error": str(exc)}
                         cielo_log("export_reports_after_cta", state=reports_state)
+                        drawer_click = await click_cielo_ready_report_download(session_id)
+                        cielo_log("export_reports_drawer_download_click_after_cta", attempt=cta_attempt, result=drawer_click)
+                        if bool(drawer_click.get("clicked")):
+                            native_drawer_clicked = await dispatch_cielo_native_click(session_id, drawer_click)
+                            cielo_log(
+                                "export_reports_drawer_download_native_click_after_cta",
+                                attempt=cta_attempt,
+                                clicked=native_drawer_clicked,
+                                result=drawer_click,
+                            )
+                            downloaded = await asyncio.to_thread(
+                                _wait_for_cielo_downloaded_report,
+                                browser_download_dir,
+                                data_br,
+                                started_at,
+                                12.0,
+                                True,
+                            )
+                            if downloaded:
+                                cielo_log("export_reports_drawer_download_detected_after_cta", attempt=cta_attempt, downloaded=downloaded)
+                                return downloaded
                         state_text = str((reports_state or {}).get("text", "")) if isinstance(reports_state, dict) else ""
                         state_href = str((reports_state or {}).get("href", "")) if isinstance(reports_state, dict) else ""
                         if (
@@ -11071,6 +11588,14 @@ def baixar_relatorio_cielo_mva(
                   };
 
                   const exactRangeConfirmed = () => {
+                    const allVisibleDateValues = plausibleDateInputs()
+                      .map(input => input.value || '')
+                      .filter(Boolean);
+                    const sameDateOccurrences = allVisibleDateValues
+                      .flatMap(value => [...value.matchAll(/\b[0-9]{2}[/][0-9]{2}[/][0-9]{4}\b/g)].map(match => match[0]))
+                      .filter(value => value === dataBr)
+                      .length;
+                    if (sameDateOccurrences >= 2) return true;
                     for (const input of plausibleDateInputs()) {
                       const raw = input.value || '';
                       const valueNorm = norm(raw);
@@ -12147,6 +12672,146 @@ def _build_card_reports_from_caixa(caminho: str, data_br: str) -> dict[str, dict
     return _build_card_reports_from_caixa_pdf(caminho, data_br)
 
 
+_AZULZINHA_UNIFIED_REQUIRED_HEADERS = ("data da venda", "modalidade", "produto", "valor bruto")
+
+
+def _find_azulzinha_unified_header_row(rows: list[list[str]]) -> tuple[int, dict[str, int]] | None:
+    for idx, row in enumerate(rows):
+        normalized = [_normalize_ascii_text(cell) for cell in row]
+        if all(header in normalized for header in _AZULZINHA_UNIFIED_REQUIRED_HEADERS):
+            column_index: dict[str, int] = {}
+            for pos, cell in enumerate(row):
+                key = _normalize_ascii_text(cell)
+                if key and key not in column_index:
+                    column_index[key] = pos
+            return idx, column_index
+    return None
+
+
+def _write_azulzinha_unified_report_files(
+    caminho_xlsx: str,
+    data_br: str,
+    company_norm: str,
+    output_dir: str | Path,
+) -> dict[str, str | None]:
+    """Reads the unified 'Relatório Histórico de vendas' export from the new Azulzinha/Caixa
+    Vendas screen (one file covering PIX + cartão, all establishments) and rewrites it as the
+    two legacy-shaped local files (card XLSX + PIX CSV) the rest of the pipeline already knows
+    how to parse and reconcile."""
+    output_dir = Path(output_dir)
+    try:
+        sheets = _read_xlsx_rows_fallback(caminho_xlsx)
+    except Exception:
+        return {"cartoes": None, "pix": None}
+
+    pix_rows: list[dict[str, object]] = []
+    credito_rows: list[dict[str, object]] = []
+    debito_rows: list[dict[str, object]] = []
+
+    for _sheet_name, rows in sheets:
+        located = _find_azulzinha_unified_header_row(rows)
+        if not located:
+            continue
+        header_idx, column_index = located
+
+        def _cell(row: list[str], key: str) -> str:
+            idx = column_index.get(key)
+            if idx is None or idx >= len(row):
+                return ""
+            return str(row[idx] or "").strip()
+
+        for row in rows[header_idx + 1 :]:
+            if not any(str(value or "").strip() for value in row):
+                continue
+            normalized_row = {key: _cell(row, key) for key in column_index}
+            parsed = _parse_cielo_card_datetime(normalized_row, data_br)
+            if not parsed:
+                continue
+            data_venda_fmt, _ordem = parsed
+            valor_raw = normalized_row.get("valor bruto", "")
+            if not valor_raw:
+                continue
+            status_raw = _cell(row, "status")
+            produto_raw = _cell(row, "produto")
+            produto_norm = _normalize_ascii_text(produto_raw)
+            modalidade_norm = _normalize_ascii_text(_cell(row, "modalidade"))
+            numero = _cell(row, "cod. de autorizacao") or _cell(row, "comprovante de venda")
+
+            if modalidade_norm == "via qrcode" or produto_norm == "pix":
+                if _normalize_ascii_text(status_raw) not in {
+                    _normalize_ascii_text("APROVADA"),
+                    _normalize_ascii_text("AUTORIZADA"),
+                    _normalize_ascii_text("EFETIVADO"),
+                }:
+                    continue
+                pix_rows.append(
+                    {
+                        "Data da venda": data_venda_fmt,
+                        "Cód. de autorização": numero,
+                        "Valor bruto": valor_raw,
+                        "Status": status_raw or "Autorizada",
+                    }
+                )
+                continue
+
+            if _normalize_ascii_text(status_raw) not in {
+                _normalize_ascii_text("Aprovada"),
+                _normalize_ascii_text("Autorizada"),
+            }:
+                continue
+            card_row = {
+                "Data da venda": data_venda_fmt,
+                "Cód. de autorização": numero,
+                "Comprovante da venda": _cell(row, "comprovante de venda"),
+                "Produto": produto_raw,
+                "Parcelado": _cell(row, "parcelas"),
+                "Bandeira": _cell(row, "bandeira"),
+                "Canal": _cell(row, "canal"),
+                "Terminal": _cell(row, "numero do terminal"),
+                "Valor bruto": valor_raw,
+                "Status": status_raw,
+                "Número do estabelecimento": _cell(row, "numero do estabelecimento"),
+                "Final do cartão": _cell(row, "numero do cartao"),
+                "Cód. Ref. Cartão": _cell(row, "cod. ref. cartao"),
+            }
+            if "debito" in produto_norm:
+                debito_rows.append(card_row)
+            elif "credito" in produto_norm or "parcelado" in produto_norm:
+                credito_rows.append(card_row)
+
+    result: dict[str, str | None] = {"cartoes": None, "pix": None}
+    safe_date = data_br.replace("/", "-")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    card_rows_all = credito_rows + debito_rows
+    if card_rows_all:
+        import pandas as pd
+
+        columns = [
+            "Data da venda", "Cód. de autorização", "Comprovante da venda", "Produto",
+            "Parcelado", "Bandeira", "Canal", "Terminal", "Valor bruto", "Status",
+            "Número do estabelecimento", "Final do cartão", "Cód. Ref. Cartão",
+        ]
+        cartoes_path = output_dir / f"Historico_Simplificado_de_vendas_{safe_date}_{company_norm}_auto.xlsx"
+        pd.DataFrame(card_rows_all, columns=columns).to_excel(cartoes_path, index=False)
+        result["cartoes"] = str(cartoes_path)
+
+    if pix_rows:
+        pix_path = output_dir / f"Relatorio_de_Vendas_Pix_{safe_date}_{company_norm}_auto.csv"
+        with open(pix_path, "w", encoding="utf-8-sig", newline="") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=["Data da venda", "Cód. de autorização", "Valor bruto", "Status"],
+                delimiter=";",
+            )
+            writer.writeheader()
+            for row in pix_rows:
+                writer.writerow(row)
+        result["pix"] = str(pix_path)
+
+    return result
+
+
 _CIELO_DATE_FIELDS = (
     "data da venda",
     "data venda",
@@ -12528,11 +13193,6 @@ def _find_local_cielo_card_report(data_br: str, *, company: str = "MVA") -> dict
                     name_norm = _normalize_ascii_text(normalized_path.name)
                     text_norm = _normalize_ascii_text(text[:6000])
                     if "cielo" not in name_norm and "cielo" not in text_norm:
-                        continue
-                    if not _cielo_report_has_exact_sale_date_range(normalized_path, data_br):
-                        avisos.append(
-                            f'O arquivo "{normalized_path.name}" foi identificado como relatÃ³rio Cielo, mas o intervalo nÃ£o Ã© exatamente {data_br} atÃ© {data_br}. Ele foi ignorado.'
-                        )
                         continue
                     detected_date = _extract_local_report_date_br(text)
                     reports = _build_card_reports_from_cielo(str(normalized_path), data_br)
@@ -12928,6 +13588,10 @@ def _integrate_cielo_card_reports_if_needed(
 
     relatorio_fechamento["relatorios_pagamento"] = relatorios_pagamento
     needed_keys = _mva_cielo_needed_card_keys(relatorio_fechamento)
+    if not needed_keys:
+        cielo_decision_log("integration_local_report_covers_closing", merged=local_merged)
+        return relatorio_fechamento, list(dict.fromkeys(avisos))
+
     pending_card_count = _mva_cielo_pending_card_count(relatorio_fechamento, needed_keys)
     same_day_report = str(data_br or "").strip() == datetime.now().strftime("%d/%m/%Y")
     should_auto_download_cielo = force_refresh_payments or (
@@ -13310,6 +13974,8 @@ def _build_eh_card_mismatch_report(
 
 
 def _analisar_html_fechamento_caixa_eh(html_text: str, arquivo: str = "Fechamento de caixa - Zweb") -> dict:
+    from bs4 import BeautifulSoup
+
     periodo = _extract_zweb_period(html_text)
     nfces_map = {}
     totalizadores = {}
@@ -13319,26 +13985,22 @@ def _analisar_html_fechamento_caixa_eh(html_text: str, arquivo: str = "Fechament
     total_geral = 0.0
     fechamento_janelas: list[dict] = []
 
-    section_pattern = re.compile(
-        r'<div class="mt-4">\s*<div class="d-flex justify-content-between">\s*'
-        r'<div class="fw-bolder fs-6">\s*(?P<titulo>.*?)\s*</div>\s*'
-        r'<div>\s*<span class="fw-bolder">Abertura:\s*</span>\s*(?P<abertura>.*?)\s*'
-        r'<span class="fw-bolder">Fechamento:\s*</span>\s*(?P<fechamento>.*?)\s*</div>\s*</div>\s*</div>\s*'
-        r'<table class="striped-table mt-2">(?P<tabela>.*?)</table>\s*'
-        r'<div class="totalizer-footer">.*?<div class="footer-content">\s*(?P<total>[-\d\.,]+)\s*</div>',
-        re.IGNORECASE | re.DOTALL,
-    )
-    row_block_pattern = re.compile(
-        r"<tr\b[^>]*>(?P<row>.*?)</tr>",
-        re.IGNORECASE | re.DOTALL,
-    )
-    row_number_pattern = re.compile(r"<td>\s*(\d{6,})\s*</td>", re.IGNORECASE | re.DOTALL)
-    row_date_pattern = re.compile(r"<td>\s*(\d{2}/\d{2}/\d{2})\s*</td>", re.IGNORECASE | re.DOTALL)
-    row_money_pattern = re.compile(r"R\$\s*([-\d\.,]+)", re.IGNORECASE)
+    soup = BeautifulSoup(html_text, "html.parser")
+    money_pattern = re.compile(r"R\$\s*([-\d\.,]+)", re.IGNORECASE)
+    date_pattern = re.compile(r"(\d{2}/\d{2}/\d{2})")
 
-    for match in section_pattern.finditer(html_text):
-        titulo = _clean_zweb_html_value(match.group("titulo"))
-        fechamento_janela = _build_scope_window(match.group("abertura"), match.group("fechamento"))
+    for section in soup.find_all("div", class_="mt-4"):
+        title_node = section.find("div", class_="fw-bolder fs-6")
+        if not title_node:
+            continue
+        titulo = _clean_zweb_html_value(title_node.get_text(" ", strip=True))
+        section_text = section.get_text(" ", strip=True)
+        abertura_match = re.search(r"Abertura:\s*(\d{2}/\d{2}/\d{4}\s+\d{2}:\d{2}:\d{2})", section_text)
+        fechamento_match = re.search(r"Fechamento:\s*(\d{2}/\d{2}/\d{4}\s+\d{2}:\d{2}:\d{2})", section_text)
+        fechamento_janela = _build_scope_window(
+            abertura_match.group(1) if abertura_match else "",
+            fechamento_match.group(1) if fechamento_match else "",
+        )
         if fechamento_janela:
             fechamento_janelas.append(fechamento_janela)
         scope_abertura = str((fechamento_janela or {}).get("abertura") or "").strip()
@@ -13354,16 +14016,31 @@ def _analisar_html_fechamento_caixa_eh(html_text: str, arquivo: str = "Fechament
                     "total_secao": 0.0,
                 },
             )
-            bucket_pagamento["total_secao"] = round(
-                float(bucket_pagamento.get("total_secao", 0.0)) + parse_number(match.group("total")),
-                2,
-            )
-        for row_match in row_block_pattern.finditer(match.group("tabela")):
-            row_html = row_match.group("row")
-            numero_match = row_number_pattern.search(row_html)
-            data_match = row_date_pattern.search(row_html)
-            valores_linha = [round(parse_number(valor_str), 2) for valor_str in row_money_pattern.findall(row_html)]
 
+        table = section.find_next_sibling("table")
+        if table is None:
+            continue
+        footer = table.find_next_sibling("div", class_="totalizer-footer")
+        if bucket_pagamento is not None and footer is not None:
+            footer_money = money_pattern.search(footer.get_text(" ", strip=True))
+            if footer_money:
+                bucket_pagamento["total_secao"] = round(
+                    float(bucket_pagamento.get("total_secao", 0.0)) + parse_number(footer_money.group(1)),
+                    2,
+                )
+
+        for row in table.find_all("tr"):
+            cells = row.find_all("td")
+            if len(cells) < 3:
+                continue
+            numero_text = cells[0].get_text(" ", strip=True)
+            data_text = cells[1].get_text(" ", strip=True)
+            valores_linha = [
+                round(parse_number(valor_str), 2)
+                for valor_str in money_pattern.findall(cells[2].get_text(" ", strip=True))
+            ]
+            numero_match = re.search(r"(\d{6,})", numero_text)
+            data_match = date_pattern.search(data_text)
             if not numero_match or not data_match or not valores_linha:
                 continue
 
@@ -13400,18 +14077,17 @@ def _analisar_html_fechamento_caixa_eh(html_text: str, arquivo: str = "Fechament
                         }
                     )
 
-    totalizer_pattern = re.compile(
-        r"<tr[^>]*>\s*<td[^>]*>\s*(.*?)\s*</td>\s*<td[^>]*>\s*R\$\s*([-\d\.,]+)\s*</td>\s*</tr>",
-        re.IGNORECASE | re.DOTALL,
-    )
-    totalizer_block_match = re.search(
-        r'<table class="striped-table totalizers-table.*?</table>',
-        html_text,
-        re.IGNORECASE | re.DOTALL,
-    )
-    if totalizer_block_match:
-        for descricao, valor_str in totalizer_pattern.findall(totalizer_block_match.group(0)):
-            label = _clean_zweb_html_value(descricao)
+    totalizer_table = soup.find("table", class_=lambda value: value and "totalizers-table" in value)
+    if totalizer_table:
+        for row in totalizer_table.find_all("tr"):
+            cells = row.find_all("td")
+            if len(cells) < 2:
+                continue
+            label = _clean_zweb_html_value(cells[0].get_text(" ", strip=True))
+            valor_match = money_pattern.search(cells[1].get_text(" ", strip=True))
+            if not label or not valor_match:
+                continue
+            valor_str = valor_match.group(1)
             valor = round(parse_number(valor_str), 2)
             totalizadores[label] = valor
             label_normalizado = _normalize_caixa_client(label)
@@ -14719,17 +15395,15 @@ def _runtime_file_path(filename: str, *, prefer_existing: bool = True) -> Path:
 
 
 def _zweb_browser_profile_dir() -> str:
-    base_dir = (
-        os.environ.get("LOCALAPPDATA")
-        or os.environ.get("APPDATA")
-        or _runtime_user_dir()
-    )
-    profile_dir = os.path.join(base_dir, "RelatorioClientes", "zweb_browser_profile")
+    profile_dir = _canonical_runtime_dir() / "runtime" / "zweb_browser_profile"
     os.makedirs(profile_dir, exist_ok=True)
-    return profile_dir
+    return str(profile_dir)
 
 
-def _load_zweb_credentials() -> dict | None:
+def _load_zweb_credentials(*, account_index: int = 0) -> dict | None:
+    if account_index < 0:
+        return None
+
     for filename in ("credenciais.txt", "credencias.txt"):
         caminho = str(_runtime_file_path(filename))
         if not os.path.isfile(caminho):
@@ -14740,18 +15414,15 @@ def _load_zweb_credentials() -> dict | None:
         except OSError:
             continue
 
-        marker = next(
-            (linha for linha in linhas if _normalize_caixa_client(linha) == "CONTA ZWEB:"),
-            "",
-        )
-        if not marker:
+        account_sections = [
+            marker_index
+            for marker_index, linha in enumerate(linhas)
+            if _normalize_caixa_client(linha) == "CONTA ZWEB:"
+        ]
+        if account_index >= len(account_sections):
             continue
 
-        try:
-            idx = linhas.index(marker)
-        except ValueError:
-            continue
-
+        idx = account_sections[account_index]
         username = str(linhas[idx + 1] if len(linhas) > idx + 1 else "").strip()
         password = str(linhas[idx + 2] if len(linhas) > idx + 2 else "").strip()
         base_url = str(linhas[idx + 3] if len(linhas) > idx + 3 else "").strip().rstrip("/")
@@ -14766,6 +15437,9 @@ def _load_zweb_credentials() -> dict | None:
                 "finance_reports_url": f"{base_url}/#/finance/reports",
                 "document_reports_url": f"{base_url}/#/document/reports",
             }
+
+    if account_index != 0:
+        return None
 
     username = str(ZWEB_USERNAME or "").strip()
     password = str(ZWEB_PASSWORD or "").strip()
@@ -14936,6 +15610,36 @@ async def _hide_chromium_window(cdp, target_id: str) -> None:
         pass
 
 
+async def _show_chromium_window(cdp, target_id: str) -> None:
+    if not target_id:
+        return
+    try:
+        window_info = await cdp("Browser.getWindowForTarget", {"targetId": target_id}, timeout=5.0)
+    except Exception:
+        return
+
+    window_id = window_info.get("windowId")
+    if not window_id:
+        return
+
+    try:
+        await cdp(
+            "Browser.setWindowBounds",
+            {"windowId": window_id, "bounds": {"state": "normal"}},
+            timeout=5.0,
+        )
+        await cdp(
+            "Browser.setWindowBounds",
+            {
+                "windowId": window_id,
+                "bounds": {"left": 40, "top": 40, "width": 1400, "height": 900},
+            },
+            timeout=5.0,
+        )
+    except Exception:
+        pass
+
+
 def gerar_relatorios_caixa_eh_zweb(
     data_br: str,
     on_status=None,
@@ -14953,7 +15657,7 @@ def gerar_relatorios_caixa_eh_zweb(
         if cancel_event.is_set():
             raise RuntimeError("__cancelled__")
 
-    credenciais = _load_zweb_credentials()
+    credenciais = _load_zweb_credentials(account_index=1)
     if not credenciais:
         raise ValueError("As credenciais do Zweb não foram encontradas no credenciais.txt.")
 
@@ -15571,6 +16275,7 @@ def gerar_relatorios_caixa_eh_zweb(
         port = _pick_free_local_port()
         _prepare_chromium_profile(profile_dir, _runtime_user_dir())
         browser_visible_debug = _browser_debug_visible_enabled()
+        keep_browser_open = _browser_debug_keep_open_enabled()
         chrome_args = [
             navegador,
             f"--remote-debugging-port={port}",
@@ -15605,21 +16310,26 @@ def gerar_relatorios_caixa_eh_zweb(
             last_error = RuntimeError(
                 "O Zweb demorou demais para responder durante a autenticação ou geração dos relatórios."
             )
+            if keep_browser_open:
+                raise last_error
             if tentativa >= 1:
                 raise last_error
             time.sleep(1.0)
         except Exception as exc:
             last_error = exc
+            if keep_browser_open:
+                raise
             if tentativa >= 1:
                 raise
             time.sleep(1.0)
         finally:
-            proc.terminate()
-            try:
-                proc.wait(timeout=5)
-            except Exception:
-                proc.kill()
-            shutil.rmtree(profile_dir, ignore_errors=True)
+            if not keep_browser_open:
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except Exception:
+                    proc.kill()
+                shutil.rmtree(profile_dir, ignore_errors=True)
 
     if last_error is not None:
         raise last_error
@@ -16288,13 +16998,6 @@ def _comparar_caixa_resumo_nfce_eh(relatorio_caixa: dict, relatorio_nfce: dict) 
     if nf_report:
         relatorios_pagamento[nf_report["categoria"]] = nf_report
 
-    nf_filtradas = [
-        item
-        for item in (relatorio_caixa.get("itens_excluidos") or [])
-        if "NOTA FISCAL ELETRONICA" in _normalize_caixa_client(item.get("documento", ""))
-    ]
-    nf_pool = [dict(item) for item in nf_filtradas]
-
     fechamento_map = {
         _normalize_fiscal_number(item.get("numero", "")): {
             "numero": _normalize_fiscal_number(item.get("numero", "")),
@@ -16401,7 +17104,20 @@ def _comparar_caixa_resumo_nfce_eh(relatorio_caixa: dict, relatorio_nfce: dict) 
             _add_alert("Pedido pendente", f"CF {pendencia['numero_exibicao']}: {motivo}", _money_text(valor))
 
     dinheiro_report = relatorios_pagamento.get("dinheiro") or {}
-    for item in dinheiro_report.get("itens_autorizados") or []:
+    dinheiro_itens_ativos, _dinheiro_itens_cancelados = _split_cancelled_payment_items(
+        list(dinheiro_report.get("itens_autorizados") or []),
+        fiscal_status_map,
+    )
+    valores_dinheiro_confirmados = {
+        round(float(item.get("valor_bruto", 0.0) or 0.0), 2)
+        for item in dinheiro_itens_ativos
+    }
+    periodo_fechamento = str(relatorio_nfce.get("periodo") or relatorio_caixa.get("periodo") or "").split(" - ", 1)[0]
+    for item in itens_caixa:
+        numero = _display_fiscal_number(item.get("pedido", ""))
+        if (periodo_fechamento, numero) in _EH_CARD_MACHINE_CASH_COUPONS:
+            valores_dinheiro_confirmados.add(round(float(item.get("valor", 0.0) or 0.0), 2))
+    for item in dinheiro_itens_ativos:
         numero = _normalize_fiscal_number(item.get("numero", ""))
         if not numero or numero in numeros_pedidos_conferidos or numero in numeros_pedidos_pendentes:
             continue
@@ -16507,20 +17223,26 @@ def _comparar_caixa_resumo_nfce_eh(relatorio_caixa: dict, relatorio_nfce: dict) 
             )
 
         itens_externos = list(report_externo.get("itens_autorizados") or [])
+        itens_externos_compativeis = itens_externos
+        itens_externos_com_valor_de_dinheiro: list[dict] = []
+        if titulo_pagamento in comparacoes_cartao:
+            itens_externos_compativeis = []
+            for item in itens_externos:
+                valor = round(float(item.get(campo_valor, 0.0) or 0.0), 2)
+                if valor in valores_dinheiro_confirmados:
+                    itens_externos_com_valor_de_dinheiro.append(item)
+                else:
+                    itens_externos_compativeis.append(item)
+
         _matched, externos_sem_fechamento, fechamento_sem_externo = _multiset_match_by_value(
-            itens_externos,
+            itens_externos_compativeis,
             itens_fechamento,
             campo_esquerda=campo_valor,
             campo_direita="valor_bruto",
         )
-        _matched_nf, externos_restantes, nf_pool = _consume_matches_against_nf(
-            externos_sem_fechamento,
-            nf_pool,
-            campo_externo=campo_valor,
-        )
+        externos_restantes = externos_sem_fechamento + itens_externos_com_valor_de_dinheiro
         total_pagamentos = round(
-            sum(float(item.get(campo_valor, 0.0) or 0.0) for item in itens_externos)
-            - sum(float(item.get(campo_valor, 0.0) or 0.0) for item, _nf in _matched_nf),
+            sum(float(item.get(campo_valor, 0.0) or 0.0) for item in itens_externos),
             2,
         )
         if usa_fallback_zweb:
@@ -16857,9 +17579,18 @@ def _comparar_caixa_fechamento_mva_com_pagamentos(relatorio_caixa: dict, relator
     itens_caixa = relatorio_caixa.get("itens_caixa", [])
     itens_nfce = relatorio_fechamento.get("nfces", [])
     relatorios_pagamento = dict(relatorio_fechamento.get("relatorios_pagamento") or {})
-    _nfes_ativas, fiscal_status_map_mva, erro_minhas_notas = _load_minhas_notas_mva_context(
-        relatorio_caixa.get("periodo", "")
-    )
+    fiscal_status_map_mva = {
+        _normalize_fiscal_number(numero): dict(info)
+        for numero, info in (relatorio_fechamento.get("fiscal_status_map") or {}).items()
+        if _normalize_fiscal_number(numero) and bool((info or {}).get("cancelada"))
+    }
+    if relatorio_fechamento.get("fiscal_status_source") == "clipp_movements":
+        _nfes_ativas = []
+        erro_minhas_notas = None
+    else:
+        _nfes_ativas, fiscal_status_map_mva, erro_minhas_notas = _load_minhas_notas_mva_context(
+            relatorio_caixa.get("periodo", "")
+        )
 
     davs_sem_cupom = _infer_mva_davs_sem_cupom(itens_caixa, itens_nfce)
     cancelados_ausentes = _build_mva_cancelled_coupon_pool(itens_nfce, fiscal_status_map_mva)
@@ -16979,8 +17710,9 @@ def _comparar_caixa_fechamento_mva_com_pagamentos(relatorio_caixa: dict, relator
     ]
 
     for titulo_pagamento, report_externo, report_fechamento in comparacoes:
-        if not report_fechamento:
+        if not report_externo and not report_fechamento:
             continue
+        report_fechamento = report_fechamento or {}
         itens_fechamento = list(report_fechamento.get("itens_autorizados") or [])
         itens_fechamento, itens_fechamento_cancelados = _split_cancelled_payment_items(
             itens_fechamento,
@@ -17154,9 +17886,14 @@ def _comparar_caixa_fechamento_mva_com_pagamentos(relatorio_caixa: dict, relator
     cupons_cancelados = list(cancelados_visiveis)
     subtitle = str(relatorio_fechamento.get("subtitle") or "").strip()
     if cupons_cancelados:
+        fonte_cancelamentos = (
+            "Clipp"
+            if relatorio_fechamento.get("fiscal_status_source") == "clipp_movements"
+            else "Minhas Notas"
+        )
         subtitle = (
             (subtitle + " ") if subtitle else ""
-        ) + f"Cupons cancelados identificados no Minhas Notas: {len(cupons_cancelados)}."
+        ) + f"Cupons cancelados identificados no {fonte_cancelamentos}: {len(cupons_cancelados)}."
     escopo_relatorio = (
         relatorio_fechamento.get("escopo_relatorio")
         or relatorio_caixa.get("escopo_relatorio")
@@ -18575,17 +19312,6 @@ def analisar_SALES_PERIOD(caminho_pdf):
         SALES_PERIOD = None
         return None
 
-# ----------------- Conexão com Supabase -----------------
-
-from api_client import (
-    get_supabase,
-    listar_vendedores_db,
-    registrar_vendedor_db,
-    excluir_ultimo_feedback,
-    atualizar_ultimo_feedback,
-    salvar_feedback_db,
-    carregar_feedbacks_db
-)
 
 
 # Importações delegadas ao pdf_parser

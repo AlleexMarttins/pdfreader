@@ -25,6 +25,8 @@ hidden_imports = [
     "gspread",
     "pdfplumber",
     "pandas",
+    "firebirdsql",
+    "passlib",
 ]
 
 data_files = [

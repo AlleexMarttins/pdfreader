@@ -1,0 +1,1733 @@
+{
+  "arquivo": "Clipp direto - Fechamento de Caixa",
+  "arquivo_tipo": "fechamento_caixa_clipp_mva",
+  "arquivo_resumo_titulo": "Clipp direto",
+  "total_resumo_titulo": "Total Fechamento de caixa",
+  "subtitle": "Dados lidos diretamente do Clipp, usando apenas NFC-e autorizadas vinculadas aos movimentos fechados.",
+  "resumo_modelo": "MVA",
+  "origem": "clipp_direto_mva",
+  "periodo": "07/08/2026 - 07/08/2026",
+  "quantidade_nfce": 125,
+  "total_nfce": 4845.25,
+  "total_geral": 4845.25,
+  "totalizadores": {
+    "Cartão de Débito": 1248.65,
+    "Dinheiro": 491.1,
+    "Pagamento Instantâneo (PIX)": 1280.65,
+    "Cartão de Crédito": 1824.85
+  },
+  "relatorios_pagamento": {
+    "cartao_debito": {
+      "arquivo": "Clipp direto - Fechamento de Caixa",
+      "periodo": "07/08/2026 - 07/08/2026",
+      "quantidade_autorizados": 37,
+      "total_autorizado": 1248.65,
+      "itens_autorizados": [
+        {
+          "numero": "000397466",
+          "numero_exibicao": "397466",
+          "data_venda": "07/08/2026 08:06:11",
+          "valor_bruto": 38.9
+        },
+        {
+          "numero": "000397469",
+          "numero_exibicao": "397469",
+          "data_venda": "07/08/2026 08:23:24",
+          "valor_bruto": 34.75
+        },
+        {
+          "numero": "000397470",
+          "numero_exibicao": "397470",
+          "data_venda": "07/08/2026 08:26:48",
+          "valor_bruto": 24.3
+        },
+        {
+          "numero": "000397471",
+          "numero_exibicao": "397471",
+          "data_venda": "07/08/2026 08:39:07",
+          "valor_bruto": 10.0
+        },
+        {
+          "numero": "000397473",
+          "numero_exibicao": "397473",
+          "data_venda": "07/08/2026 08:55:38",
+          "valor_bruto": 107.55
+        },
+        {
+          "numero": "000397480",
+          "numero_exibicao": "397480",
+          "data_venda": "07/08/2026 09:18:16",
+          "valor_bruto": 13.9
+        },
+        {
+          "numero": "000397482",
+          "numero_exibicao": "397482",
+          "data_venda": "07/08/2026 09:28:15",
+          "valor_bruto": 63.55
+        },
+        {
+          "numero": "000397485",
+          "numero_exibicao": "397485",
+          "data_venda": "07/08/2026 09:37:18",
+          "valor_bruto": 156.3
+        },
+        {
+          "numero": "000397494",
+          "numero_exibicao": "397494",
+          "data_venda": "07/08/2026 10:15:41",
+          "valor_bruto": 70.0
+        },
+        {
+          "numero": "000397501",
+          "numero_exibicao": "397501",
+          "data_venda": "07/08/2026 11:04:00",
+          "valor_bruto": 6.95
+        },
+        {
+          "numero": "000397506",
+          "numero_exibicao": "397506",
+          "data_venda": "07/08/2026 11:27:49",
+          "valor_bruto": 18.0
+        },
+        {
+          "numero": "000397507",
+          "numero_exibicao": "397507",
+          "data_venda": "07/08/2026 11:29:43",
+          "valor_bruto": 6.75
+        },
+        {
+          "numero": "000397509",
+          "numero_exibicao": "397509",
+          "data_venda": "07/08/2026 11:33:46",
+          "valor_bruto": 38.9
+        },
+        {
+          "numero": "000397511",
+          "numero_exibicao": "397511",
+          "data_venda": "07/08/2026 11:47:13",
+          "valor_bruto": 60.65
+        },
+        {
+          "numero": "000397512",
+          "numero_exibicao": "397512",
+          "data_venda": "07/08/2026 11:50:11",
+          "valor_bruto": 10.4
+        },
+        {
+          "numero": "000397513",
+          "numero_exibicao": "397513",
+          "data_venda": "07/08/2026 11:52:13",
+          "valor_bruto": 7.5
+        },
+        {
+          "numero": "000397516",
+          "numero_exibicao": "397516",
+          "data_venda": "07/08/2026 12:09:25",
+          "valor_bruto": 14.85
+        },
+        {
+          "numero": "000397520",
+          "numero_exibicao": "397520",
+          "data_venda": "07/08/2026 12:33:09",
+          "valor_bruto": 141.15
+        },
+        {
+          "numero": "000397521",
+          "numero_exibicao": "397521",
+          "data_venda": "07/08/2026 12:37:52",
+          "valor_bruto": 5.55
+        },
+        {
+          "numero": "000397530",
+          "numero_exibicao": "397530",
+          "data_venda": "07/08/2026 13:16:06",
+          "valor_bruto": 19.9
+        },
+        {
+          "numero": "000397538",
+          "numero_exibicao": "397538",
+          "data_venda": "07/08/2026 13:35:33",
+          "valor_bruto": 25.8
+        },
+        {
+          "numero": "000397542",
+          "numero_exibicao": "397542",
+          "data_venda": "07/08/2026 14:07:50",
+          "valor_bruto": 125.0
+        },
+        {
+          "numero": "000397543",
+          "numero_exibicao": "397543",
+          "data_venda": "07/08/2026 14:11:03",
+          "valor_bruto": 10.25
+        },
+        {
+          "numero": "000397544",
+          "numero_exibicao": "397544",
+          "data_venda": "07/08/2026 14:12:21",
+          "valor_bruto": 1.1
+        },
+        {
+          "numero": "000397547",
+          "numero_exibicao": "397547",
+          "data_venda": "07/08/2026 14:31:25",
+          "valor_bruto": 13.1
+        },
+        {
+          "numero": "000397550",
+          "numero_exibicao": "397550",
+          "data_venda": "07/08/2026 14:36:47",
+          "valor_bruto": 25.95
+        },
+        {
+          "numero": "000397552",
+          "numero_exibicao": "397552",
+          "data_venda": "07/08/2026 14:53:00",
+          "valor_bruto": 4.95
+        },
+        {
+          "numero": "000397553",
+          "numero_exibicao": "397553",
+          "data_venda": "07/08/2026 14:53:37",
+          "valor_bruto": 0.2
+        },
+        {
+          "numero": "000397558",
+          "numero_exibicao": "397558",
+          "data_venda": "07/08/2026 15:00:18",
+          "valor_bruto": 22.95
+        },
+        {
+          "numero": "000397565",
+          "numero_exibicao": "397565",
+          "data_venda": "07/08/2026 15:44:56",
+          "valor_bruto": 24.9
+        },
+        {
+          "numero": "000397567",
+          "numero_exibicao": "397567",
+          "data_venda": "07/08/2026 15:54:09",
+          "valor_bruto": 28.7
+        },
+        {
+          "numero": "000397570",
+          "numero_exibicao": "397570",
+          "data_venda": "07/08/2026 16:00:47",
+          "valor_bruto": 13.9
+        },
+        {
+          "numero": "000397575",
+          "numero_exibicao": "397575",
+          "data_venda": "07/08/2026 16:18:01",
+          "valor_bruto": 17.1
+        },
+        {
+          "numero": "000397580",
+          "numero_exibicao": "397580",
+          "data_venda": "07/08/2026 16:35:40",
+          "valor_bruto": 2.0
+        },
+        {
+          "numero": "000397585",
+          "numero_exibicao": "397585",
+          "data_venda": "07/08/2026 16:46:39",
+          "valor_bruto": 51.7
+        },
+        {
+          "numero": "000397586",
+          "numero_exibicao": "397586",
+          "data_venda": "07/08/2026 16:52:24",
+          "valor_bruto": 15.3
+        },
+        {
+          "numero": "000397588",
+          "numero_exibicao": "397588",
+          "data_venda": "07/08/2026 17:21:19",
+          "valor_bruto": 15.9
+        }
+      ],
+      "quantidade_relatorio": 37,
+      "total_relatorio": 1248.65,
+      "consistente": true,
+      "origem": "clipp_direto_mva",
+      "categoria": "cartao_debito"
+    },
+    "dinheiro": {
+      "arquivo": "Clipp direto - Fechamento de Caixa",
+      "periodo": "07/08/2026 - 07/08/2026",
+      "quantidade_autorizados": 23,
+      "total_autorizado": 491.1,
+      "itens_autorizados": [
+        {
+          "numero": "000397467",
+          "numero_exibicao": "397467",
+          "data_venda": "07/08/2026 08:10:48",
+          "valor_bruto": 1.2
+        },
+        {
+          "numero": "000397477",
+          "numero_exibicao": "397477",
+          "data_venda": "07/08/2026 09:14:23",
+          "valor_bruto": 1.1
+        },
+        {
+          "numero": "000397479",
+          "numero_exibicao": "397479",
+          "data_venda": "07/08/2026 09:16:23",
+          "valor_bruto": 11.0
+        },
+        {
+          "numero": "000397490",
+          "numero_exibicao": "397490",
+          "data_venda": "07/08/2026 10:05:28",
+          "valor_bruto": 3.0
+        },
+        {
+          "numero": "000397496",
+          "numero_exibicao": "397496",
+          "data_venda": "07/08/2026 10:18:08",
+          "valor_bruto": 61.9
+        },
+        {
+          "numero": "000397499",
+          "numero_exibicao": "397499",
+          "data_venda": "07/08/2026 10:23:30",
+          "valor_bruto": 22.7
+        },
+        {
+          "numero": "000397500",
+          "numero_exibicao": "397500",
+          "data_venda": "07/08/2026 10:32:53",
+          "valor_bruto": 15.6
+        },
+        {
+          "numero": "000397503",
+          "numero_exibicao": "397503",
+          "data_venda": "07/08/2026 11:07:55",
+          "valor_bruto": 11.9
+        },
+        {
+          "numero": "000397515",
+          "numero_exibicao": "397515",
+          "data_venda": "07/08/2026 11:57:27",
+          "valor_bruto": 30.0
+        },
+        {
+          "numero": "000397522",
+          "numero_exibicao": "397522",
+          "data_venda": "07/08/2026 12:42:17",
+          "valor_bruto": 77.65
+        },
+        {
+          "numero": "000397528",
+          "numero_exibicao": "397528",
+          "data_venda": "07/08/2026 13:12:26",
+          "valor_bruto": 0.4
+        },
+        {
+          "numero": "000397535",
+          "numero_exibicao": "397535",
+          "data_venda": "07/08/2026 13:29:29",
+          "valor_bruto": 47.8
+        },
+        {
+          "numero": "000397536",
+          "numero_exibicao": "397536",
+          "data_venda": "07/08/2026 13:30:48",
+          "valor_bruto": 1.95
+        },
+        {
+          "numero": "000397539",
+          "numero_exibicao": "397539",
+          "data_venda": "07/08/2026 13:46:38",
+          "valor_bruto": 39.4
+        },
+        {
+          "numero": "000397541",
+          "numero_exibicao": "397541",
+          "data_venda": "07/08/2026 13:54:50",
+          "valor_bruto": 4.7
+        },
+        {
+          "numero": "000397548",
+          "numero_exibicao": "397548",
+          "data_venda": "07/08/2026 14:34:13",
+          "valor_bruto": 27.0
+        },
+        {
+          "numero": "000397560",
+          "numero_exibicao": "397560",
+          "data_venda": "07/08/2026 15:07:15",
+          "valor_bruto": 16.0
+        },
+        {
+          "numero": "000397566",
+          "numero_exibicao": "397566",
+          "data_venda": "07/08/2026 15:45:45",
+          "valor_bruto": 14.8
+        },
+        {
+          "numero": "000397571",
+          "numero_exibicao": "397571",
+          "data_venda": "07/08/2026 16:03:23",
+          "valor_bruto": 9.95
+        },
+        {
+          "numero": "000397581",
+          "numero_exibicao": "397581",
+          "data_venda": "07/08/2026 16:40:45",
+          "valor_bruto": 4.0
+        },
+        {
+          "numero": "000397584",
+          "numero_exibicao": "397584",
+          "data_venda": "07/08/2026 16:45:09",
+          "valor_bruto": 35.75
+        },
+        {
+          "numero": "000397592",
+          "numero_exibicao": "397592",
+          "data_venda": "07/08/2026 17:36:29",
+          "valor_bruto": 45.5
+        },
+        {
+          "numero": "000397593",
+          "numero_exibicao": "397593",
+          "data_venda": "07/08/2026 17:40:16",
+          "valor_bruto": 7.8
+        }
+      ],
+      "quantidade_relatorio": 23,
+      "total_relatorio": 491.1,
+      "consistente": true,
+      "origem": "clipp_direto_mva",
+      "categoria": "dinheiro"
+    },
+    "pix": {
+      "arquivo": "Clipp direto - Fechamento de Caixa",
+      "periodo": "07/08/2026 - 07/08/2026",
+      "quantidade_autorizados": 34,
+      "total_autorizado": 1280.65,
+      "itens_autorizados": [
+        {
+          "numero": "000397468",
+          "numero_exibicao": "397468",
+          "data_venda": "07/08/2026 08:20:33",
+          "valor_bruto": 31.2
+        },
+        {
+          "numero": "000397472",
+          "numero_exibicao": "397472",
+          "data_venda": "07/08/2026 08:53:46",
+          "valor_bruto": 158.4
+        },
+        {
+          "numero": "000397481",
+          "numero_exibicao": "397481",
+          "data_venda": "07/08/2026 09:27:09",
+          "valor_bruto": 19.0
+        },
+        {
+          "numero": "000397483",
+          "numero_exibicao": "397483",
+          "data_venda": "07/08/2026 09:30:20",
+          "valor_bruto": 9.3
+        },
+        {
+          "numero": "000397488",
+          "numero_exibicao": "397488",
+          "data_venda": "07/08/2026 09:53:31",
+          "valor_bruto": 113.55
+        },
+        {
+          "numero": "000397489",
+          "numero_exibicao": "397489",
+          "data_venda": "07/08/2026 09:55:34",
+          "valor_bruto": 28.5
+        },
+        {
+          "numero": "000397491",
+          "numero_exibicao": "397491",
+          "data_venda": "07/08/2026 10:09:29",
+          "valor_bruto": 37.5
+        },
+        {
+          "numero": "000397492",
+          "numero_exibicao": "397492",
+          "data_venda": "07/08/2026 10:12:31",
+          "valor_bruto": 13.4
+        },
+        {
+          "numero": "000397493",
+          "numero_exibicao": "397493",
+          "data_venda": "07/08/2026 10:14:53",
+          "valor_bruto": 17.95
+        },
+        {
+          "numero": "000397495",
+          "numero_exibicao": "397495",
+          "data_venda": "07/08/2026 10:16:33",
+          "valor_bruto": 42.5
+        },
+        {
+          "numero": "000397498",
+          "numero_exibicao": "397498",
+          "data_venda": "07/08/2026 10:22:19",
+          "valor_bruto": 35.8
+        },
+        {
+          "numero": "000397502",
+          "numero_exibicao": "397502",
+          "data_venda": "07/08/2026 11:05:05",
+          "valor_bruto": 26.9
+        },
+        {
+          "numero": "000397505",
+          "numero_exibicao": "397505",
+          "data_venda": "07/08/2026 11:25:06",
+          "valor_bruto": 14.0
+        },
+        {
+          "numero": "000397510",
+          "numero_exibicao": "397510",
+          "data_venda": "07/08/2026 11:36:18",
+          "valor_bruto": 10.25
+        },
+        {
+          "numero": "000397514",
+          "numero_exibicao": "397514",
+          "data_venda": "07/08/2026 11:54:16",
+          "valor_bruto": 21.75
+        },
+        {
+          "numero": "000397517",
+          "numero_exibicao": "397517",
+          "data_venda": "07/08/2026 12:16:25",
+          "valor_bruto": 23.45
+        },
+        {
+          "numero": "000397523",
+          "numero_exibicao": "397523",
+          "data_venda": "07/08/2026 12:47:14",
+          "valor_bruto": 12.7
+        },
+        {
+          "numero": "000397526",
+          "numero_exibicao": "397526",
+          "data_venda": "07/08/2026 13:00:39",
+          "valor_bruto": 53.85
+        },
+        {
+          "numero": "000397531",
+          "numero_exibicao": "397531",
+          "data_venda": "07/08/2026 13:19:27",
+          "valor_bruto": 65.75
+        },
+        {
+          "numero": "000397532",
+          "numero_exibicao": "397532",
+          "data_venda": "07/08/2026 13:23:37",
+          "valor_bruto": 45.95
+        },
+        {
+          "numero": "000397546",
+          "numero_exibicao": "397546",
+          "data_venda": "07/08/2026 14:26:12",
+          "valor_bruto": 8.95
+        },
+        {
+          "numero": "000397551",
+          "numero_exibicao": "397551",
+          "data_venda": "07/08/2026 14:40:22",
+          "valor_bruto": 3.95
+        },
+        {
+          "numero": "000397557",
+          "numero_exibicao": "397557",
+          "data_venda": "07/08/2026 14:59:49",
+          "valor_bruto": 5.1
+        },
+        {
+          "numero": "000397559",
+          "numero_exibicao": "397559",
+          "data_venda": "07/08/2026 15:05:06",
+          "valor_bruto": 6.7
+        },
+        {
+          "numero": "000397560",
+          "numero_exibicao": "397560",
+          "data_venda": "07/08/2026 15:07:15",
+          "valor_bruto": 19.6
+        },
+        {
+          "numero": "000397561",
+          "numero_exibicao": "397561",
+          "data_venda": "07/08/2026 15:09:56",
+          "valor_bruto": 49.9
+        },
+        {
+          "numero": "000397562",
+          "numero_exibicao": "397562",
+          "data_venda": "07/08/2026 15:24:41",
+          "valor_bruto": 21.95
+        },
+        {
+          "numero": "000397563",
+          "numero_exibicao": "397563",
+          "data_venda": "07/08/2026 15:27:36",
+          "valor_bruto": 71.8
+        },
+        {
+          "numero": "000397564",
+          "numero_exibicao": "397564",
+          "data_venda": "07/08/2026 15:34:18",
+          "valor_bruto": 5.95
+        },
+        {
+          "numero": "000397574",
+          "numero_exibicao": "397574",
+          "data_venda": "07/08/2026 16:16:27",
+          "valor_bruto": 4.5
+        },
+        {
+          "numero": "000397577",
+          "numero_exibicao": "397577",
+          "data_venda": "07/08/2026 16:22:40",
+          "valor_bruto": 4.5
+        },
+        {
+          "numero": "000397579",
+          "numero_exibicao": "397579",
+          "data_venda": "07/08/2026 16:34:51",
+          "valor_bruto": 14.6
+        },
+        {
+          "numero": "000397589",
+          "numero_exibicao": "397589",
+          "data_venda": "07/08/2026 17:24:45",
+          "valor_bruto": 2.0
+        },
+        {
+          "numero": "000397591",
+          "numero_exibicao": "397591",
+          "data_venda": "07/08/2026 17:34:27",
+          "valor_bruto": 279.45
+        }
+      ],
+      "quantidade_relatorio": 34,
+      "total_relatorio": 1280.65,
+      "consistente": true,
+      "origem": "clipp_direto_mva",
+      "categoria": "pix"
+    },
+    "cartao_credito": {
+      "arquivo": "Clipp direto - Fechamento de Caixa",
+      "periodo": "07/08/2026 - 07/08/2026",
+      "quantidade_autorizados": 32,
+      "total_autorizado": 1824.85,
+      "itens_autorizados": [
+        {
+          "numero": "000397474",
+          "numero_exibicao": "397474",
+          "data_venda": "07/08/2026 09:07:20",
+          "valor_bruto": 245.0
+        },
+        {
+          "numero": "000397475",
+          "numero_exibicao": "397475",
+          "data_venda": "07/08/2026 09:10:01",
+          "valor_bruto": 116.6
+        },
+        {
+          "numero": "000397476",
+          "numero_exibicao": "397476",
+          "data_venda": "07/08/2026 09:13:58",
+          "valor_bruto": 101.75
+        },
+        {
+          "numero": "000397478",
+          "numero_exibicao": "397478",
+          "data_venda": "07/08/2026 09:15:36",
+          "valor_bruto": 7.5
+        },
+        {
+          "numero": "000397484",
+          "numero_exibicao": "397484",
+          "data_venda": "07/08/2026 09:36:21",
+          "valor_bruto": 5.0
+        },
+        {
+          "numero": "000397486",
+          "numero_exibicao": "397486",
+          "data_venda": "07/08/2026 09:42:55",
+          "valor_bruto": 61.95
+        },
+        {
+          "numero": "000397487",
+          "numero_exibicao": "397487",
+          "data_venda": "07/08/2026 09:50:33",
+          "valor_bruto": 39.5
+        },
+        {
+          "numero": "000397497",
+          "numero_exibicao": "397497",
+          "data_venda": "07/08/2026 10:21:01",
+          "valor_bruto": 10.55
+        },
+        {
+          "numero": "000397504",
+          "numero_exibicao": "397504",
+          "data_venda": "07/08/2026 11:12:54",
+          "valor_bruto": 26.7
+        },
+        {
+          "numero": "000397508",
+          "numero_exibicao": "397508",
+          "data_venda": "07/08/2026 11:32:00",
+          "valor_bruto": 12.5
+        },
+        {
+          "numero": "000397518",
+          "numero_exibicao": "397518",
+          "data_venda": "07/08/2026 12:28:13",
+          "valor_bruto": 59.0
+        },
+        {
+          "numero": "000397519",
+          "numero_exibicao": "397519",
+          "data_venda": "07/08/2026 12:29:55",
+          "valor_bruto": 47.1
+        },
+        {
+          "numero": "000397524",
+          "numero_exibicao": "397524",
+          "data_venda": "07/08/2026 12:52:51",
+          "valor_bruto": 24.0
+        },
+        {
+          "numero": "000397525",
+          "numero_exibicao": "397525",
+          "data_venda": "07/08/2026 12:56:13",
+          "valor_bruto": 22.9
+        },
+        {
+          "numero": "000397529",
+          "numero_exibicao": "397529",
+          "data_venda": "07/08/2026 13:13:26",
+          "valor_bruto": 153.2
+        },
+        {
+          "numero": "000397533",
+          "numero_exibicao": "397533",
+          "data_venda": "07/08/2026 13:26:03",
+          "valor_bruto": 82.45
+        },
+        {
+          "numero": "000397534",
+          "numero_exibicao": "397534",
+          "data_venda": "07/08/2026 13:27:26",
+          "valor_bruto": 17.95
+        },
+        {
+          "numero": "000397537",
+          "numero_exibicao": "397537",
+          "data_venda": "07/08/2026 13:33:33",
+          "valor_bruto": 13.5
+        },
+        {
+          "numero": "000397540",
+          "numero_exibicao": "397540",
+          "data_venda": "07/08/2026 13:53:31",
+          "valor_bruto": 41.2
+        },
+        {
+          "numero": "000397545",
+          "numero_exibicao": "397545",
+          "data_venda": "07/08/2026 14:17:44",
+          "valor_bruto": 10.2
+        },
+        {
+          "numero": "000397549",
+          "numero_exibicao": "397549",
+          "data_venda": "07/08/2026 14:35:53",
+          "valor_bruto": 145.65
+        },
+        {
+          "numero": "000397555",
+          "numero_exibicao": "397555",
+          "data_venda": "07/08/2026 14:57:39",
+          "valor_bruto": 10.15
+        },
+        {
+          "numero": "000397556",
+          "numero_exibicao": "397556",
+          "data_venda": "07/08/2026 14:58:35",
+          "valor_bruto": 261.3
+        },
+        {
+          "numero": "000397568",
+          "numero_exibicao": "397568",
+          "data_venda": "07/08/2026 15:55:21",
+          "valor_bruto": 25.5
+        },
+        {
+          "numero": "000397569",
+          "numero_exibicao": "397569",
+          "data_venda": "07/08/2026 15:56:17",
+          "valor_bruto": 127.5
+        },
+        {
+          "numero": "000397572",
+          "numero_exibicao": "397572",
+          "data_venda": "07/08/2026 16:04:07",
+          "valor_bruto": 19.0
+        },
+        {
+          "numero": "000397573",
+          "numero_exibicao": "397573",
+          "data_venda": "07/08/2026 16:13:13",
+          "valor_bruto": 15.0
+        },
+        {
+          "numero": "000397578",
+          "numero_exibicao": "397578",
+          "data_venda": "07/08/2026 16:30:53",
+          "valor_bruto": 12.5
+        },
+        {
+          "numero": "000397582",
+          "numero_exibicao": "397582",
+          "data_venda": "07/08/2026 16:41:46",
+          "valor_bruto": 19.5
+        },
+        {
+          "numero": "000397583",
+          "numero_exibicao": "397583",
+          "data_venda": "07/08/2026 16:42:48",
+          "valor_bruto": 56.0
+        },
+        {
+          "numero": "000397587",
+          "numero_exibicao": "397587",
+          "data_venda": "07/08/2026 17:07:31",
+          "valor_bruto": 5.7
+        },
+        {
+          "numero": "000397590",
+          "numero_exibicao": "397590",
+          "data_venda": "07/08/2026 17:29:14",
+          "valor_bruto": 28.5
+        }
+      ],
+      "quantidade_relatorio": 32,
+      "total_relatorio": 1824.85,
+      "consistente": true,
+      "origem": "clipp_direto_mva",
+      "categoria": "cartao_credito"
+    }
+  },
+  "fechamento_janelas": [
+    {
+      "id_movimento": 1231,
+      "caixa": 1,
+      "abertura": "07/08/2026 07:50:22",
+      "fechamento": "07/08/2026 13:33:52",
+      "abertura_valor": 250.0,
+      "sangria": 0.0,
+      "suprimento": 0.0
+    },
+    {
+      "id_movimento": 1233,
+      "caixa": 1,
+      "abertura": "07/08/2026 13:34:47",
+      "fechamento": "07/08/2026 17:40:39",
+      "abertura_valor": 250.0,
+      "sangria": 0.0,
+      "suprimento": 0.0
+    }
+  ],
+  "fechamento_parcial": false,
+  "nfces": [
+    {
+      "numero": "000397466",
+      "numero_exibicao": "397466",
+      "data_venda": "07/08/2026 08:06:11",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 38.9
+    },
+    {
+      "numero": "000397467",
+      "numero_exibicao": "397467",
+      "data_venda": "07/08/2026 08:10:48",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 1.2
+    },
+    {
+      "numero": "000397468",
+      "numero_exibicao": "397468",
+      "data_venda": "07/08/2026 08:20:33",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 31.2
+    },
+    {
+      "numero": "000397469",
+      "numero_exibicao": "397469",
+      "data_venda": "07/08/2026 08:23:24",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 34.75
+    },
+    {
+      "numero": "000397470",
+      "numero_exibicao": "397470",
+      "data_venda": "07/08/2026 08:26:48",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 24.3
+    },
+    {
+      "numero": "000397471",
+      "numero_exibicao": "397471",
+      "data_venda": "07/08/2026 08:39:07",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.0
+    },
+    {
+      "numero": "000397472",
+      "numero_exibicao": "397472",
+      "data_venda": "07/08/2026 08:53:46",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 158.4
+    },
+    {
+      "numero": "000397473",
+      "numero_exibicao": "397473",
+      "data_venda": "07/08/2026 08:55:38",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 107.55
+    },
+    {
+      "numero": "000397474",
+      "numero_exibicao": "397474",
+      "data_venda": "07/08/2026 09:07:20",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 245.0
+    },
+    {
+      "numero": "000397475",
+      "numero_exibicao": "397475",
+      "data_venda": "07/08/2026 09:10:01",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 116.6
+    },
+    {
+      "numero": "000397476",
+      "numero_exibicao": "397476",
+      "data_venda": "07/08/2026 09:13:58",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 101.75
+    },
+    {
+      "numero": "000397477",
+      "numero_exibicao": "397477",
+      "data_venda": "07/08/2026 09:14:23",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 1.1
+    },
+    {
+      "numero": "000397478",
+      "numero_exibicao": "397478",
+      "data_venda": "07/08/2026 09:15:36",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 7.5
+    },
+    {
+      "numero": "000397479",
+      "numero_exibicao": "397479",
+      "data_venda": "07/08/2026 09:16:23",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 11.0
+    },
+    {
+      "numero": "000397480",
+      "numero_exibicao": "397480",
+      "data_venda": "07/08/2026 09:18:16",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 13.9
+    },
+    {
+      "numero": "000397481",
+      "numero_exibicao": "397481",
+      "data_venda": "07/08/2026 09:27:09",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 19.0
+    },
+    {
+      "numero": "000397482",
+      "numero_exibicao": "397482",
+      "data_venda": "07/08/2026 09:28:15",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 63.55
+    },
+    {
+      "numero": "000397483",
+      "numero_exibicao": "397483",
+      "data_venda": "07/08/2026 09:30:20",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 9.3
+    },
+    {
+      "numero": "000397484",
+      "numero_exibicao": "397484",
+      "data_venda": "07/08/2026 09:36:21",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 5.0
+    },
+    {
+      "numero": "000397485",
+      "numero_exibicao": "397485",
+      "data_venda": "07/08/2026 09:37:18",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 156.3
+    },
+    {
+      "numero": "000397486",
+      "numero_exibicao": "397486",
+      "data_venda": "07/08/2026 09:42:55",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 61.95
+    },
+    {
+      "numero": "000397487",
+      "numero_exibicao": "397487",
+      "data_venda": "07/08/2026 09:50:33",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 39.5
+    },
+    {
+      "numero": "000397488",
+      "numero_exibicao": "397488",
+      "data_venda": "07/08/2026 09:53:31",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 113.55
+    },
+    {
+      "numero": "000397489",
+      "numero_exibicao": "397489",
+      "data_venda": "07/08/2026 09:55:34",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 28.5
+    },
+    {
+      "numero": "000397490",
+      "numero_exibicao": "397490",
+      "data_venda": "07/08/2026 10:05:28",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 3.0
+    },
+    {
+      "numero": "000397491",
+      "numero_exibicao": "397491",
+      "data_venda": "07/08/2026 10:09:29",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 37.5
+    },
+    {
+      "numero": "000397492",
+      "numero_exibicao": "397492",
+      "data_venda": "07/08/2026 10:12:31",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 13.4
+    },
+    {
+      "numero": "000397493",
+      "numero_exibicao": "397493",
+      "data_venda": "07/08/2026 10:14:53",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 17.95
+    },
+    {
+      "numero": "000397494",
+      "numero_exibicao": "397494",
+      "data_venda": "07/08/2026 10:15:41",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 70.0
+    },
+    {
+      "numero": "000397495",
+      "numero_exibicao": "397495",
+      "data_venda": "07/08/2026 10:16:33",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 42.5
+    },
+    {
+      "numero": "000397496",
+      "numero_exibicao": "397496",
+      "data_venda": "07/08/2026 10:18:08",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 61.9
+    },
+    {
+      "numero": "000397497",
+      "numero_exibicao": "397497",
+      "data_venda": "07/08/2026 10:21:01",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.55
+    },
+    {
+      "numero": "000397498",
+      "numero_exibicao": "397498",
+      "data_venda": "07/08/2026 10:22:19",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 35.8
+    },
+    {
+      "numero": "000397499",
+      "numero_exibicao": "397499",
+      "data_venda": "07/08/2026 10:23:30",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 22.7
+    },
+    {
+      "numero": "000397500",
+      "numero_exibicao": "397500",
+      "data_venda": "07/08/2026 10:32:53",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 15.6
+    },
+    {
+      "numero": "000397501",
+      "numero_exibicao": "397501",
+      "data_venda": "07/08/2026 11:04:00",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 6.95
+    },
+    {
+      "numero": "000397502",
+      "numero_exibicao": "397502",
+      "data_venda": "07/08/2026 11:05:05",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 26.9
+    },
+    {
+      "numero": "000397503",
+      "numero_exibicao": "397503",
+      "data_venda": "07/08/2026 11:07:55",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 11.9
+    },
+    {
+      "numero": "000397504",
+      "numero_exibicao": "397504",
+      "data_venda": "07/08/2026 11:12:54",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 26.7
+    },
+    {
+      "numero": "000397505",
+      "numero_exibicao": "397505",
+      "data_venda": "07/08/2026 11:25:06",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 14.0
+    },
+    {
+      "numero": "000397506",
+      "numero_exibicao": "397506",
+      "data_venda": "07/08/2026 11:27:49",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 18.0
+    },
+    {
+      "numero": "000397507",
+      "numero_exibicao": "397507",
+      "data_venda": "07/08/2026 11:29:43",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 6.75
+    },
+    {
+      "numero": "000397508",
+      "numero_exibicao": "397508",
+      "data_venda": "07/08/2026 11:32:00",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 12.5
+    },
+    {
+      "numero": "000397509",
+      "numero_exibicao": "397509",
+      "data_venda": "07/08/2026 11:33:46",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 38.9
+    },
+    {
+      "numero": "000397510",
+      "numero_exibicao": "397510",
+      "data_venda": "07/08/2026 11:36:18",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.25
+    },
+    {
+      "numero": "000397511",
+      "numero_exibicao": "397511",
+      "data_venda": "07/08/2026 11:47:13",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 60.65
+    },
+    {
+      "numero": "000397512",
+      "numero_exibicao": "397512",
+      "data_venda": "07/08/2026 11:50:11",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.4
+    },
+    {
+      "numero": "000397513",
+      "numero_exibicao": "397513",
+      "data_venda": "07/08/2026 11:52:13",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 7.5
+    },
+    {
+      "numero": "000397514",
+      "numero_exibicao": "397514",
+      "data_venda": "07/08/2026 11:54:16",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 21.75
+    },
+    {
+      "numero": "000397515",
+      "numero_exibicao": "397515",
+      "data_venda": "07/08/2026 11:57:27",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 30.0
+    },
+    {
+      "numero": "000397516",
+      "numero_exibicao": "397516",
+      "data_venda": "07/08/2026 12:09:25",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 14.85
+    },
+    {
+      "numero": "000397517",
+      "numero_exibicao": "397517",
+      "data_venda": "07/08/2026 12:16:25",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 23.45
+    },
+    {
+      "numero": "000397518",
+      "numero_exibicao": "397518",
+      "data_venda": "07/08/2026 12:28:13",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 59.0
+    },
+    {
+      "numero": "000397519",
+      "numero_exibicao": "397519",
+      "data_venda": "07/08/2026 12:29:55",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 47.1
+    },
+    {
+      "numero": "000397520",
+      "numero_exibicao": "397520",
+      "data_venda": "07/08/2026 12:33:09",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 141.15
+    },
+    {
+      "numero": "000397521",
+      "numero_exibicao": "397521",
+      "data_venda": "07/08/2026 12:37:52",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 5.55
+    },
+    {
+      "numero": "000397522",
+      "numero_exibicao": "397522",
+      "data_venda": "07/08/2026 12:42:17",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 77.65
+    },
+    {
+      "numero": "000397523",
+      "numero_exibicao": "397523",
+      "data_venda": "07/08/2026 12:47:14",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 12.7
+    },
+    {
+      "numero": "000397524",
+      "numero_exibicao": "397524",
+      "data_venda": "07/08/2026 12:52:51",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 24.0
+    },
+    {
+      "numero": "000397525",
+      "numero_exibicao": "397525",
+      "data_venda": "07/08/2026 12:56:13",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 22.9
+    },
+    {
+      "numero": "000397526",
+      "numero_exibicao": "397526",
+      "data_venda": "07/08/2026 13:00:39",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 53.85
+    },
+    {
+      "numero": "000397528",
+      "numero_exibicao": "397528",
+      "data_venda": "07/08/2026 13:12:26",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 0.4
+    },
+    {
+      "numero": "000397529",
+      "numero_exibicao": "397529",
+      "data_venda": "07/08/2026 13:13:26",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 153.2
+    },
+    {
+      "numero": "000397530",
+      "numero_exibicao": "397530",
+      "data_venda": "07/08/2026 13:16:06",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 19.9
+    },
+    {
+      "numero": "000397531",
+      "numero_exibicao": "397531",
+      "data_venda": "07/08/2026 13:19:27",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 65.75
+    },
+    {
+      "numero": "000397532",
+      "numero_exibicao": "397532",
+      "data_venda": "07/08/2026 13:23:37",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 45.95
+    },
+    {
+      "numero": "000397533",
+      "numero_exibicao": "397533",
+      "data_venda": "07/08/2026 13:26:03",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 82.45
+    },
+    {
+      "numero": "000397534",
+      "numero_exibicao": "397534",
+      "data_venda": "07/08/2026 13:27:26",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 17.95
+    },
+    {
+      "numero": "000397535",
+      "numero_exibicao": "397535",
+      "data_venda": "07/08/2026 13:29:29",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 47.8
+    },
+    {
+      "numero": "000397536",
+      "numero_exibicao": "397536",
+      "data_venda": "07/08/2026 13:30:48",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 1.95
+    },
+    {
+      "numero": "000397537",
+      "numero_exibicao": "397537",
+      "data_venda": "07/08/2026 13:33:33",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 13.5
+    },
+    {
+      "numero": "000397538",
+      "numero_exibicao": "397538",
+      "data_venda": "07/08/2026 13:35:33",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 25.8
+    },
+    {
+      "numero": "000397539",
+      "numero_exibicao": "397539",
+      "data_venda": "07/08/2026 13:46:38",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 39.4
+    },
+    {
+      "numero": "000397540",
+      "numero_exibicao": "397540",
+      "data_venda": "07/08/2026 13:53:31",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 41.2
+    },
+    {
+      "numero": "000397541",
+      "numero_exibicao": "397541",
+      "data_venda": "07/08/2026 13:54:50",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 4.7
+    },
+    {
+      "numero": "000397542",
+      "numero_exibicao": "397542",
+      "data_venda": "07/08/2026 14:07:50",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 125.0
+    },
+    {
+      "numero": "000397543",
+      "numero_exibicao": "397543",
+      "data_venda": "07/08/2026 14:11:03",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.25
+    },
+    {
+      "numero": "000397544",
+      "numero_exibicao": "397544",
+      "data_venda": "07/08/2026 14:12:21",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 1.1
+    },
+    {
+      "numero": "000397545",
+      "numero_exibicao": "397545",
+      "data_venda": "07/08/2026 14:17:44",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.2
+    },
+    {
+      "numero": "000397546",
+      "numero_exibicao": "397546",
+      "data_venda": "07/08/2026 14:26:12",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 8.95
+    },
+    {
+      "numero": "000397547",
+      "numero_exibicao": "397547",
+      "data_venda": "07/08/2026 14:31:25",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 13.1
+    },
+    {
+      "numero": "000397548",
+      "numero_exibicao": "397548",
+      "data_venda": "07/08/2026 14:34:13",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 27.0
+    },
+    {
+      "numero": "000397549",
+      "numero_exibicao": "397549",
+      "data_venda": "07/08/2026 14:35:53",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 145.65
+    },
+    {
+      "numero": "000397550",
+      "numero_exibicao": "397550",
+      "data_venda": "07/08/2026 14:36:47",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 25.95
+    },
+    {
+      "numero": "000397551",
+      "numero_exibicao": "397551",
+      "data_venda": "07/08/2026 14:40:22",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 3.95
+    },
+    {
+      "numero": "000397552",
+      "numero_exibicao": "397552",
+      "data_venda": "07/08/2026 14:53:00",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 4.95
+    },
+    {
+      "numero": "000397553",
+      "numero_exibicao": "397553",
+      "data_venda": "07/08/2026 14:53:37",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 0.2
+    },
+    {
+      "numero": "000397555",
+      "numero_exibicao": "397555",
+      "data_venda": "07/08/2026 14:57:39",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 10.15
+    },
+    {
+      "numero": "000397556",
+      "numero_exibicao": "397556",
+      "data_venda": "07/08/2026 14:58:35",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 261.3
+    },
+    {
+      "numero": "000397557",
+      "numero_exibicao": "397557",
+      "data_venda": "07/08/2026 14:59:49",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 5.1
+    },
+    {
+      "numero": "000397558",
+      "numero_exibicao": "397558",
+      "data_venda": "07/08/2026 15:00:18",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 22.95
+    },
+    {
+      "numero": "000397559",
+      "numero_exibicao": "397559",
+      "data_venda": "07/08/2026 15:05:06",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 6.7
+    },
+    {
+      "numero": "000397560",
+      "numero_exibicao": "397560",
+      "data_venda": "07/08/2026 15:07:15",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 35.6
+    },
+    {
+      "numero": "000397561",
+      "numero_exibicao": "397561",
+      "data_venda": "07/08/2026 15:09:56",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 49.9
+    },
+    {
+      "numero": "000397562",
+      "numero_exibicao": "397562",
+      "data_venda": "07/08/2026 15:24:41",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 21.95
+    },
+    {
+      "numero": "000397563",
+      "numero_exibicao": "397563",
+      "data_venda": "07/08/2026 15:27:36",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 71.8
+    },
+    {
+      "numero": "000397564",
+      "numero_exibicao": "397564",
+      "data_venda": "07/08/2026 15:34:18",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 5.95
+    },
+    {
+      "numero": "000397565",
+      "numero_exibicao": "397565",
+      "data_venda": "07/08/2026 15:44:56",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 24.9
+    },
+    {
+      "numero": "000397566",
+      "numero_exibicao": "397566",
+      "data_venda": "07/08/2026 15:45:45",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 14.8
+    },
+    {
+      "numero": "000397567",
+      "numero_exibicao": "397567",
+      "data_venda": "07/08/2026 15:54:09",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 28.7
+    },
+    {
+      "numero": "000397568",
+      "numero_exibicao": "397568",
+      "data_venda": "07/08/2026 15:55:21",
+      "cliente": "CLIENTES DIVERSOS",
+      "valor": 25.5
+    },
+    {
+      "numero": "000397569",
+      "numero_exibicao": "397569",
+      "data_venda": "07/08/2026 15:56:17",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 127.5
+    },
+    {
+      "numero": "000397570",
+      "numero_exibicao": "397570",
+      "data_venda": "07/08/2026 16:00:47",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 13.9
+    },
+    {
+      "numero": "000397571",
+      "numero_exibicao": "397571",
+      "data_venda": "07/08/2026 16:03:23",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 9.95
+    },
+    {
+      "numero": "000397572",
+      "numero_exibicao": "397572",
+      "data_venda": "07/08/2026 16:04:07",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 19.0
+    },
+    {
+      "numero": "000397573",
+      "numero_exibicao": "397573",
+      "data_venda": "07/08/2026 16:13:13",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 15.0
+    },
+    {
+      "numero": "000397574",
+      "numero_exibicao": "397574",
+      "data_venda": "07/08/2026 16:16:27",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 4.5
+    },
+    {
+      "numero": "000397575",
+      "numero_exibicao": "397575",
+      "data_venda": "07/08/2026 16:18:01",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 17.1
+    },
+    {
+      "numero": "000397577",
+      "numero_exibicao": "397577",
+      "data_venda": "07/08/2026 16:22:40",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 4.5
+    },
+    {
+      "numero": "000397578",
+      "numero_exibicao": "397578",
+      "data_venda": "07/08/2026 16:30:53",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 12.5
+    },
+    {
+      "numero": "000397579",
+      "numero_exibicao": "397579",
+      "data_venda": "07/08/2026 16:34:51",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 14.6
+    },
+    {
+      "numero": "000397580",
+      "numero_exibicao": "397580",
+      "data_venda": "07/08/2026 16:35:40",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 2.0
+    },
+    {
+      "numero": "000397581",
+      "numero_exibicao": "397581",
+      "data_venda": "07/08/2026 16:40:45",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 4.0
+    },
+    {
+      "numero": "000397582",
+      "numero_exibicao": "397582",
+      "data_venda": "07/08/2026 16:41:46",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 19.5
+    },
+    {
+      "numero": "000397583",
+      "numero_exibicao": "397583",
+      "data_venda": "07/08/2026 16:42:48",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 56.0
+    },
+    {
+      "numero": "000397584",
+      "numero_exibicao": "397584",
+      "data_venda": "07/08/2026 16:45:09",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 35.75
+    },
+    {
+      "numero": "000397585",
+      "numero_exibicao": "397585",
+      "data_venda": "07/08/2026 16:46:39",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 51.7
+    },
+    {
+      "numero": "000397586",
+      "numero_exibicao": "397586",
+      "data_venda": "07/08/2026 16:52:24",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 15.3
+    },
+    {
+      "numero": "000397587",
+      "numero_exibicao": "397587",
+      "data_venda": "07/08/2026 17:07:31",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 5.7
+    },
+    {
+      "numero": "000397588",
+      "numero_exibicao": "397588",
+      "data_venda": "07/08/2026 17:21:19",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 15.9
+    },
+    {
+      "numero": "000397589",
+      "numero_exibicao": "397589",
+      "data_venda": "07/08/2026 17:24:45",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 2.0
+    },
+    {
+      "numero": "000397590",
+      "numero_exibicao": "397590",
+      "data_venda": "07/08/2026 17:29:14",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 28.5
+    },
+    {
+      "numero": "000397591",
+      "numero_exibicao": "397591",
+      "data_venda": "07/08/2026 17:34:27",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 279.45
+    },
+    {
+      "numero": "000397592",
+      "numero_exibicao": "397592",
+      "data_venda": "07/08/2026 17:36:29",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 45.5
+    },
+    {
+      "numero": "000397593",
+      "numero_exibicao": "397593",
+      "data_venda": "07/08/2026 17:40:16",
+      "cliente": "CLIENTE BALCAO",
+      "valor": 7.8
+    }
+  ],
+  "nfces_faltantes_sequencia": [
+    "000397527",
+    "000397554",
+    "000397576"
+  ],
+  "fiscal_status_map": {}
+}

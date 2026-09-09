@@ -1,7 +1,7 @@
 from library import re
 
 APP_VERSION = "3.0.18"
-GITHUB_REPO = "AlleexMartinsT/pdfReader"
+GITHUB_REPO = "AlleexMarttins/pdfreader"
 MINHAS_NOTAS_LOGIN = "mvacomercio@gmail.com"
 MINHAS_NOTAS_PASSWORD = "Mva@0134"
 ZWEB_USERNAME = "horizonteeletronica@gmail.com"

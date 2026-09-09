@@ -17,6 +17,8 @@ from pathlib import Path
 
 from PySide6 import QtCore, QtGui, QtWidgets, QtPrintSupport
 
+from clipp_mva import ClippMvaConnectionError, ClippMvaReader, database_is_configured
+
 from utils import (
     source_pdf_async,
     adicionar_pdf,
@@ -48,18 +50,12 @@ from utils import (
     corrigir_texto,
     corrigir_estrutura_texto,
     criar_etiquetas,
-    salvar_feedback_db,
-    carregar_feedbacks_db,
-    excluir_ultimo_feedback,
-    atualizar_ultimo_feedback,
-    listar_vendedores_db,
     set_ui_refs,
     _active_report_dir,
     _get_gmail_api_credentials,
     cleanup_generated_auto_reports,
     get_gmail_oauth_status,
     list_generated_auto_reports,
-    canonicalize_name,
 )
 from ui_dialogs import messagebox, filedialog, set_parent
 from qt_adapters import (
@@ -254,66 +250,6 @@ class EmptyStateTableWidget(ScrollLockTableWidget):
         self._empty_state.setVisible(self.rowCount() == 0)
 
 
-def _feedback_blacklist_path() -> str:
-    return resource_path("feedback_blacklist.json")
-
-
-def _feedback_blacklist_key(name: str) -> str:
-    return re.sub(r"\s+", " ", corrigir_texto(name or "").strip()).casefold()
-
-
-def _load_feedback_blacklist() -> set[str]:
-    path = _feedback_blacklist_path()
-    if not os.path.exists(path):
-        return set()
-    try:
-        with open(path, "r", encoding="utf-8") as fh:
-            data = json.load(fh)
-    except Exception:
-        return set()
-    if isinstance(data, dict):
-        entries = data.get("vendors") or []
-    else:
-        entries = data or []
-    result = set()
-    for item in entries:
-        name = corrigir_texto(str(item or "").strip())
-        if name:
-            result.add(name)
-    return result
-
-
-def _save_feedback_blacklist(vendors: set[str]) -> None:
-    path = _feedback_blacklist_path()
-    payload = {"vendors": sorted(vendors, key=lambda item: item.casefold())}
-    with open(path, "w", encoding="utf-8") as fh:
-        json.dump(payload, fh, ensure_ascii=False, indent=2)
-
-
-def _is_feedback_blacklisted(blacklist: set[str], name: str) -> bool:
-    key = _feedback_blacklist_key(name)
-    return any(_feedback_blacklist_key(item) == key for item in blacklist)
-
-
-def _feedback_display_name(raw_name: str, blacklist: set[str]) -> str:
-    clean_name = corrigir_texto(str(raw_name or "").strip())
-    if not clean_name:
-        return ""
-    if _is_feedback_blacklisted(blacklist, clean_name):
-        return clean_name
-    return corrigir_texto(canonicalize_name(clean_name))
-
-
-def _feedback_sort_key(entry: dict) -> tuple[dt.datetime, str]:
-    raw_ts = str(entry.get("created_at") or entry.get("created_at_ts") or "").strip()
-    for fmt in ("%d-%m-%Y %H:%M:%S", "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S"):
-        try:
-            return dt.datetime.strptime(raw_ts[:19], fmt), raw_ts
-        except Exception:
-            continue
-    return dt.datetime.min, raw_ts
-
-
 def _get_reportlab_font_names() -> tuple[str, str]:
     global _LEXEND_REPORTLAB_FONT_NAME
 
@@ -389,6 +325,10 @@ def _parse_pending_print_datetime(value: object) -> dt.datetime | None:
         return dt.datetime.fromisoformat(text)
     except ValueError:
         return None
+
+
+def _print_document_page_style() -> str:
+    return "width:100%;max-width:none;margin:0 auto;padding:8pt 0 0;text-align:center;"
 
 
 def _render_html_document_to_printer(
@@ -943,403 +883,6 @@ class CaixaSettingsDialog(QtWidgets.QDialog):
         if self.exec() != QtWidgets.QDialog.Accepted:
             return None
         return self.chk_eh_special.isChecked(), self.chk_mva_special.isChecked()
-
-
-class FeedbackDialog(QtWidgets.QDialog):
-    def __init__(self, parent: QtWidgets.QWidget, tree_adapter: QtTreeAdapter) -> None:
-        super().__init__(parent)
-        self.setFont(_popup_font(self))
-        self._tree = tree_adapter
-        self._show_blacklist_only = False
-        self._last_vendedores: List[str] = []
-        self._vendor_aliases: dict[str, list[str]] = {}
-        self.setWindowTitle("Feedback dos Vendedores")
-        self.setFixedSize(390, 500)
-        layout = QtWidgets.QVBoxLayout(self)
-        layout.setContentsMargins(18, 18, 18, 18)
-        layout.setSpacing(12)
-
-        title_bar = QtWidgets.QWidget()
-        title_bar_layout = QtWidgets.QGridLayout(title_bar)
-        title_bar_layout.setContentsMargins(0, 0, 0, 0)
-        title_bar_layout.setHorizontalSpacing(6)
-        title_bar_layout.setVerticalSpacing(0)
-
-        self._blacklist_menu_button = QtWidgets.QToolButton()
-        self._blacklist_menu_button.setText("▾")
-        self._blacklist_menu_button.setToolTip("Opções da lista negra")
-        self._blacklist_menu_button.setPopupMode(QtWidgets.QToolButton.InstantPopup)
-        self._blacklist_menu_button.setStyleSheet("text-align:center; padding:2px 10px;")
-
-        left_spacer = QtWidgets.QWidget()
-        left_spacer.setFixedWidth(34)
-        self._blacklist_menu_button.setFixedWidth(34)
-
-        self._title = QtWidgets.QLabel("")
-        self._title.setAlignment(QtCore.Qt.AlignCenter)
-
-        self._blacklist_menu = QtWidgets.QMenu(self)
-        self._toggle_blacklist_action = self._blacklist_menu.addAction("")
-        self._toggle_blacklist_action.triggered.connect(self._toggle_blacklist_view)
-        self._blacklist_menu_button.setMenu(self._blacklist_menu)
-
-        title_bar_layout.addWidget(left_spacer, 0, 0)
-        title_bar_layout.addWidget(self._title, 0, 1)
-        title_bar_layout.addWidget(self._blacklist_menu_button, 0, 2, QtCore.Qt.AlignRight)
-        title_bar_layout.setColumnStretch(1, 1)
-        layout.addWidget(title_bar)
-
-        self._scroll = QtWidgets.QScrollArea()
-        self._scroll.setWidgetResizable(True)
-        self._container = QtWidgets.QWidget()
-        self._buttons_layout = QtWidgets.QVBoxLayout(self._container)
-        self._buttons_layout.setAlignment(QtCore.Qt.AlignTop)
-        self._scroll.setWidget(self._container)
-        layout.addWidget(self._scroll)
-
-        self._bottom = QtWidgets.QWidget()
-        bottom_layout = QtWidgets.QHBoxLayout(self._bottom)
-        bottom_layout.setContentsMargins(0, 0, 0, 0)
-        bottom_layout.setSpacing(10)
-        bottom_layout.addStretch()
-        self._btn_export_all = QtWidgets.QPushButton("Exportar PDF")
-        self._btn_export_all.setStyleSheet("text-align:center;")
-        self._btn_export_all.clicked.connect(self._export_all)
-        self._btn_export_all.setVisible(False)
-        bottom_layout.addWidget(self._btn_export_all)
-        btn_fechar = QtWidgets.QPushButton("Fechar")
-        btn_fechar.setStyleSheet("text-align:center;")
-        btn_fechar.clicked.connect(self.close)
-        bottom_layout.addWidget(btn_fechar)
-        bottom_layout.addStretch()
-        layout.addWidget(self._bottom)
-        self._refresh_blacklist_view_menu()
-        self._refresh()
-
-    def _refresh_blacklist_view_menu(self) -> None:
-        if self._show_blacklist_only:
-            self._title.setText("Usuários da Lista Negra")
-            self._toggle_blacklist_action.setText("Mostrar lista principal")
-            self._blacklist_menu_button.setToolTip("Mostrar lista principal")
-        else:
-            self._title.setText("Selecione o Vendedor")
-            self._toggle_blacklist_action.setText("Mostrar lista negra")
-            self._blacklist_menu_button.setToolTip("Mostrar lista negra")
-
-    def _toggle_blacklist_view(self) -> None:
-        self._show_blacklist_only = not self._show_blacklist_only
-        self._last_vendedores = []
-        self._refresh_blacklist_view_menu()
-        self._refresh()
-
-    def _refresh(self) -> None:
-        vendedores_tree = [self._tree.item(i)["values"][0] for i in self._tree.get_children()]
-        vendedores_db = listar_vendedores_db()
-        blacklist = _load_feedback_blacklist()
-        alias_map: dict[str, set[str]] = {}
-        for raw_name in set(vendedores_tree + vendedores_db):
-            clean_name = corrigir_texto(str(raw_name or "").strip())
-            if not clean_name:
-                continue
-            display_name = corrigir_texto(canonicalize_name(clean_name)).strip() or clean_name
-            alias_map.setdefault(display_name, set()).add(clean_name)
-
-        self._vendor_aliases = {
-            display_name: sorted(aliases, key=lambda item: item.casefold())
-            for display_name, aliases in alias_map.items()
-            if (
-                any(_is_feedback_blacklisted(blacklist, alias) for alias in aliases)
-                if self._show_blacklist_only
-                else not any(_is_feedback_blacklisted(blacklist, alias) for alias in aliases)
-            )
-        }
-        vendedores = sorted(self._vendor_aliases.keys(), key=lambda item: item.casefold())
-
-        if vendedores == self._last_vendedores:
-            return
-
-        self._last_vendedores = vendedores
-        while self._buttons_layout.count():
-            item = self._buttons_layout.takeAt(0)
-            if item.widget():
-                item.widget().deleteLater()
-
-        if not vendedores:
-            empty_label = QtWidgets.QLabel(
-                "Nenhum usuário na lista negra." if self._show_blacklist_only else "Nenhum vendedor carregado."
-            )
-            empty_label.setAlignment(QtCore.Qt.AlignCenter)
-            self._buttons_layout.addWidget(empty_label)
-        else:
-            for vendedor in vendedores:
-                btn = QtWidgets.QPushButton(vendedor)
-                btn.setStyleSheet("text-align:center;")
-                btn.clicked.connect(lambda _checked=False, v=vendedor: self._open_obs(v))
-                self._buttons_layout.addWidget(btn)
-
-        self._btn_export_all.setVisible(bool(vendedores))
-
-    def _export_all(self) -> None:
-        feedbacks_all = []
-        seen_ids: set[object] = set()
-        for vendedor, aliases in self._vendor_aliases.items():
-            for alias in aliases:
-                for fb in carregar_feedbacks_db(alias):
-                    feedback_id = fb.get("id") or (
-                        fb.get("vendedor"),
-                        fb.get("created_at"),
-                        fb.get("feedback"),
-                    )
-                    if feedback_id in seen_ids:
-                        continue
-                    seen_ids.add(feedback_id)
-                    fb_copy = dict(fb)
-                    fb_copy["vendedor"] = vendedor
-                    feedbacks_all.append(fb_copy)
-        if not feedbacks_all:
-            messagebox.showwarning("Aviso", "Nenhum feedback encontrado para exportar.")
-            return
-        exportar_feedbacks_pdf("Todos os Vendedores", feedbacks_all)
-
-    def _open_obs(self, vendedor: str) -> None:
-        dlg = ObservacoesDialog(
-            self,
-            vendedor,
-            aliases=self._vendor_aliases.get(vendedor) or [vendedor],
-        )
-        dlg.exec()
-        self._refresh()
-
-
-class ObservacoesDialog(QtWidgets.QDialog):
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget,
-        vendedor: str,
-        *,
-        aliases: list[str] | None = None,
-    ) -> None:
-        super().__init__(parent)
-        self.setFont(_popup_font(self))
-        self._vendedor = vendedor
-        self._aliases = sorted(
-            {
-                corrigir_texto(str(alias or "").strip())
-                for alias in (aliases or [vendedor])
-                if str(alias or "").strip()
-            },
-            key=lambda item: item.casefold(),
-        )
-        self._history_feedbacks: list[dict] = []
-        self.setWindowTitle(f"Observações - {vendedor}")
-        self.setFixedSize(760, 440)
-        layout = QtWidgets.QVBoxLayout(self)
-        layout.setContentsMargins(18, 18, 18, 18)
-        layout.setSpacing(12)
-
-        title = QtWidgets.QLabel(f"Feedback para {vendedor}")
-        font = title.font()
-        font.setBold(False)
-        font.setPointSize(10)
-        title.setFont(font)
-        title.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(title)
-
-        self._history = QtWidgets.QTextEdit()
-        self._history.setReadOnly(True)
-        layout.addWidget(self._history)
-
-        label_novo = QtWidgets.QLabel("Novo Feedback:")
-        label_novo.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(label_novo)
-        self._new_text = QtWidgets.QTextEdit()
-        layout.addWidget(self._new_text)
-
-        btn_row = QtWidgets.QHBoxLayout()
-        btn_row.setSpacing(10)
-        btn_row.addStretch()
-        btn_salvar = QtWidgets.QPushButton("Salvar")
-        btn_export = QtWidgets.QPushButton("Exportar PDF")
-        self._btn_blacklist = QtWidgets.QPushButton("")
-        btn_fechar = QtWidgets.QPushButton("Fechar")
-        btn_editar = QtWidgets.QPushButton("Editar")
-        for btn in (btn_salvar, btn_export, self._btn_blacklist, btn_fechar, btn_editar):
-            btn.setStyleSheet("text-align:center;")
-
-        btn_salvar.clicked.connect(self._save_feedback)
-        btn_export.clicked.connect(self._export_pdf)
-        self._btn_blacklist.clicked.connect(self._toggle_blacklist)
-        btn_fechar.clicked.connect(self.close)
-        btn_editar.clicked.connect(self._edit_feedback)
-
-        btn_row.addWidget(btn_salvar)
-        btn_row.addWidget(btn_export)
-        btn_row.addWidget(self._btn_blacklist)
-        btn_row.addWidget(btn_fechar)
-        btn_row.addWidget(btn_editar)
-        btn_row.addStretch()
-        layout.addLayout(btn_row)
-
-        self._confirm_edit = QtWidgets.QPushButton("Confirmar Edição")
-        self._confirm_edit.setStyleSheet("text-align:center;")
-        self._confirm_edit.clicked.connect(self._confirm_edit_feedback)
-        self._confirm_edit.setVisible(False)
-        layout.addWidget(self._confirm_edit, alignment=QtCore.Qt.AlignCenter)
-
-        self._refresh_history()
-        self._refresh_blacklist_button()
-
-    def _feedback_parent(self) -> "FeedbackDialog | None":
-        parent = self.parent()
-        return parent if isinstance(parent, FeedbackDialog) else None
-
-    def _all_aliases_blacklisted(self) -> bool:
-        blacklist = _load_feedback_blacklist()
-        aliases = self._aliases or [self._vendedor]
-        return bool(aliases) and all(_is_feedback_blacklisted(blacklist, alias) for alias in aliases)
-
-    def _refresh_blacklist_button(self) -> None:
-        all_blacklisted = self._all_aliases_blacklisted()
-        if all_blacklisted:
-            self._btn_blacklist.setText("Remover da Lista Negra")
-            self._btn_blacklist.setToolTip("Este usuário já está na lista negra.")
-            self._btn_blacklist.setStyleSheet(
-                "text-align:center; background-color:#7C3140; color:#F6FAFC; border:1px solid #D2778E;"
-            )
-        else:
-            self._btn_blacklist.setText("Adicionar à Lista Negra")
-            self._btn_blacklist.setToolTip("Mover este usuário para a lista negra.")
-            self._btn_blacklist.setStyleSheet("text-align:center;")
-
-    def _refresh_history(self) -> None:
-        historico: list[dict] = []
-        seen_ids: set[object] = set()
-        for alias in self._aliases:
-            for fb in carregar_feedbacks_db(alias):
-                feedback_id = fb.get("id") or (
-                    fb.get("vendedor"),
-                    fb.get("created_at"),
-                    fb.get("feedback"),
-                )
-                if feedback_id in seen_ids:
-                    continue
-                seen_ids.add(feedback_id)
-                historico.append(dict(fb))
-        historico.sort(key=_feedback_sort_key)
-        self._history_feedbacks = historico
-        self._history.setPlainText("")
-        if historico:
-            lines = []
-            for fb in historico:
-                ts = fb.get("created_at") or fb.get("created_at_ts", "")
-                lines.append(f"[{str(ts)[:19]}]\n{fb.get('feedback', '')}\n")
-            self._history.setPlainText("\n".join(lines))
-        else:
-            self._history.setPlainText("Nenhum feedback registrado ainda.\n")
-        self._refresh_blacklist_button()
-
-    def _save_feedback(self) -> None:
-        texto = self._new_text.toPlainText().strip()
-        if not texto:
-            messagebox.showwarning("Aviso", "Digite algum feedback antes de salvar.")
-            return
-        if salvar_feedback_db(self._vendedor, texto):
-            messagebox.showinfo("Salvo", f"Feedback de {self._vendedor} registrado com sucesso!")
-            self._new_text.clear()
-            self._refresh_history()
-        else:
-            messagebox.showerror("Erro", "Falha ao salvar feedback.")
-
-    def _export_pdf(self) -> None:
-        feedbacks = [dict(fb, vendedor=self._vendedor) for fb in self._history_feedbacks]
-        if not feedbacks:
-            messagebox.showwarning("Aviso", "Nenhum feedback para exportar.")
-            return
-        exportar_feedbacks_pdf(self._vendedor, feedbacks)
-
-    def _edit_feedback(self) -> None:
-        historico = list(self._history_feedbacks)
-        if not historico:
-            messagebox.showwarning("Aviso", "Nenhum feedback encontrado para exportar.")
-            return
-
-        dlg = QtWidgets.QDialog(self)
-        dlg.setWindowTitle("Editor")
-        dlg.setFixedSize(360, 200)
-        layout = QtWidgets.QVBoxLayout(dlg)
-        label = QtWidgets.QLabel("O que deseja fazer?")
-        label.setAlignment(QtCore.Qt.AlignCenter)
-        layout.addWidget(label)
-        buttons_row = QtWidgets.QHBoxLayout()
-        buttons_row.setSpacing(10)
-        buttons_row.addStretch()
-        btn_editar = QtWidgets.QPushButton("Editar último")
-        btn_excluir = QtWidgets.QPushButton("Excluir último")
-        btn_cancelar = QtWidgets.QPushButton("Cancelar")
-        for btn in (btn_editar, btn_excluir, btn_cancelar):
-            btn.setStyleSheet("text-align:center;")
-            buttons_row.addWidget(btn)
-        buttons_row.addStretch()
-        layout.addLayout(buttons_row)
-
-        def acao_editar() -> None:
-            dlg.accept()
-            historico_local = list(self._history_feedbacks)
-            if historico_local:
-                ultimo = historico_local[-1]["feedback"]
-                self._new_text.setPlainText(ultimo)
-                self._confirm_edit.setVisible(True)
-
-        def acao_excluir() -> None:
-            dlg.accept()
-            if not self._history_feedbacks:
-                return
-            ultimo_vendedor = str(self._history_feedbacks[-1].get("vendedor") or self._vendedor).strip() or self._vendedor
-            if excluir_ultimo_feedback(ultimo_vendedor):
-                messagebox.showinfo("Sucesso", "Último feedback excluído.")
-                self._refresh_history()
-
-        btn_editar.clicked.connect(acao_editar)
-        btn_excluir.clicked.connect(acao_excluir)
-        btn_cancelar.clicked.connect(dlg.reject)
-        dlg.exec()
-
-    def _confirm_edit_feedback(self) -> None:
-        novo = self._new_text.toPlainText().strip()
-        if not self._history_feedbacks:
-            messagebox.showwarning("Aviso", "Nenhum feedback encontrado para editar.")
-            return
-        ultimo_vendedor = str(self._history_feedbacks[-1].get("vendedor") or self._vendedor).strip() or self._vendedor
-        if atualizar_ultimo_feedback(ultimo_vendedor, novo):
-            messagebox.showinfo("Sucesso", "Feedback atualizado com sucesso!")
-            self._new_text.clear()
-            self._refresh_history()
-            self._confirm_edit.setVisible(False)
-
-    def _toggle_blacklist(self) -> None:
-        blacklist = _load_feedback_blacklist()
-        aliases = self._aliases or [self._vendedor]
-        all_blacklisted = all(_is_feedback_blacklisted(blacklist, alias) for alias in aliases)
-        if all_blacklisted:
-            updated = {
-                item for item in blacklist
-                if all(_feedback_blacklist_key(item) != _feedback_blacklist_key(alias) for alias in aliases)
-            }
-            _save_feedback_blacklist(updated)
-            messagebox.showinfo("Lista Negra", "Este vendedor foi removido da lista negra.")
-        else:
-            updated = set(blacklist)
-            for alias in aliases:
-                if alias:
-                    updated.add(alias)
-            _save_feedback_blacklist(updated)
-            messagebox.showinfo("Lista Negra", "Este vendedor foi adicionado à lista negra.")
-        parent = self._feedback_parent()
-        if parent is not None:
-            parent._last_vendedores = []
-            parent._refresh()
-        self._refresh_blacklist_button()
-        self.accept()
 
 
 class CaixaReportDialog(QtWidgets.QDialog):
@@ -2518,7 +2061,7 @@ class CaixaReportDialog(QtWidgets.QDialog):
             "<html><head><meta charset='utf-8'>",
             "<style>",
             f"body{{font-family:'{font_family}',Arial,Helvetica,sans-serif;font-size:7.4pt;color:#000;margin:0;padding:0;}}",
-            ".page{width:100%;max-width:none;margin:0 auto;padding:0;text-align:center;}",
+            f".page{{{_print_document_page_style()}}}",
             "h1{font-size:9pt;text-align:center;margin:0 0 4px 0;white-space:nowrap;overflow-wrap:normal;word-break:normal;}",
             "h2{font-size:7pt;text-align:center;margin:3px 0 2px 0;font-weight:400;}",
             "table{width:100%;border-collapse:collapse;table-layout:fixed;margin:0 0 6px 0;}",
@@ -2871,7 +2414,7 @@ class CaixaReportDialog(QtWidgets.QDialog):
             "<html><head><meta charset='utf-8'>",
             "<style>",
             f"body{{font-family:'{font_family}',Arial,Helvetica,sans-serif;font-size:7.4pt;color:#000;margin:0;padding:0;}}",
-            ".page{width:100%;max-width:none;margin:0 auto;padding:0;text-align:center;}",
+            f".page{{{_print_document_page_style()}}}",
             "h1{font-size:9pt;text-align:center;margin:0 0 4px 0;white-space:nowrap;overflow-wrap:normal;word-break:normal;}",
             "h2{font-size:7pt;text-align:center;margin:3px 0 2px 0;font-weight:400;}",
             "table{width:100%;border-collapse:collapse;table-layout:fixed;margin:0 0 6px 0;}",
@@ -3166,56 +2709,6 @@ def exportar_planilha_pdf(tree: QtTreeAdapter, titulo: str) -> None:
     messagebox.showinfo("Sucesso", f"PDF salvo em:\n{caminho}")
 
 
-def exportar_feedbacks_pdf(vendedor: str, feedbacks: list) -> None:
-    from reportlab.lib.pagesizes import A4
-    from reportlab.pdfgen import canvas
-
-    caminho = filedialog.asksaveasfilename(
-        defaultextension=".pdf",
-        filetypes=[("Arquivo PDF", "*.pdf")],
-        title=f"Exportar feedbacks de {vendedor}",
-    )
-    if not caminho:
-        return
-
-    c = canvas.Canvas(caminho, pagesize=A4)
-    largura, altura = A4
-    y = altura - 50
-    title_font_name, body_font_name = _get_reportlab_font_names()
-
-    c.setFont(title_font_name, 12)
-    c.drawString(50, y, f"Feedbacks - {vendedor}")
-    y -= 24
-    c.setFont(body_font_name, 9)
-
-    feedbacks_por_vendedor = {}
-    for fb in feedbacks:
-        nome = fb.get("vendedor", "Desconhecido")
-        feedbacks_por_vendedor.setdefault(nome, []).append(fb)
-
-    for vendedor_nome, lista in feedbacks_por_vendedor.items():
-        if len(feedbacks_por_vendedor) > 1:
-            c.setFont(title_font_name, 10)
-            c.drawString(50, y, f"Vendedor: {vendedor_nome}")
-            y -= 16
-            c.setFont(body_font_name, 9)
-
-        for fb in lista:
-            linha = f"{fb['created_at'][:19]} - {fb['feedback']}"
-            for parte in linha.split("\n"):
-                c.drawString(50, y, parte)
-                y -= 15
-                if y < 50:
-                    c.showPage()
-                    c.setFont(body_font_name, 9)
-                    y = altura - 50
-
-        y -= 10
-
-    c.save()
-    messagebox.showinfo("Exportado", f"Feedbacks exportados para:\n{caminho}")
-
-
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self) -> None:
         super().__init__()
@@ -3233,15 +2726,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self._showing_graphs = False
         self._automation_enabled = True
         self._automation_schedule = {
+            "afternoon": QtCore.QTime(8, 0),
             "morning": QtCore.QTime(13, 30),
-            "afternoon": QtCore.QTime(18, 10),
         }
         self._automation_running = False
         self._automation_next_run: dt.datetime | None = None
         self._automation_next_scope: str | None = None
         self._automation_test_run_at: dt.datetime | None = None
         self._automation_test_scope = "morning"
-        self._automation_last_status = "Automacao por turno pronta. Usa o dia atual às 13:30 e 18:10."
+        self._automation_last_status = "Automacao pronta: tarde do dia anterior às 08:00 e manhã do dia atual às 13:30."
         self._eh_pending_runs: dict[str, dict] = {"morning": {}, "afternoon": {}}
         self._mva_pending_runs: dict[str, dict] = {"morning": {}, "afternoon": {}}
         self._pending_print_jobs: dict[str, list[dict[str, str]]] = {"EH": [], "MVA": []}
@@ -3268,7 +2761,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btn_clear = QtWidgets.QPushButton("Limpar")
         self.btn_merge = QtWidgets.QPushButton("Mesclar Planilhas")
         self.btn_tag = QtWidgets.QPushButton("Criar Etiquetas")
-        self.btn_feedback = QtWidgets.QPushButton("Feedback")
         self.btn_settings = QtWidgets.QPushButton()
         self.btn_settings.setText("⚙")
         self.btn_settings.setObjectName("settingsActionButton")
@@ -3292,7 +2784,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.btn_clear,
             self.btn_merge,
             self.btn_tag,
-            self.btn_feedback,
             self.btn_automation_test,
             self.btn_eh_pending_print,
             self.btn_eh_pending_morning,
@@ -3353,7 +2844,6 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.btn_export,
                     self.btn_edit_table,
                     self.btn_graphs,
-                    self.btn_feedback,
                 ),
             )
         )
@@ -3968,7 +3458,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btn_merge.clicked.connect(self._handle_merge_tables)
         self.btn_tag.clicked.connect(lambda: criar_etiquetas(self.tree_main))
         self.btn_tag.setEnabled(False)
-        self.btn_feedback.clicked.connect(self._open_feedback)
         self.btn_settings.clicked.connect(self._open_caixa_settings)
         self.btn_automation_power.clicked.connect(self._toggle_automation_power)
         self.btn_automation_test.clicked.connect(self._schedule_automation_test_run)
@@ -4003,16 +3492,25 @@ class MainWindow(QtWidgets.QMainWindow):
     def _compute_next_automation_run(self, now: dt.datetime | None = None) -> tuple[dt.datetime | None, str | None]:
         now = now or dt.datetime.now()
         candidates: list[tuple[dt.datetime, str]] = []
+        current_weekday = now.weekday()
         for scope_mode, target_time in self._automation_schedule.items():
+            if current_weekday == 5 and scope_mode != "morning":
+                continue
             if not target_time.isValid():
                 continue
+            target_hour = target_time.hour()
+            target_minute = target_time.minute()
+            if current_weekday == 5 and scope_mode == "morning":
+                target_hour, target_minute = 13, 0
             target = now.replace(
-                hour=target_time.hour(),
-                minute=target_time.minute(),
+                hour=target_hour,
+                minute=target_minute,
                 second=0,
                 microsecond=0,
             )
             if now >= target:
+                target += dt.timedelta(days=1)
+            while target.weekday() == 6 or (target.weekday() == 5 and scope_mode != "morning"):
                 target += dt.timedelta(days=1)
             candidates.append((target, scope_mode))
         if not candidates:
@@ -4020,15 +3518,20 @@ class MainWindow(QtWidgets.QMainWindow):
         candidates.sort(key=lambda item: item[0])
         return candidates[0]
 
-    def _automation_target_date_br(self) -> str:
-        return QtCore.QDate.currentDate().toString("dd/MM/yyyy")
+    def _automation_target_date_br(self, scope_mode: str | None = None) -> str:
+        target_date = QtCore.QDate.currentDate()
+        if str(scope_mode or "").strip() == "afternoon":
+            target_date = target_date.addDays(-1)
+        return target_date.toString("dd/MM/yyyy")
 
     def _automation_time_text(self, scope_mode: str | None = None) -> str:
         if scope_mode:
             target_time = self._automation_schedule.get(scope_mode)
+            if scope_mode == "morning" and QtCore.QDate.currentDate().dayOfWeek() == 6:
+                return "13:00"
             return target_time.toString("HH:mm") if target_time and target_time.isValid() else "--:--"
         partes = []
-        for current_scope in ("morning", "afternoon"):
+        for current_scope in ("afternoon", "morning"):
             partes.append(f"{self._scope_label_text(current_scope)} {self._automation_time_text(current_scope)}")
         return " / ".join(partes)
 
@@ -4365,7 +3868,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._automation_enabled = True
         self._automation_next_run, self._automation_next_scope = self._compute_next_automation_run()
         self._automation_last_status = (
-            "Automacao retomada para manhã 13:30 e tarde 18:10."
+            "Automacao retomada para tarde do dia anterior às 08:00 e manhã do dia atual às 13:30."
         )
         self._refresh_automation_controls_ui()
 
@@ -4378,7 +3881,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._automation_test_scope = scope_mode
         self._automation_test_run_at = dt.datetime.now() + dt.timedelta(seconds=5)
         self._automation_last_status = (
-            f"Teste de automacao da {self._scope_label_text(scope_mode)} armado para {self._automation_target_date_br()}."
+            f"Teste de automacao da {self._scope_label_text(scope_mode)} armado para {self._automation_target_date_br(scope_mode)}."
         )
         self._refresh_automation_controls_ui()
 
@@ -4800,7 +4303,21 @@ class MainWindow(QtWidgets.QMainWindow):
             missing.append("DAV MVA")
         if not path_cupons:
             missing.append("Fechamento de Caixa")
-        if missing:
+        loaded_from_clipp = False
+        if missing and database_is_configured():
+            try:
+                sale_date = dt.datetime.strptime(data_br, "%d/%m/%Y").date()
+                clipp_reader = ClippMvaReader.from_environment()
+                relatorio_davs = clipp_reader.build_dav_report(sale_date)
+                relatorio_orcamentos = None
+                relatorio_cupons = clipp_reader.build_closing_report(sale_date)
+                loaded_from_clipp = True
+            except (ValueError, ClippMvaConnectionError) as exc:
+                message = f"Não foi possível ler os dados da MVA diretamente do Clipp: {exc}"
+                self._mark_mva_pending_scope(scope_mode, data_br, message)
+                return None, None, [], message
+
+        if missing and not loaded_from_clipp:
             avisos = self._prefetch_mva_payments(data_br)
             self._mark_mva_pending_scope(
                 scope_mode,
@@ -4809,17 +4326,18 @@ class MainWindow(QtWidgets.QMainWindow):
             )
             return None, None, avisos, f"Arquivos da MVA não encontrados automaticamente: {', '.join(missing)}."
 
-        relatorio_davs, relatorio_orcamentos, relatorio_cupons, mva_msg = self._load_mva_reports_with_loading(
-            path_davs,
-            path_orcamentos,
-            path_cupons,
-            force_refresh_payments=force_refresh_payments,
-            scope_mode=scope_mode,
-            filter_opening_date_br=data_br if self._mva_special_scope_enabled else None,
-        )
-        if mva_msg:
-            self._mark_mva_pending_scope(scope_mode, data_br, mva_msg)
-            return None, None, [], mva_msg
+        if not loaded_from_clipp:
+            relatorio_davs, relatorio_orcamentos, relatorio_cupons, mva_msg = self._load_mva_reports_with_loading(
+                path_davs,
+                path_orcamentos,
+                path_cupons,
+                force_refresh_payments=force_refresh_payments,
+                scope_mode=scope_mode,
+                filter_opening_date_br=data_br if self._mva_special_scope_enabled else None,
+            )
+            if mva_msg:
+                self._mark_mva_pending_scope(scope_mode, data_br, mva_msg)
+                return None, None, [], mva_msg
 
         davs_ok, davs_msg = validar_arquivo_caixa_mva(relatorio_davs, "exportacao_dados_mva")
         if not davs_ok:
@@ -5286,7 +4804,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._automation_running = True
         self.btn_automation_power.setEnabled(False)
         self.btn_automation_test.setEnabled(False)
-        data_br = self._automation_target_date_br()
+        data_br = self._automation_target_date_br(scope_mode)
         self._automation_last_status = (
             f"Automacao iniciada via {trigger_label} para a {self._scope_label_text(scope_mode)} de {data_br}."
         )
@@ -6071,11 +5589,6 @@ class MainWindow(QtWidgets.QMainWindow):
         except Exception as exc:
             messagebox.showerror("Erro", f"Erro ao salvar tabela: {exc}")
             return False
-
-    def _open_feedback(self) -> None:
-        dlg = FeedbackDialog(self, self.tree_main)
-        dlg.exec()
-
     def _setup_import_neon(self) -> None:
         self._neon_timer = QtCore.QTimer(self)
         self._neon_timer.setInterval(25)

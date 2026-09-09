@@ -1,0 +1,9 @@
+Consolidado de vendas Cielo
+Formas de pagamento;Quantidade de vendas;Valor bruto;Taxa/tarifa;Valor liquido
+Credito a vista;43;2.013,25;-72,74;1.940,51
+Data da venda;Forma de pagamento;Quantidade de vendas;Valor bruto;Valor Taxa/Tarifa;Valor liquido
+30/04/2026;Credito a vista;43;2.013,25;-72,74;1.940,51
+Detalhamento de vendas Cielo
+Data da venda;Hora;Forma de pagamento;Status;Valor bruto;Codigo de autorizacao
+30/04/2026;10:20;Credito a vista;Aprovada;R$ 90,00;123456
+30/04/2026;11:15;Debito;Autorizada;R$ 40,00;123457
